@@ -1,6 +1,6 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
 
 :root {
   --font-display: 'Cormorant Garamond', serif;
@@ -9,8 +9,8 @@
 
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  margin: 5;
+  padding: 2;
 }
 
 html {
@@ -25,30 +25,30 @@ body {
   overflow-x: hidden;
 }
 
-/* Glow utilities */
+/* ── Glow utilities ─────────────────────────────── */
 .glow-blue {
-  box-shadow: 0 0 30px rgba(34, 191, 255, 0.15), 0 0 60px rgba(34, 191, 255, 0.05);
+  box-shadow: 0 0 40px rgba(34, 191, 255, 0.12), 0 0 80px rgba(34, 191, 255, 0.04);
 }
 
 .glow-blue-sm {
-  box-shadow: 0 0 15px rgba(34, 191, 255, 0.2);
+  box-shadow: 0 0 15px rgba(34, 191, 255, 0.18);
 }
 
 .text-glow {
-  text-shadow: 0 0 40px rgba(34, 191, 255, 0.4);
+  text-shadow: 0 0 50px rgba(34, 191, 255, 0.35);
 }
 
-/* Gradient border */
+/* ── Borders ─────────────────────────────────────── */
 .border-ice {
-  border: 1px solid rgba(43, 203, 255, 0.25);
+  border: 1px solid rgba(43, 203, 255, 0.18);
 }
 
 .border-ice-glow {
-  border: 1px solid rgba(43, 203, 255, 0.4);
-  box-shadow: 0 0 20px rgba(43, 203, 255, 0.1);
+  border: 1px solid rgba(43, 203, 255, 0.35);
+  box-shadow: 0 0 25px rgba(43, 203, 255, 0.08);
 }
 
-/* Ice shimmer button */
+/* ── Buttons ─────────────────────────────────────── */
 .btn-ice {
   background: linear-gradient(135deg, #22BFFF, #8EDFFF);
   color: #050912;
@@ -56,15 +56,19 @@ body {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-ice::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
   transform: translateX(-100%);
-  transition: transform 0.4s ease;
+  transition: transform 0.45s ease;
 }
 
 .btn-ice:hover::after {
@@ -72,57 +76,45 @@ body {
 }
 
 .btn-ice:hover {
-  box-shadow: 0 0 30px rgba(34, 191, 255, 0.5);
+  box-shadow: 0 0 35px rgba(34, 191, 255, 0.45);
   transform: translateY(-1px);
 }
 
 .btn-outline-ice {
-  border: 1px solid rgba(43, 203, 255, 0.5);
+  border: 1px solid rgba(43, 203, 255, 0.45);
   color: #22BFFF;
   transition: all 0.3s ease;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-outline-ice:hover {
-  background: rgba(34, 191, 255, 0.1);
-  border-color: rgba(43, 203, 255, 0.8);
-  box-shadow: 0 0 20px rgba(34, 191, 255, 0.2);
+  background: rgba(34, 191, 255, 0.08);
+  border-color: rgba(43, 203, 255, 0.75);
+  box-shadow: 0 0 22px rgba(34, 191, 255, 0.18);
 }
 
-/* Noise texture overlay */
-.noise-overlay::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
-  opacity: 0.4;
-}
-
+/* ── Cards ───────────────────────────────────────── */
 .card-hover {
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card-hover:hover {
   transform: translateY(-4px);
-  border-color: rgba(43, 203, 255, 0.4);
-  box-shadow: 0 20px 60px rgba(34, 191, 255, 0.08), 0 0 30px rgba(34, 191, 255, 0.05);
+  border-color: rgba(43, 203, 255, 0.35);
+  box-shadow: 0 24px 64px rgba(34, 191, 255, 0.07), 0 0 30px rgba(34, 191, 255, 0.04);
 }
 
-/* Section divider */
+/* ── Dividers ────────────────────────────────────── */
 .divider-ice {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(43, 203, 255, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(43, 203, 255, 0.25), transparent);
 }
 
-/* Staggered animation delays */
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-400 { animation-delay: 0.4s; }
-.delay-500 { animation-delay: 0.5s; }
-
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
+/* ── Scrollbar ───────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: #050912; }
-::-webkit-scrollbar-thumb { background: rgba(34, 191, 255, 0.3); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(34, 191, 255, 0.5); }
+::-webkit-scrollbar-thumb { background: rgba(34, 191, 255, 0.25); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(34, 191, 255, 0.45); }
