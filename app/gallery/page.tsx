@@ -49,8 +49,7 @@ export default function GalleryPage() {
               Gallery
             </h1>
             <p className="text-[#8CA9BD] text-lg max-w-xl leading-relaxed">
-              Every vehicle tells a story. Here&apos;s what the IceLux difference looks like
-              — before, during, and after.
+              Every vehicle tells a story. Heres what the IceLux difference looks like before, during, and after.
             </p>
           </div>
         </section>

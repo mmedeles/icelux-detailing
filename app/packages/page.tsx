@@ -64,7 +64,7 @@ export default function PackagesPage() {
             </h1>
             <p className="text-[#8CA9BD] text-lg max-w-xl leading-relaxed">
               Every package is designed for a specific level of care. Choose the one that
-              fits your vehicle — or contact us for a custom quote.
+              fits your vehicle, or contact us for a custom quote.
             </p>
           </div>
         </section>
