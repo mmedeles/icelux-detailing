@@ -30,11 +30,7 @@ export default function Navbar() {
 
   return (
       <header
-          className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-              scrolled
-                  ? "bg-[#050912]/96 backdrop-blur-md border-b border-[rgba(43,203,255,0.1)] shadow-[0_4px_40px_rgba(34,191,255,0.04)]"
-                  : "bg-transparent"
-          }`}
+          className="fixed top-0 left-0 right-0 z-50 bg-[#050912]/96 backdrop-blur-md border-b border-[rgba(43,203,255,0.1)] shadow-[0_4px_40px_rgba(34,191,255,0.04)]"
       >
         {/* Use a fixed-width container with generous padding on both sides */}
         <div className="w-full px-8 sm:px-10 lg:px-14">

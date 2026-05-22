@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     template: "%s | IceLux Detailing",
   },
   description:
-    "IceLux Detailing offers premium mobile car detailing services in Iowa Colony and surrounding areas. Interior restoration, exterior detailing, ceramic coating, and maintenance plans delivered to your driveway.",
+      "IceLux Detailing offers premium mobile car detailing services in Iowa Colony and surrounding areas. Interior restoration, exterior detailing, ceramic coating, and maintenance plans delivered to your driveway.",
   keywords: [
     "mobile car detailing",
     "Iowa Colony car detailing",
@@ -28,13 +28,13 @@ export const metadata: Metadata = {
     siteName: "IceLux Detailing",
     title: "IceLux Detailing | Premium Mobile Car Detailing",
     description:
-      "Professional mobile car detailing serving Iowa Colony & surrounding areas. From dusty to icy — we come to you.",
+        "Professional mobile car detailing serving Iowa Colony & surrounding areas. From dusty to icy — we come to you.",
   },
   twitter: {
     card: "summary_large_image",
     title: "IceLux Detailing | Premium Mobile Car Detailing",
     description:
-      "Professional mobile car detailing serving Iowa Colony & surrounding areas.",
+        "Professional mobile car detailing serving Iowa Colony & surrounding areas.",
   },
   robots: {
     index: true,
@@ -43,18 +43,18 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
-}: {
+                                     children,
+                                   }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+      <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
-          rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+            rel="stylesheet"
         />
         <style>{`
           :root {
@@ -64,10 +64,10 @@ export default function RootLayout({
         `}</style>
       </head>
       <body>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+      <Navbar />
+      <main style={{ paddingTop: "72px" }}>{children}</main>
+      <Footer />
       </body>
-    </html>
+      </html>
   );
 }

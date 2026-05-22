@@ -43,8 +43,8 @@ export default function Home() {
             <div className="max-w-xl">
               {/* Eyebrow pill */}
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[rgba(43,203,255,0.28)] bg-[rgba(34,191,255,0.05)] mb-8">
-                <MapPin size={11} className="text-[#22BFFF] shrink-0" />
-                <span className="text-[#8EDFFF] text-[11px] font-medium tracking-[0.18em] uppercase">
+                <MapPin size={25} className="text-[#22BFFF] shrink-0" />
+                <span className="text-[#8EDFFF] text-[12px] font-medium tracking-[0.18em] uppercase">
                 Serving Iowa Colony &amp; Surrounding Areas
               </span>
               </div>
@@ -71,23 +71,23 @@ export default function Home() {
               </p>
 
               {/* CTAs */}
-              <div className="flex flex-col sm:flex-row gap-4 mb-10">
-                <Link href="/contact" className="btn-ice px-8 py-4 rounded-full text-sm font-semibold tracking-wide">
+              <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                <Link href="/contact" className="btn-ice px-10 py-4 rounded-full text-base font-semibold tracking-wide">
                   Book Your Detail
                 </Link>
-                <Link href="/packages" className="btn-outline-ice px-8 py-4 rounded-full text-sm font-semibold tracking-wide">
+                <Link href="/packages" className="btn-outline-ice px-10 py-4 rounded-full text-base font-semibold tracking-wide">
                   View Packages
                 </Link>
               </div>
 
               {/* Social proof */}
-              <div className="flex items-center gap-3">
-                <div className="flex gap-0.5">
+              <div className="flex items-center gap-4">
+                <div className="flex gap-1">
                   {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={13} className="text-[#22BFFF] fill-[#22BFFF]" />
+                      <Star key={i} size={18} className="text-[#22BFFF] fill-[#22BFFF]" />
                   ))}
                 </div>
-                <span className="text-[#8CA9BD] text-sm">Premium results, delivered to your door</span>
+                <span className="text-[#8CA9BD] text-base">Premium results, delivered to your door</span>
               </div>
             </div>
 

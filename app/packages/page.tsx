@@ -43,7 +43,7 @@ export default function PackagesPage() {
   return (
       <>
         {/* Page header */}
-        <section className="relative bg-[#050912] pt-32 pb-20 overflow-hidden">
+        <section className="relative bg-[#050912] pt-16 pb-16 overflow-hidden">
           <div
               aria-hidden
               className="absolute inset-0 pointer-events-none"
@@ -52,8 +52,8 @@ export default function PackagesPage() {
                     "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(34,191,255,0.07) 0%, transparent 70%)",
               }}
           />
-          <div className="relative max-w-3xl mx-auto px-4 text-center">
-            <p className="text-[#22BFFF] text-xs font-semibold tracking-[0.25em] uppercase mb-4">
+          <div className="relative w-full flex flex-col items-center text-center px-8 sm:px-10 lg:px-14">
+            <p className="text-[#22BFFF] text-[11px] font-semibold tracking-[0.22em] uppercase mb-4">
               IceLux Services
             </p>
             <h1
@@ -62,7 +62,7 @@ export default function PackagesPage() {
             >
               Detailing Packages
             </h1>
-            <p className="text-[#8CA9BD] text-lg max-w-xl mx-auto">
+            <p className="text-[#8CA9BD] text-lg max-w-xl leading-relaxed">
               Every package is designed for a specific level of care. Choose the one that
               fits your vehicle — or contact us for a custom quote.
             </p>
