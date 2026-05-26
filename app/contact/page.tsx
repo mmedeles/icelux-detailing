@@ -25,10 +25,16 @@ export default function ContactPage() {
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Connect to Formspree, Netlify Forms, or backend API
-    setSubmitted(true);
+    const response = await fetch("https://formspree.io/f/mykvbeya", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formState),
+    });
+    if (response.ok) {
+      setSubmitted(true);
+    }
   };
 
   return (
