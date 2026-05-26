@@ -121,7 +121,13 @@ export default function ContactPage() {
                           className="flex items-start gap-3 group"
                       >
                         <div className="w-9 h-9 rounded-xl bg-[rgba(34,191,255,0.08)] border border-[rgba(43,203,255,0.2)] flex items-center justify-center shrink-0 group-hover:bg-[rgba(34,191,255,0.12)] transition-colors">
-                          <Share2 size={16} className="text-[#22BFFF]" />
+                          <img
+                              src="/instagram.svg"
+                              alt="Instagram"
+                              width={14}
+                              height={14}
+                              style={{ filter: "invert(60%) sepia(80%) saturate(400%) hue-rotate(170deg)" }}
+                          />
                         </div>
                         <div>
                           <p className="text-[#8CA9BD] text-xs uppercase tracking-widest mb-0.5">Instagram</p>

@@ -207,7 +207,13 @@ export default function GalleryPage() {
                         "radial-gradient(ellipse at center, rgba(34,191,255,0.05) 0%, transparent 70%)",
                   }}
               />
-              <Share2 size={32} className="text-[#22BFFF] mx-auto mb-4" />
+              <img
+                  src="/instagram.svg"
+                  alt="Instagram"
+                  width={14}
+                  height={14}
+                  style={{ filter: "invert(60%) sepia(80%) saturate(400%) hue-rotate(170deg)" }}
+              />
               <h2
                   className="text-3xl font-bold text-[#EAF8FF] mb-3"
                   style={{ fontFamily: "var(--font-display, serif)" }}

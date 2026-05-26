@@ -75,7 +75,13 @@ export default function Footer() {
                 <li>
                   <a href={siteConfig.instagramUrl} target="_blank" rel="noopener noreferrer"
                      className="flex items-center gap-2 text-[#8CA9BD] hover:text-[#22BFFF] text-sm transition-colors">
-                    <Share2 size={13} className="text-[#22BFFF] shrink-0" />
+                    <img
+                        src="/instagram.svg"
+                        alt="Instagram"
+                        width={14}
+                        height={14}
+                        style={{ filter: "invert(60%) sepia(80%) saturate(400%) hue-rotate(170deg)" }}
+                    />
                     {siteConfig.instagram}
                   </a>
                 </li>
