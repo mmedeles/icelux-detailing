@@ -178,20 +178,14 @@ export default function ContactPage() {
                     and service in minutes.
                   </p>
                   {/* TODO: Replace href with Square Appointments or Calendly URL */}
-                  <a
-                      href="#booking-placeholder"
+                  <a href="https://calendly.com/iceluxdetailing/mobile-detail-booking"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="btn-ice px-6 py-3 rounded-full text-sm font-semibold tracking-wide inline-flex items-center gap-2"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        alert("Booking link coming soon! Call or email us to schedule.");
-                      }}
                   >
                     <Calendar size={15} />
                     Schedule Online
                   </a>
-                  <p className="text-[#8CA9BD] text-xs mt-3 opacity-60">
-                    Connect Square Appointments or Calendly here
-                  </p>
                 </div>
 
                 {/* What to expect */}
