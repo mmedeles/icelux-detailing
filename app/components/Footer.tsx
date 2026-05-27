@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Phone, Mail, Share2, MapPin } from "lucide-react";
+import Image from "next/image";
+import { Phone, Mail, MapPin } from "lucide-react";
 import { siteConfig } from "@/app/lib/data";
 
 export default function Footer() {
@@ -10,19 +11,14 @@ export default function Footer() {
 
             {/* Brand */}
             <div className="lg:col-span-2">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#22BFFF] to-[#8EDFFF] flex items-center justify-center">
-                  <span className="text-[#050912] font-bold text-xs">IL</span>
-                </div>
-                <div className="flex flex-col leading-none gap-0.5">
-                <span className="text-[#EAF8FF] font-bold text-xl tracking-[0.06em] uppercase leading-none"
-                      style={{ fontFamily: "var(--font-display, serif)" }}>
-                  IceLux
-                </span>
-                  <span className="text-[#22BFFF] text-[9px] tracking-[0.22em] uppercase font-medium leading-none">
-                  Detailing
-                </span>
-                </div>
+              <div className="mb-5">
+                <Image
+                    src="/logo.png"
+                    alt="IceLux Detailing"
+                    width={140}
+                    height={48}
+                    className="h-40 w-auto object-contain"
+                />
               </div>
               <p className="text-[#8CA9BD] text-sm leading-relaxed max-w-xs">
                 Premium mobile car detailing serving Iowa Colony and surrounding areas.
@@ -78,8 +74,8 @@ export default function Footer() {
                     <img
                         src="/instagram.svg"
                         alt="Instagram"
-                        width={14}
-                        height={14}
+                        width={13}
+                        height={13}
                         style={{ filter: "invert(60%) sepia(80%) saturate(400%) hue-rotate(170deg)" }}
                     />
                     {siteConfig.instagram}
