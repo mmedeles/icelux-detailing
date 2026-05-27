@@ -246,7 +246,7 @@ export default function GalleryPage() {
                 ))}
               </div>
               <p className="text-[#8CA9BD] text-xs mt-3 opacity-50">
-                Instagram feed embed — connect via Elfsight or similar widget
+                Instagram feed embed (connect via Elfsight or similar widget)
               </p>
             </div>
 

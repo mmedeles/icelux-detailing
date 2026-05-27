@@ -325,7 +325,7 @@ export default function Home() {
               </h2>
               <p className="text-[#8CA9BD] max-w-md mx-auto text-sm leading-relaxed mb-8">
                 We bring the full IceLux experience directly to your home, apartment, or office.
-                No drop-offs needed — we handle everything on-site.
+                No drop-offs needed, we handle everything on-site.
               </p>
               <div className="flex flex-wrap justify-center gap-2.5">
                 {["Iowa Colony", "Alvin", "Pearland", "Rosharon", "Manvel"].map((area) => (
@@ -359,7 +359,7 @@ export default function Home() {
                       ))}
                     </div>
                     <p className="text-[#8CA9BD] text-sm italic mb-5 leading-relaxed">
-                      &ldquo;Testimonial placeholder — replace with real customer review when available.&rdquo;
+                      &ldquo;Testimonial placeholder (replace with real customer review when available.&rdquo;)
                     </p>
                     <div className="flex items-center gap-3 pt-4 border-t border-[rgba(43,203,255,0.08)]">
                       <div className="w-8 h-8 rounded-full bg-[rgba(34,191,255,0.08)] border border-[rgba(43,203,255,0.18)]" />

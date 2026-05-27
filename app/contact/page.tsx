@@ -180,7 +180,7 @@ export default function ContactPage() {
                     Online Booking
                   </h3>
                   <p className="text-[#8CA9BD] text-sm mb-5">
-                    Book directly through our scheduling system — pick your date, time,
+                    Book directly through our scheduling system. Pick your date, time,
                     and service in minutes.
                   </p>
                   {/* TODO: Replace href with Square Appointments or Calendly URL */}
@@ -323,7 +323,7 @@ export default function ContactPage() {
                               <option value="diamond-lounge" className="bg-[#07101C]">The Diamond Lounge</option>
                               <option value="blue-diamond" className="bg-[#07101C]">Blue Diamond Signature</option>
                               <option value="luxe-refresh" className="bg-[#07101C]">Luxe Refresh</option>
-                              <option value="not-sure" className="bg-[#07101C]">Not sure — need a recommendation</option>
+                              <option value="not-sure" className="bg-[#07101C]">Need a recommendation</option>
                             </select>
                           </div>
 
