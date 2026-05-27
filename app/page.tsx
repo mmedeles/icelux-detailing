@@ -44,7 +44,7 @@ export default function Home() {
             <div className="max-w-xl">
               {/* Eyebrow pill */}
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[rgba(43,203,255,0.28)] bg-[rgba(34,191,255,0.05)] mb-8">
-                <MapPin size={11} className="text-[#22BFFF] shrink-0" />
+                <MapPin size={25} className="text-[#22BFFF] shrink-0" />
                 <span className="text-[#8EDFFF] text-[11px] font-medium tracking-[0.18em] uppercase">
                 Serving Iowa Colony &amp; Surrounding Areas
               </span>
@@ -313,8 +313,7 @@ export default function Home() {
         {/* ── SERVICE AREA ───────────────────────────────────────────────────── */}
         <section className="bg-[#050912] py-20">
           <div className="max-w-7xl mx-auto px-8 sm:px-10 lg:px-14">
-            <div className="bg-[#09111F] border-ice rounded-2xl p-10 md:p-16 text-center relative overflow-hidden">
-              <div className="absolute inset-0 pointer-events-none"
+            <div className="bg-[#09111F] border-ice rounded-2xl p-10 md:p-16 relative overflow-hidden flex flex-col items-center text-center">              <div className="absolute inset-0 pointer-events-none"
                    style={{ background: "radial-gradient(ellipse at center, rgba(34,191,255,0.04) 0%, transparent 65%)" }} />
               <MapPin size={26} className="text-[#22BFFF] mx-auto mb-5" />
               <p className="text-[#22BFFF] text-[11px] font-semibold tracking-[0.22em] uppercase mb-4">Service Area</p>
@@ -379,10 +378,10 @@ export default function Home() {
         <section className="relative bg-[#050912] py-32 overflow-hidden">
           <div aria-hidden className="absolute inset-0 pointer-events-none"
                style={{ background: "radial-gradient(ellipse 75% 55% at 50% 50%, rgba(34,191,255,0.07) 0%, transparent 68%)" }} />
-          <div className="relative max-w-3xl mx-auto px-6 text-center">
+          <div className="relative w-full flex flex-col items-center text-center px-8 sm:px-10 lg:px-14">
             <p className="text-[#22BFFF] text-[11px] font-semibold tracking-[0.22em] uppercase mb-5">Get Started</p>
             <h2
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#EAF8FF] mb-6"
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#EAF8FF] mb-6 max-w-3xl"
                 style={{ fontFamily: "var(--font-display, serif)" }}
             >
               Ready to Go From{" "}
@@ -390,10 +389,10 @@ export default function Home() {
                   className="text-transparent bg-clip-text"
                   style={{ backgroundImage: "linear-gradient(90deg, #22BFFF, #8EDFFF)" }}
               >
-              Dusty to Icy?
-            </span>
+        Dusty to Icy?
+      </span>
             </h2>
-            <p className="text-[#8CA9BD] text-base sm:text-lg mb-10 max-w-lg mx-auto leading-relaxed">
+            <p className="text-[#8CA9BD] text-base sm:text-lg mb-10 max-w-lg leading-relaxed">
               Book your detail today and experience what premium mobile detailing
               actually looks like.
             </p>
