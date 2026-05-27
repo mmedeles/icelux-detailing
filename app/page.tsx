@@ -1,10 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Car, Sparkles, Shield, Calendar, MapPin,
   CheckCircle, MessageCircle, ChevronRight, Star,
 } from "lucide-react";
 import {
-  services, featuredPackages, whyChoose, trustBarItems, siteConfig,
+  services, featuredPackages, whyChoose, trustBarItems,
 } from "@/app/lib/data";
 
 function ServiceIcon({ name }: { name: string }) {
@@ -37,14 +38,14 @@ export default function Home() {
           <div aria-hidden className="absolute inset-0 pointer-events-none"
                style={{ background: "radial-gradient(ellipse at center, transparent 35%, #050912 88%)" }} />
 
-          <div className="relative max-w-7xl mx-auto px-8 sm:px-10 lg:px-14 pt-32 pb-24 w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="relative max-w-7xl mx-auto px-8 sm:px-10 lg:px-14 pt-16 pb-24 w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
             {/* Copy */}
             <div className="max-w-xl">
               {/* Eyebrow pill */}
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[rgba(43,203,255,0.28)] bg-[rgba(34,191,255,0.05)] mb-8">
-                <MapPin size={25} className="text-[#22BFFF] shrink-0" />
-                <span className="text-[#8EDFFF] text-[12px] font-medium tracking-[0.18em] uppercase">
+                <MapPin size={11} className="text-[#22BFFF] shrink-0" />
+                <span className="text-[#8EDFFF] text-[11px] font-medium tracking-[0.18em] uppercase">
                 Serving Iowa Colony &amp; Surrounding Areas
               </span>
               </div>
@@ -93,25 +94,14 @@ export default function Home() {
 
             {/* Hero visual */}
             <div className="relative w-full">
-              <div
-                  className="aspect-[4/3] rounded-2xl border border-[rgba(43,203,255,0.18)] flex flex-col items-center justify-center overflow-hidden glow-blue"
-                  style={{ background: "linear-gradient(135deg, #09111F 0%, #0B1628 50%, #0B1B33 100%)" }}
-              >
-                <div className="absolute top-1/3 right-1/3 w-48 h-48 rounded-full opacity-15 blur-3xl" style={{ background: "#22BFFF" }} />
-                <div className="relative text-center px-8">
-                  <div className="w-14 h-14 rounded-2xl bg-[rgba(34,191,255,0.08)] border border-[rgba(43,203,255,0.25)] flex items-center justify-center mx-auto mb-4">
-                    <Car size={26} className="text-[#22BFFF]" />
-                  </div>
-                  <p className="text-[#8CA9BD] text-sm tracking-wide">Hero Image Placeholder</p>
-                  <p className="text-[#22BFFF] text-[10px] mt-1.5 tracking-[0.18em] uppercase opacity-50">
-                    Replace with cinematic detailing photo
-                  </p>
-                </div>
-                {/* Corner brackets */}
-                <div className="absolute top-5 left-5 w-5 h-5 border-t border-l border-[rgba(43,203,255,0.45)]" />
-                <div className="absolute top-5 right-5 w-5 h-5 border-t border-r border-[rgba(43,203,255,0.45)]" />
-                <div className="absolute bottom-5 left-5 w-5 h-5 border-b border-l border-[rgba(43,203,255,0.45)]" />
-                <div className="absolute bottom-5 right-5 w-5 h-5 border-b border-r border-[rgba(43,203,255,0.45)]" />
+              <div className="aspect-[4/3] rounded-2xl border border-[rgba(43,203,255,0.18)] overflow-hidden glow-blue relative">
+                <Image
+                    src="/hero.jpg"
+                    alt="IceLux Detailing premium mobile car detail"
+                    fill
+                    className="object-cover"
+                    priority
+                />
               </div>
 
               {/* Floating badge */}
@@ -297,7 +287,7 @@ export default function Home() {
                   The Difference Is<br />in the Details
                 </h2>
                 <p className="text-[#8CA9BD] leading-relaxed mb-10 max-w-md text-base">
-                  IceLux Detailing isn't just a car wash — it's a mobile detailing experience
+                  IceLux Detailing isn&apos;t just a car wash — it&apos;s a mobile detailing experience
                   built around convenience, quality, and professionalism you can actually feel.
                 </p>
                 <Link href="/contact" className="btn-ice px-8 py-4 rounded-full text-sm font-semibold tracking-wide">
@@ -370,7 +360,7 @@ export default function Home() {
                       ))}
                     </div>
                     <p className="text-[#8CA9BD] text-sm italic mb-5 leading-relaxed">
-                      "Testimonial placeholder — replace with real customer review when available."
+                      &ldquo;Testimonial placeholder — replace with real customer review when available.&rdquo;
                     </p>
                     <div className="flex items-center gap-3 pt-4 border-t border-[rgba(43,203,255,0.08)]">
                       <div className="w-8 h-8 rounded-full bg-[rgba(34,191,255,0.08)] border border-[rgba(43,203,255,0.18)]" />
