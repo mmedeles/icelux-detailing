@@ -13,7 +13,7 @@ export default function Footer() {
             <div className="lg:col-span-2">
               <div className="mb-5">
                 <Image
-                    src="/logo.png"
+                    src="/Logo.png"
                     alt="IceLux Detailing"
                     width={140}
                     height={48}

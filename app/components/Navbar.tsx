@@ -39,7 +39,7 @@ export default function Navbar() {
             {/* ── Logo ─────────────────────────────────────────────── */}
             <Link href="/" className="shrink-0 group">
               <Image
-                  src="/logo.png"
+                  src="/Logo.png"
                   alt="IceLux Detailing"
                   width={160}
                   height={48}
