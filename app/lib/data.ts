@@ -16,28 +16,28 @@ export const services = [
     id: "exterior",
     title: "Exterior Detailing",
     description:
-      "Paint decontamination, hand wash, clay bar treatment, and precision drying for a flawless, swirl-free finish.",
+        "Paint decontamination, hand wash, clay bar treatment, and precision drying for a flawless, swirl-free finish.",
     icon: "car",
   },
   {
     id: "interior",
     title: "Interior Restoration",
     description:
-      "Deep vacuum, steam cleaning, leather conditioning, and full surface wipe-down to bring your cabin back to life.",
+        "Deep vacuum, steam cleaning, leather conditioning, and full surface wipe-down to bring your cabin back to life.",
     icon: "sparkles",
   },
   {
     id: "ceramic",
     title: "Ceramic Protection",
     description:
-      "Professional-grade ceramic coating and surface preparation for long-term hydrophobic protection and gloss depth.",
+        "Professional-grade ceramic coating and surface preparation for long-term hydrophobic protection and gloss depth.",
     icon: "shield",
   },
   {
     id: "maintenance",
     title: "Maintenance Plans",
     description:
-      "Regular scheduled detailing to keep your vehicle in showroom condition between full detail sessions.",
+        "Regular scheduled detailing to keep your vehicle in showroom condition between full detail sessions.",
     icon: "calendar",
   },
 ];
@@ -94,7 +94,7 @@ export const packages = [
     tier: "signature",
     tagline: "The Complete IceLux Experience",
     description:
-      "Full interior + exterior detail. Ideal for vehicles needing a thorough refresh from top to bottom.",
+        "Full interior + exterior detail. Ideal for vehicles needing a thorough refresh from top to bottom.",
     services: [
       "Full interior vacuum (seats, carpet, trunk)",
       "Interior surface wipe-down",
@@ -114,7 +114,7 @@ export const packages = [
     tier: "premium",
     tagline: "For Vehicles That Demand More",
     description:
-      "A precision-level detail combining paint enhancement with advanced interior treatment.",
+        "A precision-level detail combining paint enhancement with advanced interior treatment.",
     services: [
       "Everything in IceLux Signature",
       "Single-stage paint correction",
@@ -132,7 +132,7 @@ export const packages = [
     tier: "elite",
     tagline: "The Pinnacle of Mobile Detailing",
     description:
-      "Reserved for those who demand the absolute best. Full paint correction, ceramic coating prep, and complete interior restoration.",
+        "Reserved for those who demand the absolute best. Full paint correction, ceramic coating prep, and complete interior restoration.",
     services: [
       "Everything in Diamond Luxe Finish",
       "Multi-stage paint correction",
@@ -152,7 +152,7 @@ export const packages = [
     tier: "premium",
     tagline: "Signature Meets Enhancement",
     description:
-      "The IceLux Signature elevated with paint enhancement and premium finishing touches.",
+        "The IceLux Signature elevated with paint enhancement and premium finishing touches.",
     services: [
       "Everything in IceLux Signature",
       "Paint correction (single stage)",
@@ -169,7 +169,7 @@ export const packages = [
     tier: "maintenance",
     tagline: "Stay Fresh Between Full Details",
     description:
-      "A premium maintenance session to keep your vehicle looking sharp without the full detail.",
+        "A premium maintenance session to keep your vehicle looking sharp without the full detail.",
     services: [
       "Exterior rinse & waterless detail spray",
       "Interior quick vacuum",
@@ -186,42 +186,52 @@ export const enhancements = [
   {
     name: "Rubber Mat Renewal",
     description: "Deep clean and restore rubber floor mats to factory-fresh condition.",
+    icon: "/icons/rubber-mat.svg",
   },
   {
     name: "Leather Treatment",
     description: "Professional-grade leather cleaner and conditioner for supple, protected seats.",
+    icon: "/icons/leather.svg",
   },
   {
     name: "Interior Glow-Up",
     description: "Full interior plastic dressing and UV protectant application.",
+    icon: "/icons/interior-glow.svg",
   },
   {
     name: "Stain & Odor Removal",
     description: "Enzyme-based stain treatment and odor neutralization for fabric surfaces.",
+    icon: "/icons/stain-odor.svg",
   },
   {
     name: "Exterior Trim Restoration",
     description: "Restore faded black and gray exterior trim to deep, rich color.",
+    icon: "/icons/trim-restore.svg",
   },
   {
     name: "Smooth Surface Revive",
     description: "Clay bar treatment to remove bonded contaminants and smooth paint surface.",
+    icon: "/icons/smooth-surface.svg",
   },
   {
     name: "Engine Bay Deep Clean & Dress",
     description: "Safe engine bay degreasing, rinse, and dressing for a showroom engine compartment.",
+    icon: "/icons/engine-bay.svg",
   },
   {
     name: "Ceramic Protective Wash",
     description: "SiO2-infused car wash that lays down a thin ceramic protection layer.",
+    icon: "/icons/ceramic-wash.svg",
   },
   {
     name: "IceLux Shield",
     description: "Entry-level paint sealant for 3–6 months of hydrophobic protection.",
+    icon: "/icons/icelux-shield.svg",
   },
   {
     name: "IceLux Crystal Coat",
     description: "Professional ceramic coating application for 1–3 years of premium surface protection.",
+    icon: "/icons/crystal-coat.svg",
   },
 ];
 
@@ -229,25 +239,25 @@ export const whyChoose = [
   {
     title: "Mobile Convenience",
     description:
-      "We come directly to your home or office — no drop-offs, no waiting rooms, no wasted time.",
+        "We come directly to your home or office — no drop-offs, no waiting rooms, no wasted time.",
     icon: "map-pin",
   },
   {
     title: "Premium Finish",
     description:
-      "We use professional-grade products and meticulous technique that far exceeds a standard car wash.",
+        "We use professional-grade products and meticulous technique that far exceeds a standard car wash.",
     icon: "sparkles",
   },
   {
     title: "Transparent Packages",
     description:
-      "Every package lists exactly what's included. No hidden fees, no vague pricing — just clarity.",
+        "Every package lists exactly what's included. No hidden fees, no vague pricing — just clarity.",
     icon: "check-circle",
   },
   {
     title: "Professional Communication",
     description:
-      "From booking to completion, we keep you informed and deliver exactly what we promise.",
+        "From booking to completion, we keep you informed and deliver exactly what we promise.",
     icon: "message-circle",
   },
 ];

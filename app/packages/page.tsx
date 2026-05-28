@@ -1,7 +1,33 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CheckCircle, ChevronRight, Zap } from "lucide-react";
+import { CheckCircle, ChevronRight } from "lucide-react";
 import { packages, enhancements, siteConfig } from "@/app/lib/data";
+import {
+  RubberMatIcon,
+  LeatherIcon,
+  InteriorGlowIcon,
+  StainOdorIcon,
+  TrimRestoreIcon,
+  SmoothSurfaceIcon,
+  EngineBayIcon,
+  CeramicWashIcon,
+  IceLuxShieldIcon,
+  CrystalCoatIcon,
+} from "@/app/components/EnhancementIcons";
+
+// Icons in the same order as enhancements array in data.ts
+const enhancementIcons = [
+  RubberMatIcon,
+  LeatherIcon,
+  InteriorGlowIcon,
+  StainOdorIcon,
+  TrimRestoreIcon,
+  SmoothSurfaceIcon,
+  EngineBayIcon,
+  CeramicWashIcon,
+  IceLuxShieldIcon,
+  CrystalCoatIcon,
+];
 
 export const metadata: Metadata = {
   title: "Packages",
@@ -64,7 +90,7 @@ export default function PackagesPage() {
             </h1>
             <p className="text-[#8CA9BD] text-lg max-w-xl leading-relaxed">
               Every package is designed for a specific level of care. Choose the one that
-              fits your vehicle, or contact us for a custom quote.
+              fits your vehicle — or contact us for a custom quote.
             </p>
           </div>
         </section>
@@ -91,9 +117,7 @@ export default function PackagesPage() {
                       )}
 
                       <div className="flex items-start justify-between mb-5">
-                    <span
-                        className={`text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full ${style.badge}`}
-                    >
+                    <span className={`text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full ${style.badge}`}>
                       {tierLabels[pkg.tier]}
                     </span>
                       </div>
@@ -114,10 +138,7 @@ export default function PackagesPage() {
                       <ul className="space-y-2.5 mb-6 flex-1">
                         {pkg.services.map((s) => (
                             <li key={s} className="flex items-start gap-2 text-sm text-[#8CA9BD]">
-                              <CheckCircle
-                                  size={14}
-                                  className={`${style.accent} shrink-0 mt-0.5`}
-                              />
+                              <CheckCircle size={14} className={`${style.accent} shrink-0 mt-0.5`} />
                               {s}
                             </li>
                         ))}
@@ -148,8 +169,10 @@ export default function PackagesPage() {
         {/* Enhancements */}
         <section className="bg-[#0B1628] py-24">
           <div className="max-w-7xl mx-auto px-8 sm:px-10 lg:px-14">
-            <div className="text-center mb-14">
-              <p className="text-[#22BFFF] text-xs font-semibold tracking-[0.25em] uppercase mb-3">
+
+            {/* ── Centered header ── */}
+            <div className="w-full flex flex-col items-center text-center mb-14">
+              <p className="text-[#22BFFF] text-[11px] font-semibold tracking-[0.22em] uppercase mb-4">
                 Add-Ons
               </p>
               <h2
@@ -158,31 +181,34 @@ export default function PackagesPage() {
               >
                 Enhancement Services
               </h2>
-              <p className="text-[#8CA9BD] max-w-xl mx-auto">
+              <p className="text-[#8CA9BD] max-w-xl leading-relaxed">
                 Customize any package with targeted enhancements for an even deeper clean
                 or longer-lasting protection.
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {enhancements.map((enh) => (
-                  <div
-                      key={enh.name}
-                      className="card-hover bg-[#09111F] border-ice rounded-xl p-5 flex items-start gap-4"
-                  >
-                    <div className="w-8 h-8 rounded-lg bg-[rgba(34,191,255,0.08)] border border-[rgba(43,203,255,0.2)] flex items-center justify-center shrink-0 mt-0.5">
-                      <Zap size={14} className="text-[#22BFFF]" />
+              {enhancements.map((enh, index) => {
+                const Icon = enhancementIcons[index];
+                return (
+                    <div
+                        key={enh.name}
+                        className="card-hover bg-[#09111F] border-ice rounded-xl p-5 flex items-start gap-4"
+                    >
+                      <div className="w-9 h-9 rounded-lg bg-[rgba(34,191,255,0.08)] border border-[rgba(43,203,255,0.2)] flex items-center justify-center shrink-0 mt-0.5">
+                        {Icon && <Icon />}
+                      </div>
+                      <div>
+                        <h3 className="text-[#EAF8FF] font-semibold text-sm mb-1">
+                          {enh.name}
+                        </h3>
+                        <p className="text-[#8CA9BD] text-xs leading-relaxed">
+                          {enh.description}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-[#EAF8FF] font-semibold text-sm mb-1">
-                        {enh.name}
-                      </h3>
-                      <p className="text-[#8CA9BD] text-xs leading-relaxed">
-                        {enh.description}
-                      </p>
-                    </div>
-                  </div>
-              ))}
+                );
+              })}
             </div>
 
             <p className="text-center text-[#8CA9BD] text-sm mt-10">
@@ -204,18 +230,20 @@ export default function PackagesPage() {
                     "radial-gradient(ellipse 70% 50% at 50% 50%, rgba(34,191,255,0.07) 0%, transparent 70%)",
               }}
           />
-          <div className="relative max-w-2xl mx-auto px-4 text-center">
+
+          {/* ── Centered CTA ── */}
+          <div className="relative w-full flex flex-col items-center text-center px-8 sm:px-10 lg:px-14">
             <h2
-                className="text-4xl sm:text-5xl font-bold text-[#EAF8FF] mb-5"
+                className="text-4xl sm:text-5xl font-bold text-[#EAF8FF] mb-5 max-w-2xl"
                 style={{ fontFamily: "var(--font-display, serif)" }}
             >
               Not sure which package is right?
             </h2>
-            <p className="text-[#8CA9BD] mb-8">
-              Send us a message or call and we'll help you pick the right detail for your
+            <p className="text-[#8CA9BD] mb-8 max-w-md leading-relaxed">
+              Send us a message or call and we&apos;ll help you pick the right detail for your
               vehicle and budget.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4">
               <Link
                   href="/contact"
                   className="btn-ice px-8 py-4 rounded-full text-base font-semibold tracking-wide"
