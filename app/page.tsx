@@ -25,16 +25,13 @@ export default function Home() {
       <>
         {/* ── HERO ─────────────────────────────────────────────────────────── */}
         <section className="relative min-h-screen flex items-center overflow-hidden bg-[#050912]">
-          {/* Ambient glow */}
           <div aria-hidden className="absolute inset-0 pointer-events-none"
                style={{ background: "radial-gradient(ellipse 65% 55% at 68% 42%, rgba(34,191,255,0.07) 0%, transparent 65%)" }} />
-          {/* Subtle grid */}
           <div aria-hidden className="absolute inset-0 pointer-events-none opacity-[0.022]"
                style={{
                  backgroundImage: "linear-gradient(rgba(34,191,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(34,191,255,1) 1px, transparent 1px)",
                  backgroundSize: "64px 64px",
                }} />
-          {/* Edge vignette */}
           <div aria-hidden className="absolute inset-0 pointer-events-none"
                style={{ background: "radial-gradient(ellipse at center, transparent 35%, #050912 88%)" }} />
 
@@ -42,7 +39,6 @@ export default function Home() {
 
             {/* Copy */}
             <div className="max-w-xl">
-              {/* Eyebrow pill */}
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[rgba(43,203,255,0.28)] bg-[rgba(34,191,255,0.05)] mb-8">
                 <MapPin size={25} className="text-[#22BFFF] shrink-0" />
                 <span className="text-[#8EDFFF] text-[11px] font-medium tracking-[0.18em] uppercase">
@@ -50,7 +46,6 @@ export default function Home() {
               </span>
               </div>
 
-              {/* Headline */}
               <h1
                   className="text-5xl sm:text-6xl lg:text-[68px] font-bold leading-[1.04] tracking-tight mb-6"
                   style={{ fontFamily: "var(--font-display, serif)" }}
@@ -65,13 +60,11 @@ export default function Home() {
               </span>
               </h1>
 
-              {/* Subheadline */}
               <p className="text-[#8CA9BD] text-base sm:text-lg leading-relaxed mb-10 max-w-md">
                 Professional interior, exterior, and ceramic detailing services delivering
                 deep restoration and premium protection directly to your driveway.
               </p>
 
-              {/* CTAs */}
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
                 <Link href="/contact" className="btn-ice px-10 py-4 rounded-full text-base font-semibold tracking-wide">
                   Book Your Detail
@@ -81,7 +74,6 @@ export default function Home() {
                 </Link>
               </div>
 
-              {/* Social proof */}
               <div className="flex items-center gap-4">
                 <div className="flex gap-1">
                   {[...Array(5)].map((_, i) => (
@@ -103,8 +95,6 @@ export default function Home() {
                     priority
                 />
               </div>
-
-              {/* Floating badge */}
               <div className="absolute -bottom-5 -left-4 bg-[#09111F] border border-[rgba(43,203,255,0.28)] rounded-xl px-4 py-3 glow-blue-sm shadow-lg">
                 <p className="text-[#22BFFF] text-[10px] font-semibold tracking-[0.18em] uppercase mb-0.5">Mobile Service</p>
                 <p className="text-[#EAF8FF] text-sm font-bold">We Come To You</p>
@@ -133,7 +123,7 @@ export default function Home() {
         {/* ── SERVICES ───────────────────────────────────────────────────────── */}
         <section className="bg-[#050912] py-28">
           <div className="max-w-7xl mx-auto px-8 sm:px-10 lg:px-14">
-            <div className="text-center mb-16">
+            <div className="flex flex-col items-center text-center mb-16">
               <p className="text-[#22BFFF] text-[11px] font-semibold tracking-[0.22em] uppercase mb-4">What We Offer</p>
               <h2
                   className="text-4xl sm:text-5xl font-bold text-[#EAF8FF]"
@@ -160,7 +150,7 @@ export default function Home() {
         {/* ── FEATURED PACKAGES ──────────────────────────────────────────────── */}
         <section className="bg-[#0B1628] py-28">
           <div className="max-w-7xl mx-auto px-8 sm:px-10 lg:px-14">
-            <div className="text-center mb-16">
+            <div className="flex flex-col items-center text-center mb-16">
               <p className="text-[#22BFFF] text-[11px] font-semibold tracking-[0.22em] uppercase mb-4">Our Packages</p>
               <h2
                   className="text-4xl sm:text-5xl font-bold text-[#EAF8FF] mb-5"
@@ -168,7 +158,7 @@ export default function Home() {
               >
                 Built For Your Vehicle
               </h2>
-              <p className="text-[#8CA9BD] max-w-lg mx-auto text-base leading-relaxed">
+              <p className="text-[#8CA9BD] max-w-lg text-base leading-relaxed">
                 Every package is designed with precision and care. Whether you need a
                 quick refresh or a full transformation, we have you covered.
               </p>
@@ -236,7 +226,7 @@ export default function Home() {
         {/* ── GALLERY PREVIEW ────────────────────────────────────────────────── */}
         <section className="bg-[#050912] py-28">
           <div className="max-w-7xl mx-auto px-8 sm:px-10 lg:px-14">
-            <div className="text-center mb-14">
+            <div className="flex flex-col items-center text-center mb-14">
               <p className="text-[#22BFFF] text-[11px] font-semibold tracking-[0.22em] uppercase mb-4">Our Work</p>
               <h2
                   className="text-4xl sm:text-5xl font-bold text-[#EAF8FF]"
@@ -313,9 +303,10 @@ export default function Home() {
         {/* ── SERVICE AREA ───────────────────────────────────────────────────── */}
         <section className="bg-[#050912] py-20">
           <div className="max-w-7xl mx-auto px-8 sm:px-10 lg:px-14">
-            <div className="bg-[#09111F] border-ice rounded-2xl p-10 md:p-16 relative overflow-hidden flex flex-col items-center text-center">              <div className="absolute inset-0 pointer-events-none"
+            <div className="bg-[#09111F] border-ice rounded-2xl p-10 md:p-16 relative overflow-hidden flex flex-col items-center text-center">
+              <div className="absolute inset-0 pointer-events-none"
                    style={{ background: "radial-gradient(ellipse at center, rgba(34,191,255,0.04) 0%, transparent 65%)" }} />
-              <MapPin size={26} className="text-[#22BFFF] mx-auto mb-5" />
+              <MapPin size={26} className="text-[#22BFFF] mb-5" />
               <p className="text-[#22BFFF] text-[11px] font-semibold tracking-[0.22em] uppercase mb-4">Service Area</p>
               <h2
                   className="text-3xl sm:text-4xl font-bold text-[#EAF8FF] mb-5"
@@ -323,9 +314,9 @@ export default function Home() {
               >
                 Iowa Colony &amp; Surrounding Areas
               </h2>
-              <p className="text-[#8CA9BD] max-w-md mx-auto text-sm leading-relaxed mb-8">
+              <p className="text-[#8CA9BD] max-w-md text-sm leading-relaxed mb-8">
                 We bring the full IceLux experience directly to your home, apartment, or office.
-                No drop-offs needed, we handle everything on-site.
+                No drop-offs needed — we handle everything on-site.
               </p>
               <div className="flex flex-wrap justify-center gap-2.5">
                 {["Iowa Colony", "Alvin", "Pearland", "Rosharon", "Manvel"].map((area) => (
@@ -341,7 +332,7 @@ export default function Home() {
         {/* ── TESTIMONIALS ───────────────────────────────────────────────────── */}
         <section className="bg-[#07101C] py-24 border-t border-[rgba(43,203,255,0.07)]">
           <div className="max-w-7xl mx-auto px-8 sm:px-10 lg:px-14">
-            <div className="text-center mb-14">
+            <div className="flex flex-col items-center text-center mb-14">
               <p className="text-[#22BFFF] text-[11px] font-semibold tracking-[0.22em] uppercase mb-4">Testimonials</p>
               <h2
                   className="text-4xl font-bold text-[#EAF8FF]"
@@ -359,7 +350,7 @@ export default function Home() {
                       ))}
                     </div>
                     <p className="text-[#8CA9BD] text-sm italic mb-5 leading-relaxed">
-                      &ldquo;Testimonial placeholder (replace with real customer review when available.&rdquo;)
+                      &ldquo;Testimonial placeholder — replace with real customer review when available.&rdquo;
                     </p>
                     <div className="flex items-center gap-3 pt-4 border-t border-[rgba(43,203,255,0.08)]">
                       <div className="w-8 h-8 rounded-full bg-[rgba(34,191,255,0.08)] border border-[rgba(43,203,255,0.18)]" />
@@ -389,8 +380,8 @@ export default function Home() {
                   className="text-transparent bg-clip-text"
                   style={{ backgroundImage: "linear-gradient(90deg, #22BFFF, #8EDFFF)" }}
               >
-        Dusty to Icy?
-      </span>
+              Dusty to Icy?
+            </span>
             </h2>
             <p className="text-[#8CA9BD] text-base sm:text-lg mb-10 max-w-lg leading-relaxed">
               Book your detail today and experience what premium mobile detailing
