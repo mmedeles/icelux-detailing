@@ -8,110 +8,153 @@ import { Menu, X, Phone } from "lucide-react";
 import { siteConfig } from "@/app/lib/data";
 
 const navLinks = [
-  { href: "/", label: "Home" },
+  { href: "/",         label: "Home" },
   { href: "/packages", label: "Packages" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/contact", label: "Contact" },
+  { href: "/gallery",  label: "Gallery" },
+  { href: "/contact",  label: "Contact" },
 ];
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen,   setIsOpen]   = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => { setIsOpen(false); }, [pathname]);
 
   return (
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-              ? "bg-[#050912]/97 backdrop-blur-md border-b border-[rgba(43,203,255,0.12)] shadow-[0_4px_40px_rgba(11,191,255,0.05)]"
-              : "bg-[#050912]/80 backdrop-blur-sm border-b border-[rgba(43,203,255,0.07)]"
-      }`}>
+      <header style={{
+        position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
+        background: scrolled ? "rgba(5,9,18,0.97)" : "rgba(5,9,18,0.88)",
+        backdropFilter: "blur(12px)",
+        borderBottom: "1px solid rgba(43,203,255,0.10)",
+        boxShadow: scrolled ? "0 4px 40px rgba(11,191,255,0.05)" : "none",
+        transition: "all 0.3s ease",
+      }}>
+        <style>{`
+        .nav-link        { color: #8CA9BD; text-decoration: none; font-size: 0.9375rem; font-weight: 500; letter-spacing: 0.02em; position: relative; padding-bottom: 0.125rem; transition: color 0.2s; }
+        .nav-link:hover  { color: #0BBFFF; }
+        .nav-link.active { color: #0BBFFF; }
+        .nav-link.active::after { content: ""; position: absolute; bottom: -2px; left: 0; right: 0; height: 1px; background: #0BBFFF; opacity: 0.6; border-radius: 9999px; }
+        .nb-phone        { color: #8CA9BD; font-size: 0.75rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.375rem; transition: color 0.2s; }
+        .nb-phone:hover  { color: #0BBFFF; }
+        .mob-link        { color: #8CA9BD; text-decoration: none; font-size: 1rem; padding: 0.75rem 0; border-bottom: 1px solid rgba(43,203,255,0.07); display: block; transition: color 0.2s; }
+        .mob-link:hover,
+        .mob-link.active { color: #0BBFFF; }
+        .mob-phone       { display: flex; align-items: center; gap: 0.5rem; color: #8CA9BD; font-size: 0.9375rem; padding: 0.75rem 0; border-bottom: 1px solid rgba(43,203,255,0.07); text-decoration: none; }
 
-        {/* ── Top strip: phone number (desktop only) ─────────────────── */}
-        <div className="hidden md:flex items-center justify-end px-8 sm:px-10 lg:px-14 py-1.5 border-b border-[rgba(43,203,255,0.07)]">
-          <a href={`tel:${siteConfig.phone}`}
-             className="flex items-center gap-2 text-[#8CA9BD] hover:text-[#0BBFFF] text-xs transition-colors group">
-            <Phone size={11} className="text-[#0BBFFF]" />
-            <span className="font-medium tracking-wide">{siteConfig.phone}</span>
+        /* show/hide by breakpoint */
+        .nb-phone-strip  { display: flex; justify-content: flex-end; padding: 0.375rem 2rem; border-bottom: 1px solid rgba(43,203,255,0.10); }
+        .nb-desktop-nav  { display: flex; }
+        .nb-desktop-ctas { display: flex; }
+        .nb-hamburger    { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+        .nb-mobile-menu  { display: block; }
+
+        @media (max-width: 768px) {
+          .nb-phone-strip  { display: none; }
+          .nb-desktop-nav  { display: none !important; }
+          .nb-desktop-ctas { display: none !important; }
+          .nb-hamburger    { display: flex; align-items: center; }
+        }
+      `}</style>
+
+        {/* ── Phone strip ──────────────────────────────────────── */}
+        <div className="nb-phone-strip">
+          <a href={`tel:${siteConfig.phone}`} className="nb-phone">
+            <Phone size={11} color="#0BBFFF" />
+            {siteConfig.phone}
           </a>
         </div>
 
-        {/* ── Main nav row ────────────────────────────────────────────── */}
-        <div className="w-full px-8 sm:px-10 lg:px-14">
-          <div className="flex items-center justify-between" style={{ height: "68px" }}>
+        {/* ── Main bar ─────────────────────────────────────────── */}
+        <div style={{ width: "100%", padding: "0 2rem" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "64px", position: "relative" }}>
 
             {/* Logo */}
-            <Link href="/" className="shrink-0 group">
-              <Image src="/Logo.png" alt="IceLux Detailing" width={160} height={48}
-                     className="h-22 w-auto object-contain transition-opacity duration-200 group-hover:opacity-80"
-                     priority />
+            <Link href="/" style={{ flexShrink: 0, display: "flex", alignItems: "center" }}>
+              <Image
+                  src="/Logo.png"
+                  alt="IceLux Detailing"
+                  width={120}
+                  height={40}
+                  style={{ height: "70px", width: "auto", objectFit: "contain", transition: "opacity 0.2s" }}
+                  priority
+              />
             </Link>
 
-            {/* Desktop nav — centered */}
-            <nav className="hidden md:flex items-center gap-9 absolute left-1/2 -translate-x-1/2">
+            {/* Desktop nav — centred */}
+            <nav className="nb-desktop-nav"
+                 style={{ position: "absolute", left: "50%", transform: "translateX(-50%)", alignItems: "center", gap: "2.25rem" }}>
               {navLinks.map((link) => (
-                  <Link key={link.href} href={link.href}
-                        className={`text-sm font-medium tracking-wide transition-all duration-200 hover:text-[#0BBFFF] relative pb-0.5 ${
-                            pathname === link.href ? "text-[#0BBFFF]" : "text-[#8CA9BD]"
-                        }`}>
+                  <Link
+                      key={link.href}
+                      href={link.href}
+                      className={`nav-link${pathname === link.href ? " active" : ""}`}
+                  >
                     {link.label}
-                    {pathname === link.href && (
-                        <span className="absolute bottom-0 left-0 right-0 h-px bg-[#0BBFFF] opacity-60 rounded-full" />
-                    )}
                   </Link>
               ))}
             </nav>
 
-            {/* CTA buttons */}
-            <div className="hidden md:flex items-center gap-3 shrink-0">
-              <a href={`tel:${siteConfig.phone}`}
-                 className="btn-outline-ice px-4 py-2 rounded-full text-sm font-semibold tracking-wide inline-flex items-center gap-1.5">
-                <Phone size={13} />
-                Call Us
+            {/* Right CTAs */}
+            <div className="nb-desktop-ctas" style={{ alignItems: "center", gap: "0.75rem", flexShrink: 0 }}>
+              <a
+                  href={`tel:${siteConfig.phone}`}
+                  className="btn-outline-ice"
+                  style={{ padding: "0.5rem 1.125rem", borderRadius: "9999px", fontSize: "0.8125rem", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.375rem", whiteSpace: "nowrap" }}
+              >
+                <Phone size={13} /> Call Us
               </a>
-              <Link href="/contact"
-                    className="btn-ice px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide whitespace-nowrap">
+              <Link
+                  href="/contact"
+                  className="btn-ice"
+                  style={{ padding: "0.5625rem 1.25rem", borderRadius: "9999px", fontSize: "0.8125rem", fontWeight: 600, whiteSpace: "nowrap", display: "inline-flex", alignItems: "center" }}
+              >
                 Book Your Detail
               </Link>
             </div>
 
-            {/* Mobile hamburger */}
+            {/* Hamburger */}
             <button
-                className="md:hidden text-[#8CA9BD] hover:text-[#0BBFFF] transition-colors p-2 shrink-0"
+                className="nb-hamburger"
                 onClick={() => setIsOpen(!isOpen)}
-                aria-label="Toggle menu">
-              {isOpen ? <X size={22} /> : <Menu size={22} />}
+                aria-label="Toggle menu"
+            >
+              {isOpen ? <X size={22} color="#8CA9BD" /> : <Menu size={22} color="#8CA9BD" />}
             </button>
           </div>
         </div>
 
-        {/* ── Mobile menu ─────────────────────────────────────────────── */}
-        <div className={`md:hidden transition-all duration-300 overflow-hidden ${
-            isOpen ? "max-h-[480px] opacity-100" : "max-h-0 opacity-0"
-        }`}>
-          <nav className="bg-[#07101C]/98 backdrop-blur-xl border-b border-[rgba(43,203,255,0.1)] px-8 pt-4 pb-6 flex flex-col gap-1">
+        {/* ── Mobile menu ──────────────────────────────────────── */}
+        <div className="nb-mobile-menu" style={{
+          overflow: "hidden",
+          maxHeight: isOpen ? "480px" : "0",
+          opacity: isOpen ? 1 : 0,
+          transition: "max-height 0.3s ease, opacity 0.3s ease",
+        }}>
+          <nav style={{ background: "#07101C", borderBottom: "1px solid rgba(43,203,255,0.10)", padding: "1rem 2rem 1.5rem", display: "flex", flexDirection: "column" }}>
             {navLinks.map((link) => (
-                <Link key={link.href} href={link.href}
-                      className={`text-base tracking-wide py-3 border-b border-[rgba(43,203,255,0.07)] transition-colors ${
-                          pathname === link.href ? "text-[#0BBFFF]" : "text-[#8CA9BD] hover:text-[#EAF8FF]"
-                      }`}>
+                <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`mob-link${pathname === link.href ? " active" : ""}`}
+                >
                   {link.label}
                 </Link>
             ))}
-            <a href={`tel:${siteConfig.phone}`}
-               className="flex items-center gap-2 text-[#8CA9BD] py-3 border-b border-[rgba(43,203,255,0.07)] text-sm">
-              <Phone size={14} className="text-[#0BBFFF]" />
-              {siteConfig.phone}
+            <a href={`tel:${siteConfig.phone}`} className="mob-phone">
+              <Phone size={14} color="#0BBFFF" /> {siteConfig.phone}
             </a>
-            <Link href="/contact"
-                  className="btn-ice px-5 py-3.5 rounded-full text-sm font-semibold tracking-wide text-center mt-4">
+            <Link
+                href="/contact"
+                className="btn-ice"
+                style={{ padding: "0.875rem", borderRadius: "9999px", fontSize: "0.9375rem", fontWeight: 600, textAlign: "center", marginTop: "1rem", display: "block" }}
+            >
               Book Your Detail
             </Link>
           </nav>
