@@ -1,397 +1,558 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
   Car, Sparkles, Shield, Calendar, MapPin,
   CheckCircle, MessageCircle, ChevronRight, Star,
+  Phone, ArrowRight, Play,
 } from "lucide-react";
 import {
-  services, featuredPackages, whyChoose, trustBarItems,
+  services, featuredPackages, whyChoose, trustBarItems, siteConfig,
 } from "@/app/lib/data";
 
+/* ─── Hooks ──────────────────────────────────────────────────── */
+function useCounter(target: number, duration = 2000, start = false) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!start) return;
+    let t0: number | null = null;
+    const step = (ts: number) => {
+      if (!t0) t0 = ts;
+      const p = Math.min((ts - t0) / duration, 1);
+      setCount(Math.floor(p * target));
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [start, target, duration]);
+  return count;
+}
+
+function useInView(threshold = 0.12) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current; if (!el) return;
+    const obs = new IntersectionObserver(
+        ([e]) => { if (e.isIntersecting) { setInView(true); obs.disconnect(); } },
+        { threshold }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return { ref, inView };
+}
+
+/* ─── Service icon ───────────────────────────────────────────── */
 function ServiceIcon({ name }: { name: string }) {
-  const cls = "w-5 h-5 text-[#22BFFF]";
-  if (name === "car") return <Car className={cls} />;
-  if (name === "sparkles") return <Sparkles className={cls} />;
-  if (name === "shield") return <Shield className={cls} />;
-  if (name === "calendar") return <Calendar className={cls} />;
-  if (name === "map-pin") return <MapPin className={cls} />;
-  if (name === "check-circle") return <CheckCircle className={cls} />;
+  const cls = "w-6 h-6 text-[#0BBFFF]";
+  if (name === "car")            return <Car className={cls} />;
+  if (name === "sparkles")       return <Sparkles className={cls} />;
+  if (name === "shield")         return <Shield className={cls} />;
+  if (name === "calendar")       return <Calendar className={cls} />;
+  if (name === "map-pin")        return <MapPin className={cls} />;
+  if (name === "check-circle")   return <CheckCircle className={cls} />;
   if (name === "message-circle") return <MessageCircle className={cls} />;
   return null;
 }
 
+/* ─── FadeIn ─────────────────────────────────────────────────── */
+function FadeIn({ children, delay = 0, className = "", style: extraStyle = {} }: {
+  children: React.ReactNode; delay?: number; className?: string; style?: React.CSSProperties;
+}) {
+  const { ref, inView } = useInView();
+  return (
+      <div ref={ref} className={className} style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? "translateY(0)" : "translateY(28px)",
+        transition: `opacity 0.7s ease ${delay}ms, transform 0.7s ease ${delay}ms`,
+        ...extraStyle,
+      }}>
+        {children}
+      </div>
+  );
+}
+
+/* ─── StatCounter ────────────────────────────────────────────── */
+function StatCounter({ target, suffix, label }: { target: number; suffix: string; label: string }) {
+  const { ref, inView } = useInView(0.3);
+  const count = useCounter(target, 1800, inView);
+  return (
+      <div ref={ref} style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "0 2.5rem" }}>
+        <p style={{ fontFamily: "var(--font-display,serif)", fontSize: "3.5rem", fontWeight: 700, color: "#0BBFFF", lineHeight: 1 }}>
+          {count}{suffix}
+        </p>
+        <p style={{ color: "#8CA9BD", fontSize: "0.875rem", marginTop: "0.75rem", letterSpacing: "0.05em" }}>{label}</p>
+      </div>
+  );
+}
+
+/* ─── Section wrapper — guarantees centering at any zoom ─────── */
+function Section({ children, bg, style = {} }: {
+  children: React.ReactNode;
+  bg?: string;
+  style?: React.CSSProperties;
+}) {
+  return (
+      <section style={{ background: bg, ...style }}>
+        <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "0 2rem" }}>
+          {children}
+        </div>
+      </section>
+  );
+}
+
+/* ─── SectionHeader ──────────────────────────────────────────── */
+function SectionHeader({ eyebrow, title, subtitle }: {
+  eyebrow: string; title: React.ReactNode; subtitle?: string;
+}) {
+  return (
+      <FadeIn style={{ width: "100%", maxWidth: "72rem", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "4rem" }}>
+        <p style={{ color: "#0BBFFF", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: "1rem" }}>
+          {eyebrow}
+        </p>
+        <h2 style={{ fontFamily: "var(--font-display,serif)", fontSize: "clamp(2rem,5vw,3.25rem)", fontWeight: 700, color: "#EAF8FF", marginBottom: "1.25rem", lineHeight: 1.1 }}>
+          {title}
+        </h2>
+        {subtitle && (
+            <p style={{ color: "#8CA9BD", maxWidth: "38rem", fontSize: "1rem", lineHeight: 1.75 }}>{subtitle}</p>
+        )}
+      </FadeIn>
+  );
+}
+
+/* ─── Divider line between sections ─────────────────────────── */
+const borderTop = "1px solid rgba(43,203,255,0.10)";
+
+/* ══════════════════════════════════════════════════════════════
+   HOME PAGE
+══════════════════════════════════════════════════════════════ */
 export default function Home() {
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => { const t = setTimeout(() => setLoaded(true), 80); return () => clearTimeout(t); }, []);
+
+  const anim = (delay: number): React.CSSProperties => ({
+    opacity: loaded ? 1 : 0,
+    transform: loaded ? "translateY(0)" : "translateY(20px)",
+    transition: `all 0.7s ease ${delay}ms`,
+  });
+
   return (
       <>
-        {/* ── HERO ─────────────────────────────────────────────────────────── */}
-        <section className="relative min-h-screen flex items-center overflow-hidden bg-[#050912]">
-          <div aria-hidden className="absolute inset-0 pointer-events-none"
-               style={{ background: "radial-gradient(ellipse 65% 55% at 68% 42%, rgba(34,191,255,0.07) 0%, transparent 65%)" }} />
-          <div aria-hidden className="absolute inset-0 pointer-events-none opacity-[0.022]"
-               style={{
-                 backgroundImage: "linear-gradient(rgba(34,191,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(34,191,255,1) 1px, transparent 1px)",
-                 backgroundSize: "64px 64px",
-               }} />
-          <div aria-hidden className="absolute inset-0 pointer-events-none"
-               style={{ background: "radial-gradient(ellipse at center, transparent 35%, #050912 88%)" }} />
-
-          <div className="relative max-w-7xl mx-auto px-8 sm:px-10 lg:px-14 pt-16 pb-24 w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-            {/* Copy */}
-            <div className="max-w-xl">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[rgba(43,203,255,0.28)] bg-[rgba(34,191,255,0.05)] mb-8">
-                <MapPin size={25} className="text-[#22BFFF] shrink-0" />
-                <span className="text-[#8EDFFF] text-[11px] font-medium tracking-[0.18em] uppercase">
-                Serving Iowa Colony &amp; Surrounding Areas
-              </span>
-              </div>
-
-              <h1
-                  className="text-5xl sm:text-6xl lg:text-[68px] font-bold leading-[1.04] tracking-tight mb-6"
-                  style={{ fontFamily: "var(--font-display, serif)" }}
-              >
-                <span className="text-[#EAF8FF] block">Premium Mobile</span>
-                <span className="text-[#EAF8FF] block">Detailing</span>
-                <span
-                    className="text-transparent bg-clip-text block mt-1"
-                    style={{ backgroundImage: "linear-gradient(90deg, #22BFFF 0%, #8EDFFF 100%)", textShadow: "none", WebkitTextStroke: "0px" }}
-                >
-                From Dusty to Icy
-              </span>
-              </h1>
-
-              <p className="text-[#8CA9BD] text-base sm:text-lg leading-relaxed mb-10 max-w-md">
-                Professional interior, exterior, and ceramic detailing services delivering
-                deep restoration and premium protection directly to your driveway.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                <Link href="/contact" className="btn-ice px-10 py-4 rounded-full text-base font-semibold tracking-wide">
-                  Book Your Detail
-                </Link>
-                <Link href="/packages" className="btn-outline-ice px-10 py-4 rounded-full text-base font-semibold tracking-wide">
-                  View Packages
-                </Link>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="flex gap-1">
-                  {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={18} className="text-[#22BFFF] fill-[#22BFFF]" />
-                  ))}
-                </div>
-                <span className="text-[#8CA9BD] text-base">Premium results, delivered to your door</span>
-              </div>
-            </div>
-
-            {/* Hero visual */}
-            <div className="relative w-full">
-              <div className="aspect-[4/3] rounded-2xl border border-[rgba(43,203,255,0.18)] overflow-hidden glow-blue relative">
-                <Image
-                    src="/hero.jpg"
-                    alt="IceLux Detailing premium mobile car detail"
-                    fill
-                    className="object-cover"
-                    priority
-                />
-              </div>
-              <div className="absolute -bottom-5 -left-4 bg-[#09111F] border border-[rgba(43,203,255,0.28)] rounded-xl px-4 py-3 glow-blue-sm shadow-lg">
-                <p className="text-[#22BFFF] text-[10px] font-semibold tracking-[0.18em] uppercase mb-0.5">Mobile Service</p>
-                <p className="text-[#EAF8FF] text-sm font-bold">We Come To You</p>
-              </div>
-            </div>
+        {/* ══ HERO ══════════════════════════════════════════════════ */}
+        <section style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}>
+          <div style={{ position: "absolute", inset: 0 }}>
+            <Image src="/hero.jpg" alt="IceLux Detailing" fill priority className="object-cover object-center"
+                   style={{ transform: loaded ? "scale(1)" : "scale(1.05)", transition: "transform 8s ease" }} />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(105deg,rgba(0,0,0,0.93) 0%,rgba(0,0,0,0.70) 55%,rgba(0,0,0,0.25) 100%)" }} />
+            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "8rem", background: "linear-gradient(to top,rgba(5,9,18,1),transparent)" }} />
           </div>
-        </section>
 
-        {/* ── TRUST BAR ──────────────────────────────────────────────────────── */}
-        <section className="bg-[#07101C] border-y border-[rgba(43,203,255,0.09)]">
-          <div className="max-w-7xl mx-auto px-8 sm:px-10 lg:px-14 py-7">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
-              {trustBarItems.map((item, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#22BFFF] shrink-0 opacity-80" />
-                    <div>
-                      <p className="text-[#EAF8FF] text-sm font-semibold leading-tight">{item.label}</p>
-                      <p className="text-[#8CA9BD] text-xs mt-0.5">{item.sub}</p>
-                    </div>
-                  </div>
-              ))}
-            </div>
-          </div>
-        </section>
+          <div style={{ position: "relative", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", padding: "7rem 2rem 5rem" }}>
+            <div style={{ width: "100%", maxWidth: "72rem", display: "grid", gridTemplateColumns: "1fr", gap: "3.5rem", alignItems: "center" }}
+                 className="lg:grid-cols-2-hero">
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3.5rem", alignItems: "center", width: "100%" }}
+                   className="hero-grid">
 
-        {/* ── SERVICES ───────────────────────────────────────────────────────── */}
-        <section className="bg-[#050912] py-28">
-          <div className="max-w-7xl mx-auto px-8 sm:px-10 lg:px-14">
-            <div className="flex flex-col items-center text-center mb-16">
-              <p className="text-[#22BFFF] text-[11px] font-semibold tracking-[0.22em] uppercase mb-4">What We Offer</p>
-              <h2
-                  className="text-4xl sm:text-5xl font-bold text-[#EAF8FF]"
-                  style={{ fontFamily: "var(--font-display, serif)" }}
-              >
-                Luxury Care For Every Detail
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {services.map((svc) => (
-                  <div key={svc.id} className="card-hover bg-[#09111F] border-ice rounded-2xl p-7 group">
-                    <div className="w-11 h-11 rounded-xl bg-[rgba(34,191,255,0.07)] border border-[rgba(43,203,255,0.18)] flex items-center justify-center mb-5 group-hover:bg-[rgba(34,191,255,0.11)] transition-colors">
-                      <ServiceIcon name={svc.icon} />
-                    </div>
-                    <h3 className="text-[#EAF8FF] font-semibold text-base mb-2.5 tracking-tight">{svc.title}</h3>
-                    <p className="text-[#8CA9BD] text-sm leading-relaxed">{svc.description}</p>
-                  </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── FEATURED PACKAGES ──────────────────────────────────────────────── */}
-        <section className="bg-[#0B1628] py-28">
-          <div className="max-w-7xl mx-auto px-8 sm:px-10 lg:px-14">
-            <div className="flex flex-col items-center text-center mb-16">
-              <p className="text-[#22BFFF] text-[11px] font-semibold tracking-[0.22em] uppercase mb-4">Our Packages</p>
-              <h2
-                  className="text-4xl sm:text-5xl font-bold text-[#EAF8FF] mb-5"
-                  style={{ fontFamily: "var(--font-display, serif)" }}
-              >
-                Built For Your Vehicle
-              </h2>
-              <p className="text-[#8CA9BD] max-w-lg text-base leading-relaxed">
-                Every package is designed with precision and care. Whether you need a
-                quick refresh or a full transformation, we have you covered.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {featuredPackages.map((pkg, i) => (
-                  <div
-                      key={pkg.id}
-                      className={`card-hover rounded-2xl p-8 flex flex-col ${
-                          i === 1 ? "bg-[#0B1B33] border-ice-glow" : "bg-[#09111F] border-ice"
-                      }`}
-                  >
-                    <div className="flex items-start justify-between mb-6">
-                  <span className={`text-[10px] font-semibold tracking-[0.18em] uppercase px-3 py-1.5 rounded-full ${
-                      i === 1
-                          ? "bg-[rgba(34,191,255,0.14)] text-[#22BFFF] border border-[rgba(43,203,255,0.38)]"
-                          : "bg-[rgba(34,191,255,0.06)] text-[#8EDFFF] border border-[rgba(43,203,255,0.14)]"
-                  }`}>
-                    {pkg.badge}
+                {/* Left */}
+                <div style={{ gridColumn: "1" }}>
+                  <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.5rem 1rem", borderRadius: "9999px", border: "1px solid rgba(11,191,255,0.4)", background: "rgba(11,191,255,0.08)", marginBottom: "2rem", ...anim(100) }}>
+                    <MapPin size={11} color="#0BBFFF" />
+                    <span style={{ color: "#0BBFFF", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase" }}>
+                    Serving Iowa Colony &amp; Surrounding Areas
                   </span>
-                      {i === 1 && (
-                          <Star size={14} className="text-[#22BFFF] fill-[#22BFFF] mt-1" />
-                      )}
-                    </div>
+                  </div>
 
-                    <h3
-                        className="text-[#EAF8FF] text-2xl font-bold mb-2"
-                        style={{ fontFamily: "var(--font-display, serif)" }}
-                    >
-                      {pkg.name}
-                    </h3>
-                    <p className="text-[#8CA9BD] text-sm leading-relaxed mb-6">{pkg.description}</p>
+                  <h1 style={{ fontFamily: "var(--font-display,serif)", fontSize: "clamp(2.8rem,6vw,4.5rem)", fontWeight: 700, lineHeight: 1.02, letterSpacing: "-0.02em", marginBottom: "1.5rem", ...anim(200) }}>
+                    <span style={{ color: "white", display: "block" }}>Premium Mobile</span>
+                    <span style={{ color: "white", display: "block" }}>Detailing</span>
+                    <span style={{ backgroundImage: "linear-gradient(90deg,#0BBFFF 0%,#8EDFFF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", display: "block", marginTop: "0.25rem" }}>
+                    From Dusty to Icy
+                  </span>
+                  </h1>
 
-                    <ul className="space-y-2.5 mb-8 flex-1">
-                      {pkg.highlights.map((h) => (
-                          <li key={h} className="flex items-start gap-2.5 text-sm text-[#8CA9BD]">
-                            <CheckCircle size={13} className="text-[#22BFFF] shrink-0 mt-0.5" />
-                            {h}
-                          </li>
-                      ))}
-                    </ul>
+                  <p style={{ color: "rgba(255,255,255,0.75)", fontSize: "1.125rem", lineHeight: 1.75, marginBottom: "2.5rem", maxWidth: "32rem", ...anim(350) }}>
+                    Professional interior, exterior, and ceramic detailing services —
+                    deep restoration and premium protection brought directly to your driveway.
+                    Your vehicle deserves the best. We bring it to you.
+                  </p>
 
-                    <Link
-                        href="/packages"
-                        className={`flex items-center justify-center gap-2 py-3.5 rounded-full text-sm font-semibold tracking-wide transition-all ${
-                            i === 1 ? "btn-ice" : "btn-outline-ice"
-                        }`}
-                    >
-                      {pkg.cta}
-                      <ChevronRight size={15} />
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", marginBottom: "2.5rem", ...anim(480) }}>
+                    <Link href="/contact" className="btn-ice" style={{ padding: "1rem 2rem", borderRadius: "9999px", fontSize: "1rem", fontWeight: 600, letterSpacing: "0.05em", display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+                      Book Your Detail <ArrowRight size={16} />
+                    </Link>
+                    <Link href="/packages" className="btn-outline-ice" style={{ padding: "1rem 2rem", borderRadius: "9999px", fontSize: "1rem", fontWeight: 600, letterSpacing: "0.05em" }}>
+                      View Packages
                     </Link>
                   </div>
-              ))}
-            </div>
 
-            <div className="text-center mt-10">
-              <Link href="/packages" className="text-[#22BFFF] text-sm hover:underline tracking-wide inline-flex items-center gap-1.5 opacity-80 hover:opacity-100 transition-opacity">
-                View all packages &amp; enhancements <ChevronRight size={14} />
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* ── GALLERY PREVIEW ────────────────────────────────────────────────── */}
-        <section className="bg-[#050912] py-28">
-          <div className="max-w-7xl mx-auto px-8 sm:px-10 lg:px-14">
-            <div className="flex flex-col items-center text-center mb-14">
-              <p className="text-[#22BFFF] text-[11px] font-semibold tracking-[0.22em] uppercase mb-4">Our Work</p>
-              <h2
-                  className="text-4xl sm:text-5xl font-bold text-[#EAF8FF]"
-                  style={{ fontFamily: "var(--font-display, serif)" }}
-              >
-                Results Speak for Themselves
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-10">
-              {[
-                { label: "Before", sub: "Interior" },
-                { label: "After", sub: "Interior" },
-                { label: "Before", sub: "Exterior" },
-                { label: "After", sub: "Exterior" },
-              ].map((ph, i) => (
-                  <div key={i} className="aspect-square rounded-xl bg-[#09111F] border-ice flex flex-col items-center justify-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#09111F] to-[#0B1628]" />
-                    <div className="relative text-center">
-                  <span className={`block text-xs font-bold tracking-[0.16em] uppercase mb-1 ${ph.label === "After" ? "text-[#22BFFF]" : "text-[#8CA9BD]"}`}>
-                    {ph.label}
-                  </span>
-                      <span className="text-[#8CA9BD] text-xs">{ph.sub}</span>
-                      <p className="text-[#8CA9BD] text-[10px] mt-3 opacity-40 tracking-widest uppercase">Photo coming soon</p>
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", ...anim(580) }}>
+                    <div style={{ display: "flex", gap: "0.125rem" }}>
+                      {[...Array(5)].map((_, i) => <Star key={i} size={15} color="#0BBFFF" fill="#0BBFFF" />)}
                     </div>
+                    <span style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.875rem" }}>Premium results, delivered to your door</span>
                   </div>
+                </div>
+
+                {/* Right — photo card (hidden on mobile via CSS class) */}
+                <div className="hero-photo-card" style={{ opacity: loaded ? 1 : 0, transform: loaded ? "translateX(0)" : "translateX(30px)", transition: "all 0.9s ease 300ms" }}>
+                  <div style={{ position: "relative", width: "100%", maxWidth: "26rem", borderRadius: "1rem", overflow: "hidden", border: "1px solid rgba(11,191,255,0.28)", boxShadow: "0 0 80px rgba(11,191,255,0.10)", aspectRatio: "4/3" }}>
+                    <Image src="/hero.jpg" alt="IceLux Detail Work" fill className="object-cover" />
+                    <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.18)" }} />
+                    <div style={{ position: "absolute", bottom: "1rem", left: "1rem", padding: "0.625rem 1rem", borderRadius: "0.75rem", background: "rgba(0,0,0,0.80)", border: "1px solid rgba(11,191,255,0.35)", backdropFilter: "blur(8px)" }}>
+                      <p style={{ color: "#0BBFFF", fontSize: "0.5625rem", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: "0.125rem" }}>Mobile Service</p>
+                      <p style={{ color: "white", fontSize: "0.875rem", fontWeight: 600 }}>We Come To You</p>
+                    </div>
+                    <div style={{ position: "absolute", top: "0.75rem", left: "0.75rem", width: "1.25rem", height: "1.25rem", borderTop: "2px solid rgba(11,191,255,0.55)", borderLeft: "2px solid rgba(11,191,255,0.55)" }} />
+                    <div style={{ position: "absolute", top: "0.75rem", right: "0.75rem", width: "1.25rem", height: "1.25rem", borderTop: "2px solid rgba(11,191,255,0.55)", borderRight: "2px solid rgba(11,191,255,0.55)" }} />
+                    <div style={{ position: "absolute", bottom: "0.75rem", right: "0.75rem", width: "1.25rem", height: "1.25rem", borderBottom: "2px solid rgba(11,191,255,0.55)", borderRight: "2px solid rgba(11,191,255,0.55)" }} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ══ TRUST BAR ═════════════════════════════════════════════ */}
+        <Section bg="#07101C" style={{ borderTop: borderTop, borderBottom: borderTop }}>
+          <div style={{ width: "100%", maxWidth: "72rem", display: "grid", gap: "2rem", padding: "2rem 0", gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))" }}>
+            {trustBarItems.map((item, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: "0.875rem", justifyContent: "center" }}>
+                  <div style={{ width: "0.5rem", height: "0.5rem", borderRadius: "9999px", background: "#0BBFFF", flexShrink: 0 }} />
+                  <div>
+                    <p style={{ color: "#EAF8FF", fontSize: "0.875rem", fontWeight: 600 }}>{item.label}</p>
+                    <p style={{ color: "#8CA9BD", fontSize: "0.75rem", marginTop: "0.25rem" }}>{item.sub}</p>
+                  </div>
+                </div>
+            ))}
+          </div>
+        </Section>
+
+        {/* ══ STATS ═════════════════════════════════════════════════ */}
+        <Section bg="#050912" style={{ borderBottom: borderTop }}>
+          <div style={{ width: "100%", maxWidth: "48rem", display: "grid", gridTemplateColumns: "repeat(3,1fr)", padding: "5rem 0", gap: "0" }}>
+            {[
+              { target: 5,   suffix: "★", label: "Star Rating — Every Time" },
+              { target: 50,  suffix: "+", label: "Vehicles Detailed" },
+              { target: 100, suffix: "%", label: "Satisfaction Guaranteed" },
+            ].map((s, i) => (
+                <div key={i} style={{ borderLeft: i > 0 ? borderTop : "none" }}>
+                  <StatCounter {...s} />
+                </div>
+            ))}
+          </div>
+        </Section>
+
+        {/* ══ ABOUT — alternating rows ══════════════════════════════ */}
+        <Section bg="#050912" style={{ paddingTop: "6rem", paddingBottom: "6rem" }}>
+          <div style={{ width: "100%", maxWidth: "72rem", display: "flex", flexDirection: "column", gap: "7rem" }}>
+
+            {/* Row 1: text left / image right */}
+            <FadeIn style={{ width: "100%" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "center" }} className="about-grid">
+                <div>
+                  <p style={{ color: "#0BBFFF", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: "1.25rem" }}>Why IceLux</p>
+                  <h2 style={{ fontFamily: "var(--font-display,serif)", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#EAF8FF", lineHeight: 1.15, marginBottom: "2rem" }}>
+                    Mobile Detailing Built Around You
+                  </h2>
+                  <p style={{ color: "#8CA9BD", fontSize: "1rem", lineHeight: 1.8, marginBottom: "1.5rem" }}>
+                    At IceLux Detailing, your vehicle is more than transportation — it&apos;s an investment
+                    worth protecting. We come directly to your home or office, bringing professional-grade
+                    care with zero hassle. No drop-offs, no waiting rooms, no wasted time.
+                  </p>
+                  <p style={{ color: "#8CA9BD", fontSize: "1rem", lineHeight: 1.8, marginBottom: "2.5rem" }}>
+                    Every service uses industry-leading products and meticulous technique, delivering
+                    showroom-quality results at your door. Transparent pricing, always — no hidden fees, ever.
+                  </p>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+                    <Link href="/contact" className="btn-ice" style={{ padding: "0.875rem 1.75rem", borderRadius: "9999px", fontSize: "0.875rem", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+                      Get a Quote <ArrowRight size={14} />
+                    </Link>
+                    <Link href="/packages" className="btn-outline-ice" style={{ padding: "0.875rem 1.75rem", borderRadius: "9999px", fontSize: "0.875rem", fontWeight: 600 }}>
+                      Our Packages
+                    </Link>
+                  </div>
+                </div>
+                <div style={{ position: "relative", borderRadius: "1rem", overflow: "hidden", border: "1px solid rgba(11,191,255,0.2)", aspectRatio: "4/3" }}>
+                  <Image src="/hero.jpg" alt="IceLux mobile detailing" fill className="object-cover" />
+                  <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.15)" }} />
+                  <div style={{ position: "absolute", top: "1rem", left: "1rem", width: "1.5rem", height: "1.5rem", borderTop: "2px solid rgba(11,191,255,0.5)", borderLeft: "2px solid rgba(11,191,255,0.5)" }} />
+                  <div style={{ position: "absolute", bottom: "1rem", right: "1rem", width: "1.5rem", height: "1.5rem", borderBottom: "2px solid rgba(11,191,255,0.5)", borderRight: "2px solid rgba(11,191,255,0.5)" }} />
+                </div>
+              </div>
+            </FadeIn>
+
+            {/* Row 2: image left / text right */}
+            <FadeIn style={{ width: "100%" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "center" }} className="about-grid">
+                <div style={{ position: "relative", borderRadius: "1rem", overflow: "hidden", border: "1px solid rgba(11,191,255,0.2)", aspectRatio: "4/3" }} className="about-img-second">
+                  <Image src="/hero.jpg" alt="Premium detailing results" fill className="object-cover" />
+                  <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.15)" }} />
+                  <div style={{ position: "absolute", top: "1rem", right: "1rem", width: "1.5rem", height: "1.5rem", borderTop: "2px solid rgba(11,191,255,0.5)", borderRight: "2px solid rgba(11,191,255,0.5)" }} />
+                  <div style={{ position: "absolute", bottom: "1rem", left: "1rem", width: "1.5rem", height: "1.5rem", borderBottom: "2px solid rgba(11,191,255,0.5)", borderLeft: "2px solid rgba(11,191,255,0.5)" }} />
+                </div>
+                <div className="about-text-second">
+                  <p style={{ color: "#0BBFFF", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: "1.25rem" }}>Premium Quality</p>
+                  <h2 style={{ fontFamily: "var(--font-display,serif)", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#EAF8FF", lineHeight: 1.15, marginBottom: "2rem" }}>
+                    Professional Grade — Every Single Detail
+                  </h2>
+                  <p style={{ color: "#8CA9BD", fontSize: "1rem", lineHeight: 1.8, marginBottom: "2rem" }}>
+                    We use only premium detailing products — the same tools trusted by professional shops.
+                    From clay bar decontamination to ceramic protective washes, every step is intentional
+                    for maximum performance and lasting results.
+                  </p>
+                  <ul style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                    {["Professional-grade products only", "Meticulous technique, no shortcuts", "Transparent pricing, no surprises", "Kept informed from booking to completion"].map((pt) => (
+                        <li key={pt} style={{ display: "flex", alignItems: "flex-start", gap: "0.875rem" }}>
+                          <CheckCircle size={16} color="#0BBFFF" style={{ flexShrink: 0, marginTop: "0.125rem" }} />
+                          <span style={{ color: "#8CA9BD", fontSize: "0.9375rem", lineHeight: 1.6 }}>{pt}</span>
+                        </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </Section>
+
+        {/* ══ SERVICES ══════════════════════════════════════════════ */}
+        <Section bg="#07101C" style={{ borderTop: borderTop, paddingTop: "6rem", paddingBottom: "6rem" }}>
+          <SectionHeader
+              eyebrow="What We Offer"
+              title="Luxury Care For Every Detail"
+              subtitle="Our passion for excellence shows in every service — a clean vehicle, a transformative experience, and enhanced value every time." />
+          <div style={{ width: "100%", maxWidth: "72rem", display: "grid", gap: "1.75rem", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}>
+            {services.map((svc, i) => (
+                <FadeIn key={svc.id} delay={i * 80}>
+                  <div className="card-hover border-ice" style={{ background: "#09111F", borderRadius: "1rem", padding: "2.25rem", display: "flex", flexDirection: "column", height: "100%" }}>
+                    <div style={{ width: "3.5rem", height: "3.5rem", borderRadius: "0.75rem", background: "rgba(11,191,255,0.07)", border: "1px solid rgba(11,191,255,0.18)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.5rem" }}>
+                      <ServiceIcon name={svc.icon} />
+                    </div>
+                    <h3 style={{ color: "#EAF8FF", fontWeight: 700, fontSize: "1rem", marginBottom: "0.875rem", lineHeight: 1.4 }}>{svc.title}</h3>
+                    <p style={{ color: "#8CA9BD", fontSize: "0.875rem", lineHeight: 1.75, flex: 1 }}>{svc.description}</p>
+                    <Link href="/packages" style={{ marginTop: "1.5rem", display: "inline-flex", alignItems: "center", gap: "0.375rem", color: "#0BBFFF", fontSize: "0.875rem", fontWeight: 500 }}>
+                      Learn More <ChevronRight size={14} />
+                    </Link>
+                  </div>
+                </FadeIn>
+            ))}
+          </div>
+        </Section>
+
+        {/* ══ PACKAGES — photo background ═══════════════════════════ */}
+        <section style={{ position: "relative", padding: "6rem 0", overflow: "hidden" }}>
+          <div style={{ position: "absolute", inset: 0 }}>
+            <Image src="/hero.jpg" alt="packages bg" fill className="object-cover object-center" />
+            <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.87)" }} />
+          </div>
+          <div style={{ position: "relative", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", padding: "0 2rem" }}>
+            <SectionHeader
+                eyebrow="Our Packages"
+                title="Built For Your Vehicle"
+                subtitle="Every package is designed with precision and care. Whether you need a quick refresh or a full transformation, we have you covered." />
+
+            <div style={{ width: "100%", maxWidth: "72rem", display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: "1.75rem" }}>
+              {featuredPackages.map((pkg, i) => (
+                  <FadeIn key={pkg.id} delay={i * 100}>
+                    <div style={{
+                      background: i === 1 ? "rgba(5,15,35,0.97)" : "rgba(9,17,31,0.94)",
+                      border: i === 1 ? "1px solid rgba(11,191,255,0.50)" : "1px solid rgba(11,191,255,0.18)",
+                      boxShadow: i === 1 ? "0 0 50px rgba(11,191,255,0.12)" : "none",
+                      borderRadius: "1rem",
+                      padding: "2.25rem",
+                      display: "flex",
+                      flexDirection: "column",
+                      height: "100%",
+                    }} className="card-hover">
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1.5rem" }}>
+                    <span style={{
+                      fontSize: "0.625rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase",
+                      padding: "0.375rem 0.75rem", borderRadius: "9999px",
+                      background: i === 1 ? "rgba(11,191,255,0.18)" : "rgba(11,191,255,0.06)",
+                      color: i === 1 ? "#0BBFFF" : "#8EDFFF",
+                      border: i === 1 ? "1px solid rgba(11,191,255,0.40)" : "1px solid rgba(11,191,255,0.14)",
+                    }}>{pkg.badge}</span>
+                        {i === 1 && <Star size={14} color="#0BBFFF" fill="#0BBFFF" />}
+                      </div>
+                      <h3 style={{ fontFamily: "var(--font-display,serif)", color: "#EAF8FF", fontSize: "1.375rem", fontWeight: 700, marginBottom: "0.875rem" }}>{pkg.name}</h3>
+                      <p style={{ color: "#8CA9BD", fontSize: "0.875rem", lineHeight: 1.7, marginBottom: "1.5rem" }}>{pkg.description}</p>
+                      <ul style={{ display: "flex", flexDirection: "column", gap: "0.75rem", flex: 1, marginBottom: "1.5rem" }}>
+                        {pkg.highlights.map((h) => (
+                            <li key={h} style={{ display: "flex", alignItems: "flex-start", gap: "0.75rem" }}>
+                              <CheckCircle size={13} color="#0BBFFF" style={{ flexShrink: 0, marginTop: "0.125rem" }} />
+                              <span style={{ color: "#8CA9BD", fontSize: "0.875rem" }}>{h}</span>
+                            </li>
+                        ))}
+                      </ul>
+                      <p style={{ color: "#8CA9BD", fontSize: "0.6875rem", textAlign: "center", opacity: 0.5, letterSpacing: "0.05em", marginBottom: "1rem" }}>Contact us for pricing</p>
+                      <Link href="/packages"
+                            className={i === 1 ? "btn-ice" : "btn-outline-ice"}
+                            style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", padding: "0.875rem", borderRadius: "9999px", fontSize: "0.875rem", fontWeight: 600, letterSpacing: "0.05em" }}>
+                        {pkg.cta} <ChevronRight size={14} />
+                      </Link>
+                    </div>
+                  </FadeIn>
               ))}
             </div>
 
-            <div className="text-center">
-              <Link href="/gallery" className="btn-outline-ice px-8 py-3.5 rounded-full text-sm font-semibold tracking-wide">
-                View Full Gallery
+            <div style={{ marginTop: "3rem" }}>
+              <Link href="/packages" style={{ color: "#0BBFFF", fontSize: "0.875rem", display: "inline-flex", alignItems: "center", gap: "0.375rem", opacity: 0.7 }}>
+                View all packages &amp; enhancements <ChevronRight size={13} />
               </Link>
             </div>
           </div>
         </section>
 
-        {/* ── WHY CHOOSE ─────────────────────────────────────────────────────── */}
-        <section className="bg-[#0B1628] py-28">
-          <div className="max-w-7xl mx-auto px-8 sm:px-10 lg:px-14">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <p className="text-[#22BFFF] text-[11px] font-semibold tracking-[0.22em] uppercase mb-4">Why IceLux</p>
-                <h2
-                    className="text-4xl sm:text-5xl font-bold text-[#EAF8FF] mb-6"
-                    style={{ fontFamily: "var(--font-display, serif)" }}
-                >
-                  The Difference Is<br />in the Details
-                </h2>
-                <p className="text-[#8CA9BD] leading-relaxed mb-10 max-w-md text-base">
-                  IceLux Detailing isn&apos;t just a car wash — it&apos;s a mobile detailing experience
-                  built around convenience, quality, and professionalism you can actually feel.
-                </p>
-                <Link href="/contact" className="btn-ice px-8 py-4 rounded-full text-sm font-semibold tracking-wide">
-                  Book Your Detail
-                </Link>
+        {/* ══ GALLERY ═══════════════════════════════════════════════ */}
+        <Section bg="#050912" style={{ borderTop: borderTop, paddingTop: "6rem", paddingBottom: "6rem" }}>
+          <SectionHeader eyebrow="Our Work" title="Results Speak for Themselves" />
+          <FadeIn delay={100} style={{ width: "100%", maxWidth: "72rem", margin: "0 auto" }}>
+            <div style={{ background: "#09111F", border: "1px solid rgba(11,191,255,0.18)", borderRadius: "1rem", padding: "5rem 3rem", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", position: "relative", overflow: "hidden" }}>
+              <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse at center,rgba(11,191,255,0.04) 0%,transparent 65%)" }} />
+              <div style={{ width: "4rem", height: "4rem", borderRadius: "1rem", background: "rgba(11,191,255,0.07)", border: "1px solid rgba(11,191,255,0.18)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "2rem" }}>
+                <Play size={24} color="#0BBFFF" />
               </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                {whyChoose.map((item) => (
-                    <div key={item.title} className="card-hover bg-[#09111F] border-ice rounded-2xl p-6">
-                      <div className="w-10 h-10 rounded-xl bg-[rgba(34,191,255,0.07)] border border-[rgba(43,203,255,0.18)] flex items-center justify-center mb-4">
-                        <ServiceIcon name={item.icon} />
-                      </div>
-                      <h3 className="text-[#EAF8FF] font-semibold text-sm mb-2">{item.title}</h3>
-                      <p className="text-[#8CA9BD] text-sm leading-relaxed">{item.description}</p>
-                    </div>
-                ))}
-              </div>
+              <h3 style={{ fontFamily: "var(--font-display,serif)", color: "#EAF8FF", fontSize: "1.5rem", fontWeight: 700, marginBottom: "1rem" }}>Gallery Coming Soon</h3>
+              <p style={{ color: "#8CA9BD", fontSize: "0.9375rem", lineHeight: 1.75, maxWidth: "28rem", marginBottom: "2.5rem" }}>
+                We&apos;re just getting started. Follow us on Instagram for real-time before &amp; afters and behind-the-scenes content.
+              </p>
+              <a href={siteConfig.instagramUrl} target="_blank" rel="noopener noreferrer"
+                 className="btn-outline-ice" style={{ padding: "0.75rem 2rem", borderRadius: "9999px", fontSize: "0.875rem", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+                @IceLux_Detailing <ChevronRight size={13} />
+              </a>
             </div>
-          </div>
-        </section>
+          </FadeIn>
+        </Section>
 
-        {/* ── SERVICE AREA ───────────────────────────────────────────────────── */}
-        <section className="bg-[#050912] py-20">
-          <div className="max-w-7xl mx-auto px-8 sm:px-10 lg:px-14">
-            <div className="bg-[#09111F] border-ice rounded-2xl p-10 md:p-16 relative overflow-hidden flex flex-col items-center text-center">
-              <div className="absolute inset-0 pointer-events-none"
-                   style={{ background: "radial-gradient(ellipse at center, rgba(34,191,255,0.04) 0%, transparent 65%)" }} />
-              <MapPin size={26} className="text-[#22BFFF] mb-5" />
-              <p className="text-[#22BFFF] text-[11px] font-semibold tracking-[0.22em] uppercase mb-4">Service Area</p>
-              <h2
-                  className="text-3xl sm:text-4xl font-bold text-[#EAF8FF] mb-5"
-                  style={{ fontFamily: "var(--font-display, serif)" }}
-              >
-                Iowa Colony &amp; Surrounding Areas
-              </h2>
-              <p className="text-[#8CA9BD] max-w-md text-sm leading-relaxed mb-8">
+        {/* ══ TESTIMONIALS ══════════════════════════════════════════ */}
+        <Section bg="#0B1628" style={{ borderTop: borderTop, paddingTop: "6rem", paddingBottom: "6rem" }}>
+          <SectionHeader eyebrow="Testimonials" title="What Our Clients Say" />
+          <FadeIn delay={100} style={{ width: "100%", maxWidth: "36rem", margin: "0 auto" }}>
+            <div style={{ background: "#09111F", border: "1px solid rgba(11,191,255,0.18)", borderRadius: "1rem", padding: "4rem", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", position: "relative", overflow: "hidden" }}>
+              <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse at center,rgba(11,191,255,0.04) 0%,transparent 65%)" }} />
+              <div style={{ display: "flex", gap: "0.375rem", marginBottom: "1.75rem" }}>
+                {[...Array(5)].map((_, j) => <Star key={j} size={22} color="#0BBFFF" fill="#0BBFFF" />)}
+              </div>
+              <p style={{ fontFamily: "var(--font-display,serif)", color: "#EAF8FF", fontSize: "1.375rem", fontWeight: 600, marginBottom: "1rem" }}>Be One of Our First Reviews</p>
+              <p style={{ color: "#8CA9BD", fontSize: "0.9375rem", lineHeight: 1.75, maxWidth: "22rem", marginBottom: "2.25rem" }}>
+                Book your detail today and experience the IceLux difference. We&apos;d love to earn your five stars.
+              </p>
+              <Link href="/contact" className="btn-ice" style={{ padding: "0.875rem 2.5rem", borderRadius: "9999px", fontSize: "0.9375rem", fontWeight: 600 }}>
+                Book Your Detail
+              </Link>
+            </div>
+          </FadeIn>
+        </Section>
+
+        {/* ══ SERVICE AREA ══════════════════════════════════════════ */}
+        <Section bg="#050912" style={{ borderTop: borderTop, paddingTop: "6rem", paddingBottom: "6rem" }}>
+          <FadeIn style={{ width: "100%", maxWidth: "72rem", margin: "0 auto" }}>
+            <div style={{ background: "#09111F", border: "1px solid rgba(43,203,255,0.18)", borderRadius: "1rem", padding: "4rem", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", position: "relative", overflow: "hidden" }}>
+              <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse at center,rgba(11,191,255,0.05) 0%,transparent 65%)" }} />
+              <MapPin size={30} color="#0BBFFF" style={{ marginBottom: "1.25rem" }} />
+              <p style={{ color: "#0BBFFF", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.25em", textTransform: "uppercase", marginBottom: "1rem" }}>Service Area</p>
+              <h2 style={{ fontFamily: "var(--font-display,serif)", fontSize: "clamp(1.75rem,4vw,2.5rem)", fontWeight: 700, color: "#EAF8FF", marginBottom: "1.25rem" }}>Iowa Colony &amp; Surrounding Areas</h2>
+              <p style={{ color: "#8CA9BD", maxWidth: "28rem", fontSize: "0.9375rem", lineHeight: 1.75, marginBottom: "2rem" }}>
                 We bring the full IceLux experience directly to your home, apartment, or office.
                 No drop-offs needed — we handle everything on-site.
               </p>
-              <div className="flex flex-wrap justify-center gap-2.5">
+              <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0.75rem" }}>
                 {["Iowa Colony", "Alvin", "Pearland", "Rosharon", "Manvel"].map((area) => (
-                    <span key={area} className="px-4 py-2 rounded-full bg-[rgba(34,191,255,0.05)] border border-[rgba(43,203,255,0.18)] text-[#8EDFFF] text-sm font-medium">
+                    <span key={area} style={{ padding: "0.5rem 1.25rem", borderRadius: "9999px", background: "rgba(11,191,255,0.05)", border: "1px solid rgba(11,191,255,0.18)", color: "#8EDFFF", fontSize: "0.875rem", fontWeight: 500 }}>
                   {area}
                 </span>
                 ))}
               </div>
             </div>
-          </div>
-        </section>
+          </FadeIn>
+        </Section>
 
-        {/* ── TESTIMONIALS ───────────────────────────────────────────────────── */}
-        <section className="bg-[#07101C] py-24 border-t border-[rgba(43,203,255,0.07)]">
-          <div className="max-w-7xl mx-auto px-8 sm:px-10 lg:px-14">
-            <div className="flex flex-col items-center text-center mb-14">
-              <p className="text-[#22BFFF] text-[11px] font-semibold tracking-[0.22em] uppercase mb-4">Testimonials</p>
-              <h2
-                  className="text-4xl font-bold text-[#EAF8FF]"
-                  style={{ fontFamily: "var(--font-display, serif)" }}
-              >
-                What Our Clients Say
+        {/* ══ SOCIALS ═══════════════════════════════════════════════ */}
+        <Section bg="#050912" style={{ borderTop: borderTop, paddingTop: "6rem", paddingBottom: "6rem" }}>
+          <SectionHeader
+              eyebrow="Stay Connected"
+              title="Follow The IceLux Journey"
+              subtitle="See our latest work, before & afters, and behind-the-scenes content across our socials." />
+          <div style={{ width: "100%", maxWidth: "42rem", display: "flex", flexDirection: "column", gap: "1.25rem", margin: "0 auto" }} className="socials-row">
+            {[
+              {
+                href: siteConfig.instagramUrl,
+                bg: "linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)",
+                icon: <img src="/instagram.svg" alt="Instagram" width={24} height={24} style={{ filter: "brightness(0) invert(1)" }} />,
+                name: "Instagram",
+                handle: siteConfig.instagram,
+                sub: "Follow our latest details",
+              },
+              {
+                href: siteConfig.facebookUrl,
+                bg: "#1877F2",
+                icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>,
+                name: "Facebook",
+                handle: "IceLux Detailing",
+                sub: "Like our page for updates",
+              },
+            ].map((s, i) => (
+                <FadeIn key={s.name} delay={i * 100} style={{ width: "100%" }}>
+                  <a href={s.href} target="_blank" rel="noopener noreferrer" className="card-hover border-ice"
+                     style={{ display: "flex", alignItems: "center", gap: "1.25rem", background: "#09111F", borderRadius: "1rem", padding: "1.5rem 2rem", width: "100%", textAlign: "left" }}>
+                    <div style={{ width: "3.5rem", height: "3.5rem", borderRadius: "0.75rem", background: s.bg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                      {s.icon}
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <p style={{ color: "#EAF8FF", fontWeight: 600, fontSize: "0.9375rem", marginBottom: "0.25rem" }}>{s.name}</p>
+                      <p style={{ color: "#0BBFFF", fontSize: "0.8125rem", marginBottom: "0.125rem" }}>{s.handle}</p>
+                      <p style={{ color: "#8CA9BD", fontSize: "0.8125rem" }}>{s.sub}</p>
+                    </div>
+                    <ChevronRight size={18} color="#8CA9BD" />
+                  </a>
+                </FadeIn>
+            ))}
+          </div>
+        </Section>
+
+        {/* ══ FINAL CTA ═════════════════════════════════════════════ */}
+        <section style={{ position: "relative", background: "#050912", borderTop: borderTop, padding: "7rem 2rem", overflow: "hidden" }}>
+          <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse 80% 60% at 50% 50%,rgba(11,191,255,0.07) 0%,transparent 68%)" }} />
+          <div style={{ position: "relative", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+            <FadeIn style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
+              <p style={{ color: "#0BBFFF", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: "1.25rem" }}>Get Started</p>
+              <h2 style={{ fontFamily: "var(--font-display,serif)", fontSize: "clamp(2.5rem,7vw,5rem)", fontWeight: 700, color: "#EAF8FF", maxWidth: "52rem", marginBottom: "1.5rem", lineHeight: 1.05 }}>
+                Ready to Go From{" "}
+                <span style={{ backgroundImage: "linear-gradient(90deg,#0BBFFF,#8EDFFF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                Dusty to Icy?
+              </span>
               </h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {[1, 2, 3].map((i) => (
-                  <div key={i} className="bg-[#09111F] border-ice rounded-2xl p-7">
-                    <div className="flex gap-0.5 mb-4">
-                      {[...Array(5)].map((_, j) => (
-                          <Star key={j} size={12} className="text-[#22BFFF] fill-[#22BFFF]" />
-                      ))}
-                    </div>
-                    <p className="text-[#8CA9BD] text-sm italic mb-5 leading-relaxed">
-                      &ldquo;Testimonial placeholder — replace with real customer review when available.&rdquo;
-                    </p>
-                    <div className="flex items-center gap-3 pt-4 border-t border-[rgba(43,203,255,0.08)]">
-                      <div className="w-8 h-8 rounded-full bg-[rgba(34,191,255,0.08)] border border-[rgba(43,203,255,0.18)]" />
-                      <div>
-                        <p className="text-[#EAF8FF] text-sm font-semibold">Customer Name</p>
-                        <p className="text-[#8CA9BD] text-xs">Iowa Colony, TX</p>
-                      </div>
-                    </div>
-                  </div>
-              ))}
-            </div>
+              <p style={{ color: "#8CA9BD", fontSize: "1.125rem", lineHeight: 1.75, maxWidth: "32rem", marginBottom: "3rem" }}>
+                Book your detail today and experience what premium mobile detailing actually looks like.
+              </p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", justifyContent: "center" }}>
+                <Link href="/contact" className="btn-ice" style={{ padding: "1rem 2.5rem", borderRadius: "9999px", fontSize: "1rem", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+                  Book Your Detail <ArrowRight size={16} />
+                </Link>
+                <a href={`tel:${siteConfig.phone}`} className="btn-outline-ice" style={{ padding: "1rem 2.5rem", borderRadius: "9999px", fontSize: "1rem", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+                  <Phone size={16} /> {siteConfig.phone}
+                </a>
+              </div>
+            </FadeIn>
           </div>
         </section>
 
-        {/* ── FINAL CTA ──────────────────────────────────────────────────────── */}
-        <section className="relative bg-[#050912] py-32 overflow-hidden">
-          <div aria-hidden className="absolute inset-0 pointer-events-none"
-               style={{ background: "radial-gradient(ellipse 75% 55% at 50% 50%, rgba(34,191,255,0.07) 0%, transparent 68%)" }} />
-          <div className="relative w-full flex flex-col items-center text-center px-8 sm:px-10 lg:px-14">
-            <p className="text-[#22BFFF] text-[11px] font-semibold tracking-[0.22em] uppercase mb-5">Get Started</p>
-            <h2
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#EAF8FF] mb-6 max-w-3xl"
-                style={{ fontFamily: "var(--font-display, serif)" }}
-            >
-              Ready to Go From{" "}
-              <span
-                  className="text-transparent bg-clip-text"
-                  style={{ backgroundImage: "linear-gradient(90deg, #22BFFF, #8EDFFF)" }}
-              >
-              Dusty to Icy?
-            </span>
-            </h2>
-            <p className="text-[#8CA9BD] text-base sm:text-lg mb-10 max-w-lg leading-relaxed">
-              Book your detail today and experience what premium mobile detailing
-              actually looks like.
-            </p>
-            <Link href="/contact" className="btn-ice px-10 py-4 rounded-full text-base font-semibold tracking-wide">
-              Book Your Detail
-            </Link>
-          </div>
-        </section>
+        {/* Responsive helpers */}
+        <style>{`
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; width: 100%; }
+        .hero-photo-card { display: flex; justify-content: center; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+        .socials-row { flex-direction: column; }
+        @media (min-width: 640px) { .socials-row { flex-direction: row; } }
+        @media (max-width: 900px) {
+          .hero-grid { grid-template-columns: 1fr; }
+          .hero-photo-card { display: none; }
+          .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+          .about-img-second { order: 1; }
+          .about-text-second { order: 2; }
+        }
+      `}</style>
       </>
   );
 }

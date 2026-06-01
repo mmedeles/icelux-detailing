@@ -7,8 +7,9 @@ export const siteConfig = {
   email: "iceluxdetailing@gmail.com",
   instagram: "@IceLux_Detailing",
   instagramUrl: "https://instagram.com/IceLux_Detailing",
+  facebookUrl: "https://www.facebook.com/iceluxdetailing/",
   serviceArea: "Iowa Colony & Surrounding Areas",
-  bookingUrl: "#book", // Replace with Square Appointments or Calendly URL
+  bookingUrl: "https://calendly.com/iceluxdetailing/mobile-detail-booking",
 };
 
 export const services = [
@@ -28,9 +29,9 @@ export const services = [
   },
   {
     id: "ceramic",
-    title: "Ceramic Protection",
+    title: "Paint Sealants & Protection",
     description:
-        "Professional-grade ceramic coating and surface preparation for long-term hydrophobic protection and gloss depth.",
+        "Protect your vehicle's paint with durable protection that enhances gloss, improves surface performance, and helps preserve a showroom-quality finish.",
     icon: "shield",
   },
   {
