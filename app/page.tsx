@@ -173,8 +173,8 @@ export default function Home() {
                   </h1>
 
                   <p style={{ color: "rgba(255,255,255,0.75)", fontSize: "1.125rem", lineHeight: 1.75, marginBottom: "2.5rem", maxWidth: "32rem", ...anim(350) }}>
-                    Professional interior, exterior, and ceramic detailing services —
-                    deep restoration and premium protection brought directly to your driveway.
+                    Professional interior, exterior, and ceramic detailing services.
+                    Deep restoration and premium protection brought directly to your driveway.
                     Your vehicle deserves the best. We bring it to you.
                   </p>
 
@@ -257,13 +257,13 @@ export default function Home() {
                     Mobile Detailing Built Around You
                   </h2>
                   <p style={{ color: "#8CA9BD", fontSize: "1rem", lineHeight: 1.8, marginBottom: "1.5rem" }}>
-                    At IceLux Detailing, your vehicle is more than transportation — it&apos;s an investment
+                    At IceLux Detailing, your vehicle is more than transportation, it&apos;s an investment
                     worth protecting. We come directly to your home or office, bringing professional-grade
                     care with zero hassle. No drop-offs, no waiting rooms, no wasted time.
                   </p>
                   <p style={{ color: "#8CA9BD", fontSize: "1rem", lineHeight: 1.8, marginBottom: "2.5rem" }}>
                     Every service uses industry-leading products and meticulous technique, delivering
-                    showroom-quality results at your door. Transparent pricing, always — no hidden fees, ever.
+                    showroom-quality results at your door. Transparent pricing, always no hidden fees, ever.
                   </p>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
                     <Link href="/contact" className="btn-ice" style={{ padding: "0.875rem 1.75rem", borderRadius: "9999px", fontSize: "0.875rem", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
@@ -305,10 +305,10 @@ export default function Home() {
                   <div className="about-text-second">
                     <p style={{ color: "#0BBFFF", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: "1.25rem" }}>Premium Quality</p>
                     <h2 style={{ fontFamily: "var(--font-display,serif)", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#EAF8FF", lineHeight: 1.15, marginBottom: "2rem" }}>
-                      Professional Grade — Every Single Detail
+                      Professional Grade Every Single Detail
                     </h2>
                     <p style={{ color: "#8CA9BD", fontSize: "1rem", lineHeight: 1.8, marginBottom: "2rem" }}>
-                      We use only premium detailing products — the same tools trusted by professional shops.
+                      We use only premium detailing products, the same tools trusted by professional shops.
                       From clay bar decontamination to ceramic protective washes, every step is intentional
                       for maximum performance and lasting results.
                     </p>
@@ -332,7 +332,7 @@ export default function Home() {
           <SectionHeader
               eyebrow="What We Offer"
               title="Luxury Care For Every Detail"
-              subtitle="Our passion for excellence shows in every service — a clean vehicle, a transformative experience, and enhanced value every time." />
+              subtitle="Our passion for excellence shows in every service a clean vehicle, a transformative experience, and enhanced value every time." />
           <div style={{ width: "100%", maxWidth: "72rem", display: "grid", gap: "1.75rem", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}>
             {services.map((svc, i) => (
                 <FadeIn key={svc.id} delay={i * 80}>
@@ -466,7 +466,7 @@ export default function Home() {
               <h2 style={{ fontFamily: "var(--font-display,serif)", fontSize: "clamp(1.75rem,4vw,2.5rem)", fontWeight: 700, color: "#EAF8FF", marginBottom: "1.25rem" }}>Iowa Colony &amp; Surrounding Areas</h2>
               <p style={{ color: "#8CA9BD", maxWidth: "28rem", fontSize: "0.9375rem", lineHeight: 1.75, marginBottom: "1.75rem" }}>
                 Mobile detailing available throughout our service area.
-                We come directly to your home, apartment, or office — no drop-offs needed.
+                We come directly to your home, apartment, or office. No drop-offs needed.
               </p>
               <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0.75rem", marginBottom: "2rem" }}>
                 {["Iowa Colony", "Alvin", "Pearland", "Rosharon", "Manvel"].map((area) => (

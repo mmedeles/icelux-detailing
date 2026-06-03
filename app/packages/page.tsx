@@ -104,7 +104,7 @@ const allPackages = [
     id: "signature", badge: "Most Popular", featured: true,
     badgeStyle: { background: "rgba(11,191,255,0.18)", color: ICE, border: "1px solid rgba(11,191,255,0.40)" },
     name: "IceLux Signature", label: "Full Interior & Exterior Detail",
-    description: "Restore your vehicle inside and out with a complete detail — vacuuming, surface cleaning, door jambs, interior glass, hand wash, wheel & tire cleaning, tire dressing, bug removal, and glass cleaning.",
+    description: "Restore your vehicle inside and out with a complete detail with vacuuming, surface cleaning, door jambs, interior glass, hand wash, wheel & tire cleaning, tire dressing, bug removal, and glass cleaning.",
     services: ["Full interior vacuum", "Surface & door jamb cleaning", "Interior glass cleaning", "Exterior hand wash & rinse", "Wheel & tire cleaning", "Tire dressing", "Bug removal", "Exterior glass cleaning"],
     prices: [140, 180, 220, 250, 300], warning: null,
   },
@@ -120,7 +120,7 @@ const allPackages = [
     id: "luxe-refresh", badge: "Maintenance", featured: false,
     badgeStyle: { background: "rgba(11,191,255,0.05)", color: MUTED, border: "1px solid rgba(43,203,255,0.15)" },
     name: "The Luxe Refresh", label: "Maintenance Detail",
-    description: "Keep your vehicle fresh between full details — vacuuming, surface wipe-downs, interior & exterior glass, contact wash, wheel cleaning, and tire dressing.",
+    description: "Keep your vehicle fresh between full details - acuuming, surface wipe-downs, interior & exterior glass, contact wash, wheel cleaning, and tire dressing.",
     services: ["Interior vacuum", "Surface wipe-downs", "Interior & exterior glass", "Contact wash", "Wheel & tire cleaning", "Tire dressing"],
     prices: [85, 105, 125, 145, 165],
     warning: "Vehicles previously detailed by IceLux with the IceLux Signature or Blue Diamond package are eligible 3–5 weeks after the full detail.",
@@ -129,7 +129,7 @@ const allPackages = [
     id: "diamond-lounge", badge: "Interior Detail", featured: false,
     badgeStyle: { background: "rgba(11,191,255,0.05)", color: MUTED, border: "1px solid rgba(43,203,255,0.15)" },
     name: "The Diamond Lounge", label: "Interior Detail",
-    description: "Refresh your vehicle's cabin with a thorough interior detail — vacuuming, floor mat cleaning, dashboard, console, door panels, interior glass, and a complete wipe-down of all interior surfaces.",
+    description: "Refresh your vehicle's cabin with a thorough interior detail - vacuuming, floor mat cleaning, dashboard, console, door panels, interior glass, and a complete wipe-down of all interior surfaces.",
     services: ["Full interior vacuum", "Floor mat cleaning", "Dashboard & console cleaning", "Door panel cleaning", "Interior glass cleaning", "Door jamb cleaning", "Complete interior wipe-down"],
     prices: [100, 125, 150, 175, 200], warning: null,
   },
@@ -201,7 +201,7 @@ export default function PackagesPage() {
               Detailing Packages
             </h1>
             <p style={{ color: MUTED, fontSize: "1.0625rem", maxWidth: "34rem", lineHeight: 1.75, ...h(320) }}>
-              Every package is built for a specific level of care. Choose the one that fits your vehicle — or contact us for a custom quote.
+              Every package is built for a specific level of care. Choose the one that fits your vehicle, or contact us for a custom quote.
             </p>
           </div>
         </section>
@@ -274,7 +274,7 @@ export default function PackagesPage() {
         <section style={{ background: BG2, borderTop: SECTION_BORDER, paddingTop: "6rem", paddingBottom: "6rem" }}>
           <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", padding: "0 2rem" }}>
             <SectionHeader eyebrow="Paint Protection" title="Protect Your Investment"
-                           subtitle="Add a layer of paint protection to any package — from a quick ceramic wash to long-lasting crystal coating." />
+                           subtitle="Add a layer of paint protection to any package, from a quick ceramic wash to long-lasting crystal coating." />
             <div style={{ width: "100%", maxWidth: "72rem", display: "grid", gap: "1.75rem", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))" }}>
               {paintProtection.map((item, i) => {
                 const IconComp = item.Icon;
@@ -362,7 +362,7 @@ export default function PackagesPage() {
               Not Sure Which Package Is Right?
             </h2>
             <p style={{ color: MUTED, maxWidth: "30rem", fontSize: "1rem", lineHeight: 1.75, marginBottom: "3rem" }}>
-              Message us or give us a call — we&apos;ll help you pick the right detail for your vehicle and budget.
+              Message us or give us a call, we&apos;ll help you pick the right detail for your vehicle and budget.
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", justifyContent: "center" }}>
               <Link href="/contact" className="btn-ice"

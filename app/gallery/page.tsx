@@ -136,7 +136,7 @@ export default function GalleryPage() {
               Gallery
             </h1>
             <p style={{ color: MUTED, fontSize: "1.0625rem", maxWidth: "34rem", lineHeight: 1.75 }}>
-              Every vehicle tells a story. Here&apos;s what the IceLux difference looks like — before, during, and after.
+              Every vehicle tells a story. Here&apos;s what the IceLux difference looks like before, during, and after.
             </p>
           </div>
         </section>
