@@ -6,129 +6,117 @@ import { galleryCategories, siteConfig } from "@/app/lib/data";
 export const metadata: Metadata = {
   title: "Gallery",
   description:
-      "View IceLux Detailing's portfolio of before & after transformations, interior restoration, exterior gloss, ceramic coatings, and more.",
+      "View IceLux Detailing's portfolio of before & after transformations, interior restoration, exterior gloss, engine bay cleaning, paint protection, and more.",
 };
 
-// Placeholder gallery items — replace with real photos
+/* ─── Gallery items
+   Updated: "Ceramic Coating" → "Engine Bay" / "Paint Protection" throughout
+──────────────────────────────────────────────────────────────────────────── */
 const galleryItems = [
-  { category: "Before & After", label: "Full Interior Detail", size: "large" },
-  { category: "Exterior", label: "Paint Gloss Finish", size: "medium" },
-  { category: "Interior", label: "Leather Restoration", size: "medium" },
-  { category: "Ceramic Coating", label: "Hydrophobic Beading", size: "medium" },
-  { category: "Before & After", label: "Exterior Wash & Clay", size: "medium" },
-  { category: "Wheels & Tires", label: "Wheel Deep Clean", size: "small" },
-  { category: "Interior", label: "Dashboard Restoration", size: "small" },
-  { category: "Exterior", label: "Panel Gloss Detail", size: "small" },
-  { category: "Transformations", label: "Full Vehicle Transformation", size: "large" },
-  { category: "Wheels & Tires", label: "Tire Dressing", size: "small" },
-  { category: "Ceramic Coating", label: "Crystal Coat Application", size: "medium" },
-  { category: "Interior", label: "Carpet Steam Clean", size: "small" },
+  { category: "Before & After",   label: "Full Interior Detail",        size: "large"  },
+  { category: "Exterior",          label: "Paint Gloss Finish",          size: "medium" },
+  { category: "Interior",          label: "Leather Restoration",         size: "medium" },
+  { category: "Paint Protection",  label: "IceLux Shield Application",   size: "medium" },
+  { category: "Before & After",    label: "Exterior Wash & Clay",        size: "medium" },
+  { category: "Wheels & Tires",    label: "Wheel Deep Clean",            size: "small"  },
+  { category: "Interior",          label: "Dashboard Restoration",       size: "small"  },
+  { category: "Exterior",          label: "Panel Gloss Detail",          size: "small"  },
+  { category: "Transformations",   label: "Full Vehicle Transformation",  size: "large"  },
+  { category: "Wheels & Tires",    label: "Tire Dressing",               size: "small"  },
+  { category: "Engine Bay",        label: "Engine Bay Deep Clean",       size: "medium" },
+  { category: "Interior",          label: "Carpet Steam Clean",          size: "small"  },
+  { category: "Paint Protection",  label: "Crystal Coat Application",    size: "medium" },
+  { category: "Engine Bay",        label: "Engine Bay Dressing",         size: "small"  },
 ];
+
+const ICE   = "#0BBFFF";
+const MUTED = "#8CA9BD";
+const TEXT  = "#EAF8FF";
+const BG    = "#050912";
+const BG3   = "#09111F";
+const BG4   = "#0B1628";
+const FONT_DISPLAY = "var(--font-display,serif)";
+const SECTION_BORDER = "1px solid rgba(43,203,255,0.10)";
 
 export default function GalleryPage() {
   return (
       <>
-        {/* Header */}
-        <section className="relative bg-[#050912] pt-16 pb-16 overflow-hidden">
-          <div
-              aria-hidden
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background:
-                    "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(34,191,255,0.07) 0%, transparent 70%)",
-              }}
-          />
-          <div className="relative w-full flex flex-col items-center text-center px-8 sm:px-10 lg:px-14">
-            <p className="text-[#22BFFF] text-[11px] font-semibold tracking-[0.22em] uppercase mb-4">
+        {/* ── HEADER ──────────────────────────────────────────────────── */}
+        <section style={{ position: "relative", background: BG, overflow: "hidden" }}>
+          <div aria-hidden style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(11,191,255,0.07) 0%, transparent 70%)" }} />
+          <div style={{ position: "relative", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "6rem 2rem 5rem" }}>
+            <p style={{ color: ICE, fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: "1rem" }}>
               Our Work
             </p>
-            <h1
-                className="text-5xl sm:text-6xl font-bold text-[#EAF8FF] mb-5"
-                style={{ fontFamily: "var(--font-display, serif)" }}
-            >
+            <h1 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(2.5rem,6vw,4rem)", fontWeight: 700, color: TEXT, marginBottom: "1.25rem", lineHeight: 1.05 }}>
               Gallery
             </h1>
-            <p className="text-[#8CA9BD] text-lg max-w-xl leading-relaxed">
-              Every vehicle tells a story. Heres what the IceLux difference looks like before, during, and after.
+            <p style={{ color: MUTED, fontSize: "1.0625rem", maxWidth: "34rem", lineHeight: 1.75 }}>
+              Every vehicle tells a story. Here&apos;s what the IceLux difference looks like — before, during, and after.
             </p>
           </div>
         </section>
 
-        {/* Category filters */}
-        <section className="bg-[#050912] pb-8">
-          <div className="max-w-7xl mx-auto px-8 sm:px-10 lg:px-14">
-            <div className="flex flex-wrap gap-2 justify-center">
-              <button className="px-4 py-2 rounded-full bg-[rgba(34,191,255,0.12)] border border-[rgba(43,203,255,0.4)] text-[#22BFFF] text-sm font-medium">
+        {/* ── CATEGORY FILTERS ────────────────────────────────────────── */}
+        <section style={{ background: BG, paddingBottom: "2.5rem" }}>
+          <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", padding: "0 2rem" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.625rem", justifyContent: "center", maxWidth: "72rem" }}>
+              <button style={{ padding: "0.5rem 1.25rem", borderRadius: "9999px", background: "rgba(11,191,255,0.12)", border: "1px solid rgba(43,203,255,0.4)", color: ICE, fontSize: "0.875rem", fontWeight: 500, cursor: "pointer" }}>
                 All
               </button>
               {galleryCategories.map((cat) => (
-                  <button
-                      key={cat}
-                      className="px-4 py-2 rounded-full bg-[#09111F] border-ice text-[#8CA9BD] text-sm hover:text-[#22BFFF] hover:border-[rgba(43,203,255,0.4)] transition-all"
-                  >
+                  <button key={cat}
+                          style={{ padding: "0.5rem 1.25rem", borderRadius: "9999px", background: BG3, border: "1px solid rgba(43,203,255,0.18)", color: MUTED, fontSize: "0.875rem", fontWeight: 500, cursor: "pointer", transition: "all 0.2s" }}>
                     {cat}
                   </button>
               ))}
             </div>
-            <p className="text-center text-[#8CA9BD] text-xs mt-4 opacity-60">
+            <p style={{ color: MUTED, fontSize: "0.75rem", marginTop: "1rem", opacity: 0.6 }}>
               Filter functionality — connect real photos to activate
             </p>
           </div>
         </section>
 
-        {/* Gallery grid */}
-        <section className="bg-[#050912] pb-24">
-          <div className="max-w-7xl mx-auto px-8 sm:px-10 lg:px-14">
-            <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+        {/* ── GALLERY GRID ────────────────────────────────────────────── */}
+        <section style={{ background: BG, paddingBottom: "6rem" }}>
+          <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", padding: "0 2rem" }}>
+            <div style={{ width: "100%", maxWidth: "72rem", columns: "1", columnGap: "1rem" }} className="gallery-columns">
               {galleryItems.map((item, i) => {
-                const aspect =
-                    item.size === "large"
-                        ? "aspect-[4/3]"
-                        : item.size === "medium"
-                            ? "aspect-square"
-                            : "aspect-[3/4]";
+                const aspectRatio = item.size === "large" ? "4/3" : item.size === "medium" ? "1/1" : "3/4";
                 return (
-                    <div
-                        key={i}
-                        className={`break-inside-avoid ${aspect} rounded-xl bg-[#09111F] border-ice relative overflow-hidden group card-hover w-full`}
-                    >
-                      {/* Placeholder visual */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#09111F] via-[#0B1628] to-[#0B1B33]" />
-                      <div
-                          className="absolute inset-0 opacity-10"
-                          style={{
-                            backgroundImage: `radial-gradient(circle at ${30 + i * 17}% ${
-                                40 + i * 11
-                            }%, rgba(34,191,255,0.6) 0%, transparent 50%)`,
-                          }}
-                      />
+                    <div key={i} style={{
+                      breakInside: "avoid",
+                      aspectRatio,
+                      borderRadius: "0.75rem",
+                      background: BG3,
+                      border: "1px solid rgba(43,203,255,0.18)",
+                      position: "relative",
+                      overflow: "hidden",
+                      marginBottom: "1rem",
+                      display: "block",
+                    }} className="card-hover">
+                      {/* Subtle gradient bg */}
+                      <div style={{ position: "absolute", inset: 0, background: `linear-gradient(135deg, ${BG3}, ${BG4})` }} />
+                      <div style={{ position: "absolute", inset: 0, opacity: 0.1, backgroundImage: `radial-gradient(circle at ${30 + i * 17}% ${40 + i * 11}%, rgba(11,191,255,0.6) 0%, transparent 50%)` }} />
 
-                      {/* Hover overlay */}
-                      <div className="absolute inset-0 bg-[rgba(5,9,18,0.6)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <div className="text-center">
-                          <Camera size={22} className="text-[#22BFFF] mx-auto mb-2" />
-                          <p className="text-[#EAF8FF] text-sm font-semibold">{item.label}</p>
+                      {/* Placeholder icon */}
+                      <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", pointerEvents: "none" }}>
+                        <div style={{ textAlign: "center", opacity: 0.4 }}>
+                          <Camera size={20} color={ICE} style={{ display: "block", margin: "0 auto 0.375rem" }} />
+                          <p style={{ color: MUTED, fontSize: "0.75rem" }}>Photo placeholder</p>
                         </div>
                       </div>
 
                       {/* Category badge */}
-                      <div className="absolute bottom-3 left-3 right-3">
-                    <span className="inline-block px-2.5 py-1 rounded-full bg-[rgba(5,9,18,0.8)] border border-[rgba(43,203,255,0.2)] text-[#8EDFFF] text-[10px] font-medium tracking-wide uppercase backdrop-blur-sm">
+                      <div style={{ position: "absolute", bottom: "0.75rem", left: "0.75rem", right: "0.75rem" }}>
+                    <span style={{ display: "inline-block", padding: "0.25rem 0.625rem", borderRadius: "9999px", background: "rgba(5,9,18,0.8)", border: "1px solid rgba(43,203,255,0.2)", color: "#8EDFFF", fontSize: "0.625rem", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", backdropFilter: "blur(4px)" }}>
                       {item.category}
                     </span>
                       </div>
 
-                      {/* Placeholder text */}
-                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                        <div className="text-center opacity-40">
-                          <Camera size={20} className="text-[#22BFFF] mx-auto mb-1.5" />
-                          <p className="text-[#8CA9BD] text-xs">Photo placeholder</p>
-                        </div>
-                      </div>
-
                       {/* Corner accents */}
-                      <div className="absolute top-3 left-3 w-4 h-4 border-t border-l border-[rgba(43,203,255,0.4)]" />
-                      <div className="absolute top-3 right-3 w-4 h-4 border-t border-r border-[rgba(43,203,255,0.4)]" />
+                      <div style={{ position: "absolute", top: "0.75rem", left: "0.75rem", width: "1rem", height: "1rem", borderTop: "1px solid rgba(43,203,255,0.4)", borderLeft: "1px solid rgba(43,203,255,0.4)" }} />
+                      <div style={{ position: "absolute", top: "0.75rem", right: "0.75rem", width: "1rem", height: "1rem", borderTop: "1px solid rgba(43,203,255,0.4)", borderRight: "1px solid rgba(43,203,255,0.4)" }} />
                     </div>
                 );
               })}
@@ -136,131 +124,124 @@ export default function GalleryPage() {
           </div>
         </section>
 
-        {/* Before/After Section */}
-        <section className="bg-[#0B1628] py-20">
-          <div className="max-w-7xl mx-auto px-8 sm:px-10 lg:px-14">
-            <div className="text-center mb-12">
-              <p className="text-[#22BFFF] text-xs font-semibold tracking-[0.25em] uppercase mb-3">
-                Transformations
-              </p>
-              <h2
-                  className="text-4xl font-bold text-[#EAF8FF]"
-                  style={{ fontFamily: "var(--font-display, serif)" }}
-              >
-                Before &amp; After
-              </h2>
-            </div>
+        {/* ── BEFORE & AFTER ──────────────────────────────────────────── */}
+        <section style={{ background: BG4, borderTop: SECTION_BORDER, paddingTop: "6rem", paddingBottom: "6rem" }}>
+          <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", padding: "0 2rem" }}>
+            <div style={{ width: "100%", maxWidth: "72rem", margin: "0 auto" }}>
+              <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
+                <p style={{ color: ICE, fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.25em", textTransform: "uppercase", marginBottom: "1rem" }}>
+                  Transformations
+                </p>
+                <h2 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(2rem,5vw,3rem)", fontWeight: 700, color: TEXT }}>
+                  Before &amp; After
+                </h2>
+              </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[
-                { label: "Interior Full Restoration" },
-                { label: "Exterior Clay & Polish" },
-              ].map((item, i) => (
-                  <div key={i} className="rounded-2xl overflow-hidden border-ice bg-[#09111F]">
-                    <div className="grid grid-cols-2">
-                      {["Before", "After"].map((phase) => (
-                          <div
-                              key={phase}
-                              className="aspect-[3/2] relative flex flex-col items-center justify-center"
-                              style={{
-                                background:
-                                    phase === "Before"
-                                        ? "linear-gradient(135deg, #09111F, #0B1628)"
-                                        : "linear-gradient(135deg, #0B1628, #0B1B33)",
-                              }}
-                          >
-                            <Camera size={18} className="text-[#22BFFF] opacity-30 mb-2" />
-                            <span className="text-[#8CA9BD] text-xs opacity-50">
-                        {phase} photo
-                      </span>
-                            <div className="absolute top-2 left-2">
-                        <span
-                            className={`text-[10px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full ${
-                                phase === "Before"
-                                    ? "bg-[rgba(0,0,0,0.5)] text-[#8CA9BD]"
-                                    : "bg-[rgba(34,191,255,0.2)] text-[#22BFFF]"
-                            }`}
-                        >
-                          {phase}
-                        </span>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))", gap: "1.5rem" }}>
+                {[
+                  { label: "Interior Full Restoration" },
+                  { label: "Exterior Clay & Paint Protection" },  {/* ← updated label */}
+                ].map((item, i) => (
+                    <div key={i} style={{ borderRadius: "1rem", overflow: "hidden", border: "1px solid rgba(43,203,255,0.18)", background: BG3 }}>
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+                        {["Before", "After"].map((phase) => (
+                            <div key={phase} style={{
+                              aspectRatio: "3/2",
+                              position: "relative",
+                              display: "flex",
+                              flexDirection: "column",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              background: phase === "Before"
+                                  ? "linear-gradient(135deg,#09111F,#0B1628)"
+                                  : "linear-gradient(135deg,#0B1628,#0B1B33)",
+                            }}>
+                              <Camera size={18} color={ICE} style={{ opacity: 0.3, marginBottom: "0.5rem" }} />
+                              <span style={{ color: MUTED, fontSize: "0.75rem", opacity: 0.5 }}>{phase} photo</span>
+                              <div style={{ position: "absolute", top: "0.5rem", left: "0.5rem" }}>
+                          <span style={{
+                            fontSize: "0.625rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase",
+                            padding: "0.125rem 0.5rem", borderRadius: "9999px",
+                            background: phase === "Before" ? "rgba(0,0,0,0.5)" : "rgba(11,191,255,0.2)",
+                            color: phase === "Before" ? MUTED : ICE,
+                          }}>
+                            {phase}
+                          </span>
+                              </div>
                             </div>
-                          </div>
-                      ))}
-                    </div>
-                    <div className="px-4 py-3 border-t border-[rgba(43,203,255,0.1)]">
-                      <p className="text-[#8CA9BD] text-sm">{item.label}</p>
-                    </div>
-                  </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Instagram CTA */}
-        <section className="bg-[#050912] py-20">
-          <div className="max-w-2xl mx-auto px-4 text-center">
-            <div className="bg-[#09111F] border-ice rounded-2xl p-10 relative overflow-hidden">
-              <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                        "radial-gradient(ellipse at center, rgba(34,191,255,0.05) 0%, transparent 70%)",
-                  }}
-              />
-              <img
-                  src="/instagram.svg"
-                  alt="Instagram"
-                  width={14}
-                  height={14}
-                  style={{ filter: "invert(60%) sepia(80%) saturate(400%) hue-rotate(170deg)" }}
-              />
-              <h2
-                  className="text-3xl font-bold text-[#EAF8FF] mb-3"
-                  style={{ fontFamily: "var(--font-display, serif)" }}
-              >
-                Follow Our Work
-              </h2>
-              <p className="text-[#8CA9BD] mb-6 text-sm">
-                See our latest details, transformations, and process videos on Instagram.
-                New content posted regularly.
-              </p>
-              <a
-                  href={siteConfig.instagramUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-ice px-8 py-3 rounded-full text-sm font-semibold tracking-wide inline-flex items-center gap-2"
-              >
-                <Share2 size={16} />
-                {siteConfig.instagram}
-              </a>
-
-              {/* Instagram embed placeholder */}
-              <div className="mt-8 grid grid-cols-3 gap-2">
-                {[...Array(6)].map((_, i) => (
-                    <div
-                        key={i}
-                        className="aspect-square rounded-lg bg-[rgba(34,191,255,0.04)] border border-[rgba(43,203,255,0.1)] flex items-center justify-center"
-                    >
-                      <Camera size={14} className="text-[#22BFFF] opacity-30" />
+                        ))}
+                      </div>
+                      <div style={{ padding: "0.875rem 1rem", borderTop: "1px solid rgba(43,203,255,0.1)" }}>
+                        <p style={{ color: MUTED, fontSize: "0.9375rem", fontWeight: 500 }}>{item.label}</p>
+                      </div>
                     </div>
                 ))}
               </div>
-              <p className="text-[#8CA9BD] text-xs mt-3 opacity-50">
-                Instagram feed embed (connect via Elfsight or similar widget)
-              </p>
-            </div>
-
-            <div className="mt-10">
-              <Link
-                  href="/contact"
-                  className="btn-ice px-8 py-4 rounded-full text-base font-semibold tracking-wide inline-flex items-center gap-2"
-              >
-                Book Your Detail
-                <ChevronRight size={16} />
-              </Link>
             </div>
           </div>
         </section>
+
+        {/* ── SOCIAL CTA ──────────────────────────────────────────────── */}
+        <section style={{ background: BG, borderTop: SECTION_BORDER, paddingTop: "6rem", paddingBottom: "6rem" }}>
+          <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", padding: "0 2rem" }}>
+            <div style={{ width: "100%", maxWidth: "36rem", margin: "0 auto" }}>
+              <div style={{ background: BG3, border: "1px solid rgba(43,203,255,0.18)", borderRadius: "1rem", padding: "3rem", textAlign: "center", position: "relative", overflow: "hidden" }}>
+                <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse at center,rgba(11,191,255,0.05) 0%,transparent 70%)" }} />
+
+                <img src="/instagram.svg" alt="Instagram" width={28} height={28}
+                     style={{ filter: "invert(60%) sepia(80%) saturate(400%) hue-rotate(170deg)", display: "block", margin: "0 auto 1.25rem" }} />
+
+                <h2 style={{ fontFamily: FONT_DISPLAY, fontSize: "1.875rem", fontWeight: 700, color: TEXT, marginBottom: "0.875rem" }}>
+                  Follow Our Work
+                </h2>
+                <p style={{ color: MUTED, fontSize: "0.9375rem", lineHeight: 1.75, marginBottom: "2rem" }}>
+                  See our latest details, transformations, and process videos on Instagram and TikTok. New content posted regularly.
+                </p>
+
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", alignItems: "center" }}>
+                  <a href={siteConfig.instagramUrl} target="_blank" rel="noopener noreferrer"
+                     className="btn-ice"
+                     style={{ padding: "0.75rem 2rem", borderRadius: "9999px", fontSize: "0.9375rem", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+                    <Share2 size={16} />
+                    {siteConfig.instagram}
+                  </a>
+                  <a href={siteConfig.tiktokUrl} target="_blank" rel="noopener noreferrer"
+                     className="btn-outline-ice"
+                     style={{ padding: "0.75rem 2rem", borderRadius: "9999px", fontSize: "0.9375rem", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-.79-.05A6.34 6.34 0 003.15 15.3a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.27 8.27 0 004.83 1.54V6.78a4.85 4.85 0 01-1.06-.09z"/>
+                    </svg>
+                    {siteConfig.tiktok}
+                  </a>
+                </div>
+
+                {/* Feed placeholder grid */}
+                <div style={{ marginTop: "2rem", display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "0.5rem" }}>
+                  {[...Array(6)].map((_, i) => (
+                      <div key={i} style={{ aspectRatio: "1/1", borderRadius: "0.5rem", background: "rgba(11,191,255,0.04)", border: "1px solid rgba(43,203,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <Camera size={14} color={ICE} style={{ opacity: 0.3 }} />
+                      </div>
+                  ))}
+                </div>
+                <p style={{ color: MUTED, fontSize: "0.75rem", marginTop: "0.75rem", opacity: 0.5 }}>
+                  Instagram feed embed — connect via Elfsight or similar widget
+                </p>
+              </div>
+
+              <div style={{ marginTop: "2.5rem", textAlign: "center" }}>
+                <Link href="/contact" className="btn-ice"
+                      style={{ padding: "1rem 2rem", borderRadius: "9999px", fontSize: "1rem", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+                  Book Your Detail <ChevronRight size={16} />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <style>{`
+        @media (min-width: 640px)  { .gallery-columns { columns: 2; } }
+        @media (min-width: 1024px) { .gallery-columns { columns: 3; } }
+      `}</style>
       </>
   );
 }

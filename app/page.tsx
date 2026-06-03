@@ -165,7 +165,7 @@ export default function Home() {
                   </div>
 
                   <h1 style={{ fontFamily: "var(--font-display,serif)", fontSize: "clamp(2.8rem,6vw,4.5rem)", fontWeight: 700, lineHeight: 1.02, letterSpacing: "-0.02em", marginBottom: "1.5rem", ...anim(200) }}>
-                    <span style={{ color: "white", display: "block" }}>Premium Mobile</span>
+                    <span style={{ color: "white", display: "block" }}>Luxury Auto</span>
                     <span style={{ color: "white", display: "block" }}>Detailing</span>
                     <span style={{ backgroundImage: "linear-gradient(90deg,#0BBFFF 0%,#8EDFFF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", display: "block", marginTop: "0.25rem" }}>
                     From Dusty to Icy
@@ -198,7 +198,7 @@ export default function Home() {
                 {/* Right — photo card (hidden on mobile via CSS class) */}
                 <div className="hero-photo-card" style={{ opacity: loaded ? 1 : 0, transform: loaded ? "translateX(0)" : "translateX(30px)", transition: "all 0.9s ease 300ms" }}>
                   <div style={{ position: "relative", width: "100%", maxWidth: "26rem", borderRadius: "1rem", overflow: "hidden", border: "1px solid rgba(11,191,255,0.28)", boxShadow: "0 0 80px rgba(11,191,255,0.10)", aspectRatio: "4/3" }}>
-                    <Image src="/hero.jpg" alt="IceLux Detail Work" fill className="object-cover" />
+                    <Image src="/detail-truck.jpeg" alt="IceLux Detail Work" fill className="object-cover" />
                     <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.18)" }} />
                     <div style={{ position: "absolute", bottom: "1rem", left: "1rem", padding: "0.625rem 1rem", borderRadius: "0.75rem", background: "rgba(0,0,0,0.80)", border: "1px solid rgba(11,191,255,0.35)", backdropFilter: "blur(8px)" }}>
                       <p style={{ color: "#0BBFFF", fontSize: "0.5625rem", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: "0.125rem" }}>Mobile Service</p>
@@ -275,7 +275,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div style={{ position: "relative", borderRadius: "1rem", overflow: "hidden", border: "1px solid rgba(11,191,255,0.2)", aspectRatio: "4/3" }}>
-                  <Image src="/hero.jpg" alt="IceLux mobile detailing" fill className="object-cover" />
+                  <Image src="/wagoneer-exterior.jpeg" alt="IceLux mobile detailing" fill className="object-cover" />
                   <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.15)" }} />
                   <div style={{ position: "absolute", top: "1rem", left: "1rem", width: "1.5rem", height: "1.5rem", borderTop: "2px solid rgba(11,191,255,0.5)", borderLeft: "2px solid rgba(11,191,255,0.5)" }} />
                   <div style={{ position: "absolute", bottom: "1rem", right: "1rem", width: "1.5rem", height: "1.5rem", borderBottom: "2px solid rgba(11,191,255,0.5)", borderRight: "2px solid rgba(11,191,255,0.5)" }} />
@@ -283,38 +283,49 @@ export default function Home() {
               </div>
             </FadeIn>
 
-            {/* Row 2: image left / text right */}
-            <FadeIn style={{ width: "100%" }}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "center" }} className="about-grid">
-                <div style={{ position: "relative", borderRadius: "1rem", overflow: "hidden", border: "1px solid rgba(11,191,255,0.2)", aspectRatio: "4/3" }} className="about-img-second">
-                  <Image src="/hero.jpg" alt="Premium detailing results" fill className="object-cover" />
-                  <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.15)" }} />
-                  <div style={{ position: "absolute", top: "1rem", right: "1rem", width: "1.5rem", height: "1.5rem", borderTop: "2px solid rgba(11,191,255,0.5)", borderRight: "2px solid rgba(11,191,255,0.5)" }} />
-                  <div style={{ position: "absolute", bottom: "1rem", left: "1rem", width: "1.5rem", height: "1.5rem", borderBottom: "2px solid rgba(11,191,255,0.5)", borderLeft: "2px solid rgba(11,191,255,0.5)" }} />
-                </div>
-                <div className="about-text-second">
-                  <p style={{ color: "#0BBFFF", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: "1.25rem" }}>Premium Quality</p>
-                  <h2 style={{ fontFamily: "var(--font-display,serif)", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#EAF8FF", lineHeight: 1.15, marginBottom: "2rem" }}>
-                    Professional Grade — Every Single Detail
-                  </h2>
-                  <p style={{ color: "#8CA9BD", fontSize: "1rem", lineHeight: 1.8, marginBottom: "2rem" }}>
-                    We use only premium detailing products — the same tools trusted by professional shops.
-                    From clay bar decontamination to ceramic protective washes, every step is intentional
-                    for maximum performance and lasting results.
-                  </p>
-                  <ul style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                    {["Professional-grade products only", "Meticulous technique, no shortcuts", "Transparent pricing, no surprises", "Kept informed from booking to completion"].map((pt) => (
-                        <li key={pt} style={{ display: "flex", alignItems: "flex-start", gap: "0.875rem" }}>
-                          <CheckCircle size={16} color="#0BBFFF" style={{ flexShrink: 0, marginTop: "0.125rem" }} />
-                          <span style={{ color: "#8CA9BD", fontSize: "0.9375rem", lineHeight: 1.6 }}>{pt}</span>
-                        </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </FadeIn>
           </div>
         </Section>
+
+        {/* ══ ABOUT ROW 2 — Wagoneer interior photo background ══════ */}
+        <section style={{ position: "relative", overflow: "hidden", paddingTop: "6rem", paddingBottom: "6rem" }}>
+          <div style={{ position: "absolute", inset: 0 }}>
+            <Image src="/wagoneer-interior.png" alt="" fill className="object-cover object-center" />
+            <div style={{ position: "absolute", inset: 0, background: "rgba(5,9,18,0.88)" }} />
+          </div>
+          <div style={{ position: "relative", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", padding: "0 2rem" }}>
+            <div style={{ width: "100%", maxWidth: "72rem" }}>
+              <FadeIn style={{ width: "100%" }}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "center" }} className="about-grid">
+                  <div style={{ position: "relative", borderRadius: "1rem", overflow: "hidden", border: "1px solid rgba(11,191,255,0.2)", aspectRatio: "4/3" }} className="about-img-second">
+                    <Image src="/porsche-interior.png" alt="Premium detailing results" fill className="object-cover" />
+                    <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.15)" }} />
+                    <div style={{ position: "absolute", top: "1rem", right: "1rem", width: "1.5rem", height: "1.5rem", borderTop: "2px solid rgba(11,191,255,0.5)", borderRight: "2px solid rgba(11,191,255,0.5)" }} />
+                    <div style={{ position: "absolute", bottom: "1rem", left: "1rem", width: "1.5rem", height: "1.5rem", borderBottom: "2px solid rgba(11,191,255,0.5)", borderLeft: "2px solid rgba(11,191,255,0.5)" }} />
+                  </div>
+                  <div className="about-text-second">
+                    <p style={{ color: "#0BBFFF", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: "1.25rem" }}>Premium Quality</p>
+                    <h2 style={{ fontFamily: "var(--font-display,serif)", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#EAF8FF", lineHeight: 1.15, marginBottom: "2rem" }}>
+                      Professional Grade — Every Single Detail
+                    </h2>
+                    <p style={{ color: "#8CA9BD", fontSize: "1rem", lineHeight: 1.8, marginBottom: "2rem" }}>
+                      We use only premium detailing products — the same tools trusted by professional shops.
+                      From clay bar decontamination to ceramic protective washes, every step is intentional
+                      for maximum performance and lasting results.
+                    </p>
+                    <ul style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                      {["Professional-grade products only", "Meticulous technique, no shortcuts", "Transparent pricing, no surprises", "Kept informed from booking to completion"].map((pt) => (
+                          <li key={pt} style={{ display: "flex", alignItems: "flex-start", gap: "0.875rem" }}>
+                            <CheckCircle size={16} color="#0BBFFF" style={{ flexShrink: 0, marginTop: "0.125rem" }} />
+                            <span style={{ color: "#8CA9BD", fontSize: "0.9375rem", lineHeight: 1.6 }}>{pt}</span>
+                          </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </FadeIn>
+            </div>
+          </div>
+        </section>
 
         {/* ══ SERVICES ══════════════════════════════════════════════ */}
         <Section bg="#07101C" style={{ borderTop: borderTop, paddingTop: "6rem", paddingBottom: "6rem" }}>
@@ -343,7 +354,7 @@ export default function Home() {
         {/* ══ PACKAGES — photo background ═══════════════════════════ */}
         <section style={{ position: "relative", padding: "6rem 0", overflow: "hidden" }}>
           <div style={{ position: "absolute", inset: 0 }}>
-            <Image src="/hero.jpg" alt="packages bg" fill className="object-cover object-center" />
+            <Image src="/wagoneer-full.png" alt="packages bg" fill className="object-cover object-center" />
             <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.87)" }} />
           </div>
           <div style={{ position: "relative", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", padding: "0 2rem" }}>
@@ -453,16 +464,27 @@ export default function Home() {
               <MapPin size={30} color="#0BBFFF" style={{ marginBottom: "1.25rem" }} />
               <p style={{ color: "#0BBFFF", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.25em", textTransform: "uppercase", marginBottom: "1rem" }}>Service Area</p>
               <h2 style={{ fontFamily: "var(--font-display,serif)", fontSize: "clamp(1.75rem,4vw,2.5rem)", fontWeight: 700, color: "#EAF8FF", marginBottom: "1.25rem" }}>Iowa Colony &amp; Surrounding Areas</h2>
-              <p style={{ color: "#8CA9BD", maxWidth: "28rem", fontSize: "0.9375rem", lineHeight: 1.75, marginBottom: "2rem" }}>
-                We bring the full IceLux experience directly to your home, apartment, or office.
-                No drop-offs needed — we handle everything on-site.
+              <p style={{ color: "#8CA9BD", maxWidth: "28rem", fontSize: "0.9375rem", lineHeight: 1.75, marginBottom: "1.75rem" }}>
+                Mobile detailing available throughout our service area.
+                We come directly to your home, apartment, or office — no drop-offs needed.
               </p>
-              <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0.75rem" }}>
+              <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0.75rem", marginBottom: "2rem" }}>
                 {["Iowa Colony", "Alvin", "Pearland", "Rosharon", "Manvel"].map((area) => (
                     <span key={area} style={{ padding: "0.5rem 1.25rem", borderRadius: "9999px", background: "rgba(11,191,255,0.05)", border: "1px solid rgba(11,191,255,0.18)", color: "#8EDFFF", fontSize: "0.875rem", fontWeight: 500 }}>
                   {area}
                 </span>
                 ))}
+              </div>
+              {/* Drop-off appointment callout */}
+              <div style={{ display: "flex", alignItems: "flex-start", gap: "0.875rem", background: "rgba(11,191,255,0.05)", border: "1px solid rgba(11,191,255,0.22)", borderRadius: "0.875rem", padding: "1.125rem 1.5rem", maxWidth: "32rem", textAlign: "left" }}>
+                <span style={{ fontSize: "1.25rem", flexShrink: 0, marginTop: "0.125rem" }}>🏠</span>
+                <div>
+                  <p style={{ color: "#EAF8FF", fontWeight: 600, fontSize: "0.9375rem", marginBottom: "0.375rem" }}>Drop-Off Appointments Available</p>
+                  <p style={{ color: "#8CA9BD", fontSize: "0.875rem", lineHeight: 1.7 }}>
+                    Iowa Colony residents may drop off their vehicle for service.
+                    Drop-off appointments available for Iowa Colony location only.
+                  </p>
+                </div>
               </div>
             </div>
           </FadeIn>
@@ -474,7 +496,7 @@ export default function Home() {
               eyebrow="Stay Connected"
               title="Follow The IceLux Journey"
               subtitle="See our latest work, before & afters, and behind-the-scenes content across our socials." />
-          <div style={{ width: "100%", maxWidth: "42rem", display: "flex", flexDirection: "column", gap: "1.25rem", margin: "0 auto" }} className="socials-row">
+          <div style={{ width: "100%", maxWidth: "56rem", display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: "1.25rem", margin: "0 auto" }}>
             {[
               {
                 href: siteConfig.instagramUrl,
@@ -493,18 +515,18 @@ export default function Home() {
                 sub: "Like our page for updates",
               },
             ].map((s, i) => (
-                <FadeIn key={s.name} delay={i * 100} style={{ width: "100%" }}>
+                <FadeIn key={s.name} delay={i * 80} style={{ display: "flex" }}>
                   <a href={s.href} target="_blank" rel="noopener noreferrer" className="card-hover border-ice"
-                     style={{ display: "flex", alignItems: "center", gap: "1.25rem", background: "#09111F", borderRadius: "1rem", padding: "1.5rem 2rem", width: "100%", textAlign: "left" }}>
-                    <div style={{ width: "3.5rem", height: "3.5rem", borderRadius: "0.75rem", background: s.bg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                     style={{ display: "flex", alignItems: "center", gap: "1rem", background: "#09111F", borderRadius: "1rem", padding: "1.25rem 1.5rem", width: "100%", textAlign: "left", textDecoration: "none" }}>
+                    <div style={{ width: "3rem", height: "3rem", borderRadius: "0.75rem", background: s.bg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                       {s.icon}
                     </div>
                     <div style={{ flex: 1 }}>
                       <p style={{ color: "#EAF8FF", fontWeight: 600, fontSize: "0.9375rem", marginBottom: "0.25rem" }}>{s.name}</p>
                       <p style={{ color: "#0BBFFF", fontSize: "0.8125rem", marginBottom: "0.125rem" }}>{s.handle}</p>
-                      <p style={{ color: "#8CA9BD", fontSize: "0.8125rem" }}>{s.sub}</p>
+                      <p style={{ color: "#8CA9BD", fontSize: "0.75rem" }}>{s.sub}</p>
                     </div>
-                    <ChevronRight size={18} color="#8CA9BD" />
+                    <ChevronRight size={16} color="#8CA9BD" />
                   </a>
                 </FadeIn>
             ))}
