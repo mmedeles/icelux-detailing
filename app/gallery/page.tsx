@@ -62,7 +62,7 @@ const galleryItems = [
   { src: "/cad after front.jpg",        cat: "Exterior",       label: "Cadillac XT6 — Front View",              size: "medium" },
   { src: "/after silver van full.jpg",  cat: "Exterior",       label: "Sprinter Van — Front View",              size: "medium" },
   { src: "/after silver van 2 full.jpg",cat: "Exterior",       label: "Sprinter Van — Rear 3/4 View",           size: "medium" },
-  { src: "/wagoneer-full.PNG",          cat: "Exterior",       label: "Wagoneer — Full Exterior",               size: "large"  },
+  { src: "/wagoneer-full.png",          cat: "Exterior",       label: "Wagoneer — Full Exterior",               size: "large"  },
 
   /* ── INTERIOR ───────────────────────────────────────── */
   { src: "/after cad int 1.jpg",        cat: "Interior",       label: "Cadillac XT6 — Driver Cabin",            size: "medium" },
@@ -75,7 +75,7 @@ const galleryItems = [
   { src: "/after cad int 15.jpg",       cat: "Interior",       label: "Cadillac XT6 — Rear Seats",              size: "medium" },
   { src: "/van int 2.jpg",              cat: "Interior",       label: "Sprinter Van — Clean Interior",          size: "medium" },
   { src: "/after 2.jpg",               cat: "Interior",       label: "Sprinter Van — Driver Cabin After",      size: "medium" },
-  { src: "/porsche-interior.PNG",       cat: "Interior",       label: "Porsche Macan — Interior Restoration",   size: "large"  },
+  { src: "/porsche-interior.png",       cat: "Interior",       label: "Porsche Macan — Interior Restoration",   size: "large"  },
 
   /* ── WHEELS & TIRES ─────────────────────────────────── */
   { src: "/after cad tire 1.jpg",       cat: "Wheels & Tires", label: "Cadillac XT6 — Wheel & Tire Dressing",   size: "medium" },
