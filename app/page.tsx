@@ -148,14 +148,12 @@ export default function Home() {
             <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "8rem", background: "linear-gradient(to top,rgba(5,9,18,1),transparent)" }} />
           </div>
 
-          <div style={{ position: "relative", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", padding: "7rem 2rem 5rem" }}>
-            <div style={{ width: "100%", maxWidth: "72rem", display: "grid", gridTemplateColumns: "1fr", gap: "3.5rem", alignItems: "center" }}
-                 className="lg:grid-cols-2-hero">
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3.5rem", alignItems: "center", width: "100%" }}
-                   className="hero-grid">
+          <div style={{ position: "relative", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", padding: "7rem 1.25rem 5rem" }}>
+            <div style={{ width: "100%", maxWidth: "72rem" }}>
+              <div className="hero-grid">
 
-                {/* Left */}
-                <div style={{ gridColumn: "1" }}>
+                {/* Left — always full width on mobile */}
+                <div className="hero-text">
                   <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.5rem 1rem", borderRadius: "9999px", border: "1px solid rgba(11,191,255,0.4)", background: "rgba(11,191,255,0.08)", marginBottom: "2rem", ...anim(100) }}>
                     <MapPin size={11} color="#0BBFFF" />
                     <span style={{ color: "#0BBFFF", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase" }}>
@@ -163,7 +161,7 @@ export default function Home() {
                   </span>
                   </div>
 
-                  <h1 style={{ fontFamily: "var(--font-display,serif)", fontSize: "clamp(2.8rem,6vw,4.5rem)", fontWeight: 700, lineHeight: 1.02, letterSpacing: "-0.02em", marginBottom: "1.5rem", ...anim(200) }}>
+                  <h1 style={{ fontFamily: "var(--font-display,serif)", fontSize: "clamp(2.5rem,6vw,4.5rem)", fontWeight: 700, lineHeight: 1.02, letterSpacing: "-0.02em", marginBottom: "1.5rem", ...anim(200) }}>
                     <span style={{ color: "white", display: "block" }}>Luxury Auto</span>
                     <span style={{ color: "white", display: "block" }}>Detailing</span>
                     <span style={{ backgroundImage: "linear-gradient(90deg,#0BBFFF 0%,#8EDFFF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", display: "block", marginTop: "0.25rem" }}>
@@ -171,7 +169,7 @@ export default function Home() {
                   </span>
                   </h1>
 
-                  <p style={{ color: "rgba(255,255,255,0.75)", fontSize: "1.125rem", lineHeight: 1.75, marginBottom: "2.5rem", maxWidth: "32rem", ...anim(350) }}>
+                  <p style={{ color: "rgba(255,255,255,0.75)", fontSize: "1.0625rem", lineHeight: 1.75, marginBottom: "2.5rem", maxWidth: "32rem", ...anim(350) }}>
                     Professional interior, exterior, and ceramic detailing services.
                     Deep restoration and premium protection brought directly to your driveway.
                     Your vehicle deserves the best. We bring it to you.
@@ -230,7 +228,7 @@ export default function Home() {
 
         {/* ══ STATS ═════════════════════════════════════════════════ */}
         <Section bg="#050912" style={{ borderBottom: borderTop }}>
-          <div style={{ width: "100%", maxWidth: "48rem", display: "grid", gridTemplateColumns: "repeat(3,1fr)", padding: "5rem 0", gap: "0" }}>
+          <div style={{ width: "100%", maxWidth: "48rem", display: "grid", gridTemplateColumns: "repeat(3,1fr)", padding: "5rem 0", gap: "0" }} className="stats-grid">
             {[
               { target: 5,   suffix: "★", label: "Star Rating — Every Time" },
               { target: 50,  suffix: "+", label: "Vehicles Detailed" },
@@ -247,24 +245,24 @@ export default function Home() {
         <Section bg="#050912" style={{ paddingTop: "6rem", paddingBottom: "6rem" }}>
           <div style={{ width: "100%", maxWidth: "72rem", display: "flex", flexDirection: "column", gap: "7rem" }}>
 
-            {/* Row 1: text left / image right */}
+            {/* Row 1: full-width text, no image */}
             <FadeIn style={{ width: "100%" }}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "center" }} className="about-grid">
+              <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "2.5rem", maxWidth: "56rem", margin: "0 auto", textAlign: "center" }}>
                 <div>
                   <p style={{ color: "#0BBFFF", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: "1.25rem" }}>Why IceLux</p>
                   <h2 style={{ fontFamily: "var(--font-display,serif)", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#EAF8FF", lineHeight: 1.15, marginBottom: "2rem" }}>
                     Mobile Detailing Built Around You
                   </h2>
                   <p style={{ color: "#8CA9BD", fontSize: "1rem", lineHeight: 1.8, marginBottom: "1.5rem" }}>
-                    At IceLux Detailing, your vehicle is more than transportation, it&apos;s an investment
+                    At IceLux Detailing, your vehicle is more than transportation — it&apos;s an investment
                     worth protecting. We come directly to your home or office, bringing professional-grade
                     care with zero hassle. No drop-offs, no waiting rooms, no wasted time.
                   </p>
                   <p style={{ color: "#8CA9BD", fontSize: "1rem", lineHeight: 1.8, marginBottom: "2.5rem" }}>
                     Every service uses industry-leading products and meticulous technique, delivering
-                    showroom-quality results at your door. Transparent pricing, always no hidden fees, ever.
+                    showroom-quality results at your door. Transparent pricing — no hidden fees, ever.
                   </p>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", justifyContent: "center" }}>
                     <Link href="/contact" className="btn-ice" style={{ padding: "0.875rem 1.75rem", borderRadius: "9999px", fontSize: "0.875rem", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
                       Get a Quote <ArrowRight size={14} />
                     </Link>
@@ -273,53 +271,43 @@ export default function Home() {
                     </Link>
                   </div>
                 </div>
-                <div style={{ position: "relative", borderRadius: "1rem", overflow: "hidden", border: "1px solid rgba(11,191,255,0.2)", aspectRatio: "4/3" }}>
-                  <Image src="/wagoneer-exterior.jpeg" alt="IceLux mobile detailing" fill className="object-cover" />
-                  <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.15)" }} />
-                  <div style={{ position: "absolute", top: "1rem", left: "1rem", width: "1.5rem", height: "1.5rem", borderTop: "2px solid rgba(11,191,255,0.5)", borderLeft: "2px solid rgba(11,191,255,0.5)" }} />
-                  <div style={{ position: "absolute", bottom: "1rem", right: "1rem", width: "1.5rem", height: "1.5rem", borderBottom: "2px solid rgba(11,191,255,0.5)", borderRight: "2px solid rgba(11,191,255,0.5)" }} />
-                </div>
               </div>
             </FadeIn>
 
           </div>
         </Section>
 
-        {/* ══ ABOUT ROW 2 — Wagoneer interior photo background ══════ */}
+        {/* ══ ABOUT ROW 2 — Premium Quality ═════════════════════════ */}
         <section style={{ position: "relative", overflow: "hidden", paddingTop: "6rem", paddingBottom: "6rem" }}>
           <div style={{ position: "absolute", inset: 0 }}>
             <Image src="/wagoneer-interior.png" alt="" fill className="object-cover object-center" />
             <div style={{ position: "absolute", inset: 0, background: "rgba(5,9,18,0.88)" }} />
           </div>
-          <div style={{ position: "relative", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", padding: "0 2rem" }}>
-            <div style={{ width: "100%", maxWidth: "72rem" }}>
-              <FadeIn style={{ width: "100%" }}>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "center" }} className="about-grid">
-                  <div style={{ position: "relative", borderRadius: "1rem", overflow: "hidden", border: "1px solid rgba(11,191,255,0.2)", aspectRatio: "4/3" }} className="about-img-second">
-                    <Image src="/porsche-interior.png" alt="Premium detailing results" fill className="object-cover" />
-                    <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.15)" }} />
-                    <div style={{ position: "absolute", top: "1rem", right: "1rem", width: "1.5rem", height: "1.5rem", borderTop: "2px solid rgba(11,191,255,0.5)", borderRight: "2px solid rgba(11,191,255,0.5)" }} />
-                    <div style={{ position: "absolute", bottom: "1rem", left: "1rem", width: "1.5rem", height: "1.5rem", borderBottom: "2px solid rgba(11,191,255,0.5)", borderLeft: "2px solid rgba(11,191,255,0.5)" }} />
-                  </div>
-                  <div className="about-text-second">
-                    <p style={{ color: "#0BBFFF", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: "1.25rem" }}>Premium Quality</p>
-                    <h2 style={{ fontFamily: "var(--font-display,serif)", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#EAF8FF", lineHeight: 1.15, marginBottom: "2rem" }}>
-                      Professional Grade Every Single Detail
-                    </h2>
-                    <p style={{ color: "#8CA9BD", fontSize: "1rem", lineHeight: 1.8, marginBottom: "2rem" }}>
-                      We use only premium detailing products, the same tools trusted by professional shops.
-                      From clay bar decontamination to ceramic protective washes, every step is intentional
-                      for maximum performance and lasting results.
-                    </p>
-                    <ul style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                      {["Professional-grade products only", "Meticulous technique, no shortcuts", "Transparent pricing, no surprises", "Kept informed from booking to completion"].map((pt) => (
-                          <li key={pt} style={{ display: "flex", alignItems: "flex-start", gap: "0.875rem" }}>
-                            <CheckCircle size={16} color="#0BBFFF" style={{ flexShrink: 0, marginTop: "0.125rem" }} />
-                            <span style={{ color: "#8CA9BD", fontSize: "0.9375rem", lineHeight: 1.6 }}>{pt}</span>
-                          </li>
-                      ))}
-                    </ul>
-                  </div>
+          <div style={{ position: "relative", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", padding: "0 1.25rem" }}>
+            <div style={{ width: "100%", maxWidth: "56rem", margin: "0 auto", textAlign: "center" }}>
+              <FadeIn>
+                <p style={{ color: "#0BBFFF", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: "1.25rem" }}>Premium Quality</p>
+                <h2 style={{ fontFamily: "var(--font-display,serif)", fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#EAF8FF", lineHeight: 1.15, marginBottom: "1.5rem" }}>
+                  Professional Grade Every Single Detail
+                </h2>
+                <p style={{ color: "#8CA9BD", fontSize: "1rem", lineHeight: 1.8, marginBottom: "3rem", maxWidth: "44rem", margin: "0 auto 3rem" }}>
+                  We use only premium detailing products, the same tools trusted by professional shops.
+                  From clay bar decontamination to ceramic protective washes, every step is intentional
+                  for maximum performance and lasting results.
+                </p>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: "1.25rem", textAlign: "left" }}>
+                  {[
+                    { icon: <CheckCircle size={18} color="#0BBFFF" />, title: "Professional-Grade Products", desc: "Only the best detailing compounds, coatings, and tools — no shortcuts." },
+                    { icon: <CheckCircle size={18} color="#0BBFFF" />, title: "Meticulous Technique", desc: "Every panel, surface, and crevice treated with care and precision." },
+                    { icon: <CheckCircle size={18} color="#0BBFFF" />, title: "Transparent Pricing", desc: "What you see is what you pay — no hidden fees, ever." },
+                    { icon: <CheckCircle size={18} color="#0BBFFF" />, title: "Kept Informed", desc: "Updates from booking through completion so you're never left guessing." },
+                  ].map((pt) => (
+                      <div key={pt.title} style={{ background: "rgba(9,17,31,0.80)", border: "1px solid rgba(43,203,255,0.15)", borderRadius: "0.875rem", padding: "1.375rem 1.5rem", display: "flex", flexDirection: "column", gap: "0.625rem" }}>
+                        {pt.icon}
+                        <p style={{ color: "#EAF8FF", fontWeight: 600, fontSize: "0.9375rem" }}>{pt.title}</p>
+                        <p style={{ color: "#8CA9BD", fontSize: "0.875rem", lineHeight: 1.65 }}>{pt.desc}</p>
+                      </div>
+                  ))}
                 </div>
               </FadeIn>
             </div>
@@ -335,8 +323,8 @@ export default function Home() {
           <div style={{ width: "100%", maxWidth: "72rem", display: "grid", gap: "1.75rem", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}>
             {services.map((svc, i) => (
                 <FadeIn key={svc.id} delay={i * 80}>
-                  <div className="card-hover border-ice" style={{ background: "#09111F", borderRadius: "1rem", padding: "2.25rem", display: "flex", flexDirection: "column", height: "100%" }}>
-                    <div style={{ width: "3.5rem", height: "3.5rem", borderRadius: "0.75rem", background: "rgba(11,191,255,0.07)", border: "1px solid rgba(11,191,255,0.18)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.5rem" }}>
+                  <div className="card-hover border-ice" style={{ background: "#09111F", borderRadius: "1rem", padding: "2.25rem", display: "flex", flexDirection: "column", height: "100%", alignItems: "center", textAlign: "center" }}>
+                    <div style={{ width: "3.5rem", height: "3.5rem", borderRadius: "0.75rem", background: "rgba(11,191,255,0.07)", border: "1px solid rgba(11,191,255,0.18)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.5rem", flexShrink: 0 }}>
                       <ServiceIcon name={svc.icon} />
                     </div>
                     <h3 style={{ color: "#EAF8FF", fontWeight: 700, fontSize: "1rem", marginBottom: "0.875rem", lineHeight: 1.4 }}>{svc.title}</h3>
@@ -446,7 +434,7 @@ export default function Home() {
         {/* ══ SERVICE AREA ══════════════════════════════════════════ */}
         <Section bg="#050912" style={{ borderTop: borderTop, paddingTop: "6rem", paddingBottom: "6rem" }}>
           <FadeIn style={{ width: "100%", maxWidth: "72rem", margin: "0 auto" }}>
-            <div style={{ background: "#09111F", border: "1px solid rgba(43,203,255,0.18)", borderRadius: "1rem", padding: "4rem", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", position: "relative", overflow: "hidden" }}>
+            <div style={{ background: "#09111F", border: "1px solid rgba(43,203,255,0.18)", borderRadius: "1rem", padding: "clamp(1.75rem,5vw,4rem)", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", position: "relative", overflow: "hidden" }}>
               <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse at center,rgba(11,191,255,0.05) 0%,transparent 65%)" }} />
               <MapPin size={30} color="#0BBFFF" style={{ marginBottom: "1.25rem" }} />
               <p style={{ color: "#0BBFFF", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.25em", textTransform: "uppercase", marginBottom: "1rem" }}>Service Area</p>
@@ -557,17 +545,43 @@ export default function Home() {
 
         {/* Responsive helpers */}
         <style>{`
-        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; width: 100%; }
-        .hero-photo-card { display: flex; justify-content: center; }
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
-        .socials-row { flex-direction: column; }
-        @media (min-width: 640px) { .socials-row { flex-direction: row; } }
-        @media (max-width: 900px) {
-          .hero-grid { grid-template-columns: 1fr; }
-          .hero-photo-card { display: none; }
-          .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-          .about-img-second { order: 1; }
-          .about-text-second { order: 2; }
+        /* ── Hero ─────────────────────────────────────────── */
+        .hero-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 2.5rem;
+          width: 100%;
+          align-items: center;
+        }
+        .hero-text { width: 100%; text-align: left; }
+        .hero-photo-card { display: none; }
+
+        @media (min-width: 900px) {
+          .hero-grid { grid-template-columns: 1fr 1fr; gap: 3.5rem; }
+          .hero-photo-card { display: flex; justify-content: center; }
+        }
+
+        /* ── Stats ────────────────────────────────────────── */
+        .stats-grid {
+          grid-template-columns: 1fr !important;
+          padding: 3rem 0 !important;
+          gap: 2rem !important;
+        }
+        .stats-grid > div { border-left: none !important; border-top: 1px solid rgba(43,203,255,0.10); padding-top: 2rem; }
+        .stats-grid > div:first-child { border-top: none; padding-top: 0; }
+        @media (min-width: 640px) {
+          .stats-grid {
+            grid-template-columns: repeat(3,1fr) !important;
+            padding: 5rem 0 !important;
+            gap: 0 !important;
+          }
+          .stats-grid > div { border-top: none !important; padding-top: 0 !important; }
+          .stats-grid > div + div { border-left: 1px solid rgba(43,203,255,0.10) !important; }
+        }
+
+        /* ── Global overflow guard ────────────────────────── */
+        @media (max-width: 639px) {
+          section { overflow-x: hidden; }
         }
       `}</style>
       </>
