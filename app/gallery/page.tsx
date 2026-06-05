@@ -64,8 +64,7 @@ const galleryItems = [
   { src: "/after silver van 2 full.jpg",cat: "Exterior",       label: "Sprinter Van — Rear 3/4 View",           size: "medium" },
   { src: "/IMG_1726.jpeg",              cat: "Exterior",       label: "Wagoneer — Side Profile",                size: "large"  },
   { src: "/IMG_1727.jpeg",              cat: "Exterior",       label: "Wagoneer — Rear 3/4 View",               size: "medium" },
-  { src: "/IMG_1729.jpeg",              cat: "Exterior",       label: "Wagoneer — Front 3/4 View",              size: "medium" },
-  { src: "/IMG_1730.jpeg",              cat: "Exterior",       label: "Wagoneer — Rear Quarter",                size: "large"  },
+  { src: "/IMG_1729.jpeg",              cat: "Interior",       label: "Wagoneer — Front 3/4 View",              size: "medium" },
 
   /* ── INTERIOR ───────────────────────────────────────── */
   { src: "/after cad int 1.jpg",        cat: "Interior",       label: "Cadillac XT6 — Driver Cabin",            size: "medium" },
@@ -76,7 +75,7 @@ const galleryItems = [
   { src: "/after cad int 13.jpg",       cat: "Interior",       label: "Cadillac LYRIQ 600 E4 — Cargo Area",     size: "medium" },
   { src: "/after cad int 14.jpg",       cat: "Interior",       label: "Cadillac LYRIQ 600 E4 — Night Interior Glow", size: "large" },
   { src: "/after cad int 15.jpg",       cat: "Interior",       label: "Cadillac LYRIQ 600 E4 — Dashboard",      size: "medium" },
-  { src: "/after 2.jpg",               cat: "Interior",       label: "Sprinter Van — Driver Cabin After",       size: "medium" },
+  { src: "/after 2.jpg",                cat: "Interior",       label: "Sprinter Van — Driver Cabin After",       size: "medium" },
   { src: "/porsche-interior.png",       cat: "Interior",       label: "Porsche Macan — Interior Restoration",   size: "large"  },
   { src: "/IMG_1711.jpeg",              cat: "Interior",       label: "Wagoneer — Driver Cabin",                size: "large"  },
   { src: "/IMG_1712.jpeg",              cat: "Interior",       label: "Wagoneer — Rear Seats",                  size: "medium" },
@@ -90,6 +89,7 @@ const galleryItems = [
 
   /* ── WHEELS & TIRES ─────────────────────────────────── */
   { src: "/after cad tire 1.jpg",       cat: "Wheels & Tires", label: "Cadillac XT6 — Wheel & Tire Dressing",  size: "medium" },
+  { src: "/IMG_1730.jpeg",              cat: "Wheels & Tires", label: "Wagoneer — Rear Quarter",               size: "large"  },
   { src: "/detail-truck.jpeg",          cat: "Wheels & Tires", label: "F-150 — Wheel Deep Clean",              size: "medium" },
   { src: "/wagoneer-exterior.jpeg",     cat: "Wheels & Tires", label: "Wagoneer — Wheel & Side Panel",         size: "large"  },
   { src: "/IMG_1725.jpeg",              cat: "Wheels & Tires", label: "Wagoneer — Wheel Close-Up",             size: "medium" },
