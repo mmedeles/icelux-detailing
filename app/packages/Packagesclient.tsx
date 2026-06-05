@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
     CheckCircle, ChevronRight, Phone, AlertTriangle,
-    Shield, Droplets, Sparkles,
+    Shield, Droplets, Sparkles, Wind,
 } from "lucide-react";
 import { siteConfig } from "@/app/lib/data";
 import {
@@ -270,6 +270,7 @@ const signatureEnhancements = [
     { Icon: EngineBayIcon,    name: "Engine Bay Clean & Dressing", description: "Removes dirt and grime from accessible surfaces, restoring plastic and rubber to a factory-fresh look.",   durability: "Up to 6 Months",  price: "$40" },
     { Icon: InteriorGlowIcon, name: "Interior Glow-Up",          description: "Revitalizes plastic, vinyl, and trim surfaces with UV protection and a restored factory-finish appearance.",   durability: "Up to 2 Months",  price: "$20" },
     { Icon: StainOdorIcon,    name: "Stain & Odor Removal",      description: "Targeted stain treatment, steam cleaning, and odor neutralization for carpets and upholstery.",                durability: "Varies",          price: "From $30" },
+    { Icon: Wind,             name: "Steam Cleaning",             description: "High-pressure steam sanitizes and deep-cleans vents, crevices, upholstery, and hard-to-reach interior surfaces.", durability: "N/A",             price: "$40" },
 ];
 
 /* ══════════════════════════════════════════════════════════════

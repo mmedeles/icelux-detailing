@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
   CheckCircle, ChevronRight, Phone, AlertTriangle,
-  Shield, Droplets, Sparkles,
+  Shield, Droplets, Sparkles, Wind,
 } from "lucide-react";
 import { siteConfig } from "@/app/lib/data";
 import {
@@ -119,8 +119,8 @@ const allPackages = [
   {
     id: "luxe-refresh", badge: "Maintenance", featured: false,
     badgeStyle: { background: "rgba(11,191,255,0.05)", color: MUTED, border: "1px solid rgba(43,203,255,0.15)" },
-    name: "The Luxe Refresh", label: "Maintenance Detail",
-    description: "Keep your vehicle fresh between full details - acuuming, surface wipe-downs, interior & exterior glass, contact wash, wheel cleaning, and tire dressing.",
+    name: "The Lux Refresh", label: "Maintenance Detail",
+    description: "Keep your vehicle fresh between full details — vacuuming, surface wipe-downs, interior & exterior glass, contact wash, wheel cleaning, and tire dressing.",
     services: ["Interior vacuum", "Surface wipe-downs", "Interior & exterior glass", "Contact wash", "Wheel & tire cleaning", "Tire dressing"],
     prices: [85, 105, 125, 145, 165],
     warning: "Vehicles previously detailed by IceLux with the IceLux Signature or Blue Diamond package are eligible 3–5 weeks after the full detail.",
@@ -129,7 +129,7 @@ const allPackages = [
     id: "diamond-lounge", badge: "Interior Detail", featured: false,
     badgeStyle: { background: "rgba(11,191,255,0.05)", color: MUTED, border: "1px solid rgba(43,203,255,0.15)" },
     name: "The Diamond Lounge", label: "Interior Detail",
-    description: "Refresh your vehicle's cabin with a thorough interior detail - vacuuming, floor mat cleaning, dashboard, console, door panels, interior glass, and a complete wipe-down of all interior surfaces.",
+    description: "Refresh your vehicle's cabin with a thorough interior detail — vacuuming, floor mat cleaning, dashboard, console, door panels, interior glass, and a complete wipe-down of all interior surfaces.",
     services: ["Full interior vacuum", "Floor mat cleaning", "Dashboard & console cleaning", "Door panel cleaning", "Interior glass cleaning", "Door jamb cleaning", "Complete interior wipe-down"],
     prices: [100, 125, 150, 175, 200], warning: null,
   },
@@ -159,7 +159,7 @@ const paintProtection = [
   },
   {
     Icon: Sparkles, name: "IceLux Crystal Coat", durability: "Up to 12 Months",
-    description: "Our highest level of paint protection, full-body clay decontamination + advanced ceramic wax for deep shine and long-lasting hydrophobic protection.",
+    description: "Our highest level of paint protection — full-body clay decontamination + advanced ceramic wax for deep shine and long-lasting hydrophobic protection.",
     isSale: false, flashSale: null, regularPrice: null,
     pricing: [{ label: "Cars, SUVs & Trucks", price: "$75" }, { label: "3rd Row SUVs", price: "$85" }, { label: "Sprinter Vans", price: "$100" }],
   },
@@ -173,6 +173,7 @@ const signatureEnhancements = [
   { Icon: EngineBayIcon,    name: "Engine Bay Clean & Dressing", durability: "Up to 6 Months",  price: "$40",     description: "Removes dirt and grime from accessible surfaces, restoring plastic and rubber to a factory-fresh look." },
   { Icon: InteriorGlowIcon, name: "Interior Glow-Up",            durability: "Up to 2 Months",  price: "$20",     description: "Revitalizes plastic, vinyl, and trim surfaces with UV protection and a restored factory-finish appearance." },
   { Icon: StainOdorIcon,    name: "Stain & Odor Removal",        durability: "Varies",          price: "From $30", description: "Targeted stain treatment, steam cleaning, and odor neutralization for carpets and upholstery." },
+  { Icon: Wind,             name: "Steam Cleaning",               durability: "N/A",             price: "$40",      description: "High-pressure steam sanitizes and deep-cleans vents, crevices, upholstery, and hard-to-reach interior surfaces." },
 ];
 
 /* ══════════════════════════════════════════════════════════════
@@ -271,7 +272,7 @@ export default function PackagesPage() {
         </section>
 
         {/* ══ PAINT PROTECTION ════════════════════════════════════ */}
-        <section style={{ background: BG2, borderTop: SECTION_BORDER, paddingTop: "6rem", paddingBottom: "6rem" }}>
+        <section id="paint-protection" style={{ background: BG2, borderTop: SECTION_BORDER, paddingTop: "6rem", paddingBottom: "6rem" }}>
           <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", padding: "0 2rem" }}>
             <SectionHeader eyebrow="Paint Protection" title="Protect Your Investment"
                            subtitle="Add a layer of paint protection to any package, from a quick ceramic wash to long-lasting crystal coating." />
@@ -344,12 +345,6 @@ export default function PackagesPage() {
                 );
               })}
             </div>
-            <FadeIn style={{ marginTop: "2.5rem", textAlign: "center" }}>
-              <p style={{ color: MUTED, fontSize: "0.875rem" }}>
-                Add any enhancement to your package.{" "}
-                <Link href="/contact" style={{ color: ICE }}>Contact us for availability.</Link>
-              </p>
-            </FadeIn>
           </div>
         </section>
 
