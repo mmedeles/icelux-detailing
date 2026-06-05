@@ -165,7 +165,7 @@ const allPackages = [
         badge: "Maintenance",
         badgeStyle: { background: "rgba(11,191,255,0.05)", color: MUTED, border: "1px solid rgba(43,203,255,0.15)" },
         featured: false,
-        name: "The Luxe Refresh",
+        name: "The Lux Refresh",
         label: "Maintenance Detail",
         description: "Keep your vehicle fresh between full details — vacuuming, surface wipe-downs, interior & exterior glass, contact wash, wheel cleaning, and tire dressing.",
         services: [
@@ -392,7 +392,7 @@ export default function PackagesClient() {
             </section>
 
             {/* ══ PAINT PROTECTION ═════════════════════════════════════ */}
-            <section style={{ background: BG2, borderTop: SECTION_BORDER, paddingTop: "6rem", paddingBottom: "6rem" }}>
+            <section id="paint-protection" style={{ background: BG2, borderTop: SECTION_BORDER, paddingTop: "6rem", paddingBottom: "6rem" }}>
                 <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", padding: "0 2rem" }}>
                     <SectionHeader
                         eyebrow="Paint Protection"
@@ -473,13 +473,6 @@ export default function PackagesClient() {
                             );
                         })}
                     </div>
-
-                    <FadeIn style={{ marginTop: "2.5rem", textAlign: "center" }}>
-                        <p style={{ color: MUTED, fontSize: "0.875rem" }}>
-                            Add any enhancement to your package.{" "}
-                            <Link href="/contact" style={{ color: ICE }}>Contact us for availability.</Link>
-                        </p>
-                    </FadeIn>
                 </div>
             </section>
 

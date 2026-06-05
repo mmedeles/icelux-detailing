@@ -6,9 +6,8 @@ import Image from "next/image";
 import {
   Car, Sparkles, Shield, Calendar, MapPin,
   CheckCircle, MessageCircle, ChevronRight, Star,
-  Phone, ArrowRight, Play,
-} from "lucide-react";
-import {
+  Phone, ArrowRight,
+} from "lucide-react";import {
   services, featuredPackages, whyChoose, trustBarItems, siteConfig,
 } from "@/app/lib/data";
 
@@ -342,7 +341,9 @@ export default function Home() {
                     </div>
                     <h3 style={{ color: "#EAF8FF", fontWeight: 700, fontSize: "1rem", marginBottom: "0.875rem", lineHeight: 1.4 }}>{svc.title}</h3>
                     <p style={{ color: "#8CA9BD", fontSize: "0.875rem", lineHeight: 1.75, flex: 1 }}>{svc.description}</p>
-                    <Link href="/packages" style={{ marginTop: "1.5rem", display: "inline-flex", alignItems: "center", gap: "0.375rem", color: "#0BBFFF", fontSize: "0.875rem", fontWeight: 500 }}>
+                    <Link
+                        href={svc.id === "paint-sealants" ? "/packages#paint-protection" : "/packages"}
+                        style={{ marginTop: "1.5rem", display: "inline-flex", alignItems: "center", gap: "0.375rem", color: "#0BBFFF", fontSize: "0.875rem", fontWeight: 500 }}>
                       Learn More <ChevronRight size={14} />
                     </Link>
                   </div>
@@ -416,45 +417,31 @@ export default function Home() {
         </section>
 
         {/* ══ GALLERY ═══════════════════════════════════════════════ */}
-        <Section bg="#050912" style={{ borderTop: borderTop, paddingTop: "6rem", paddingBottom: "6rem" }}>
-          <SectionHeader eyebrow="Our Work" title="Results Speak for Themselves" />
-          <FadeIn delay={100} style={{ width: "100%", maxWidth: "72rem", margin: "0 auto" }}>
-            <div style={{ background: "#09111F", border: "1px solid rgba(11,191,255,0.18)", borderRadius: "1rem", padding: "5rem 3rem", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", position: "relative", overflow: "hidden" }}>
-              <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse at center,rgba(11,191,255,0.04) 0%,transparent 65%)" }} />
-              <div style={{ width: "4rem", height: "4rem", borderRadius: "1rem", background: "rgba(11,191,255,0.07)", border: "1px solid rgba(11,191,255,0.18)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "2rem" }}>
-                <Play size={24} color="#0BBFFF" />
+        <section style={{ position: "relative", borderTop: borderTop, paddingTop: "6rem", paddingBottom: "6rem", overflow: "hidden" }}>
+          <div style={{ position: "absolute", inset: 0 }}>
+            <Image src="/IMG_1719.jpeg" alt="IceLux Detail Work" fill className="object-cover object-center" />
+            <div style={{ position: "absolute", inset: 0, background: "rgba(5,9,18,0.82)" }} />
+          </div>
+          <div style={{ position: "relative", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", padding: "0 2rem" }}>
+            <SectionHeader eyebrow="Our Work" title="Results Speak for Themselves" />
+            <FadeIn delay={100} style={{ width: "100%", maxWidth: "72rem", margin: "0 auto" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: "1rem", marginBottom: "3rem" }}>
+                {["/IMG_1711.jpeg","/IMG_1712.jpeg","/IMG_1727.jpeg","/IMG_1730.jpeg","/IMG_1732.jpeg","/IMG_1734.jpeg"].map((src, i) => (
+                    <div key={i} style={{ position: "relative", borderRadius: "0.875rem", overflow: "hidden", aspectRatio: "4/3", border: "1px solid rgba(11,191,255,0.18)" }}>
+                      <Image src={src} alt="IceLux Detail Work" fill className="object-cover" />
+                    </div>
+                ))}
               </div>
-              <h3 style={{ fontFamily: "var(--font-display,serif)", color: "#EAF8FF", fontSize: "1.5rem", fontWeight: 700, marginBottom: "1rem" }}>Gallery Coming Soon</h3>
-              <p style={{ color: "#8CA9BD", fontSize: "0.9375rem", lineHeight: 1.75, maxWidth: "28rem", marginBottom: "2.5rem" }}>
-                We&apos;re just getting started. Follow us on Instagram for real-time before &amp; afters and behind-the-scenes content.
-              </p>
-              <a href={siteConfig.instagramUrl} target="_blank" rel="noopener noreferrer"
-                 className="btn-outline-ice" style={{ padding: "0.75rem 2rem", borderRadius: "9999px", fontSize: "0.875rem", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
-                @IceLux_Detailing <ChevronRight size={13} />
-              </a>
-            </div>
-          </FadeIn>
-        </Section>
+              <div style={{ textAlign: "center" }}>
+                <Link href="/gallery" className="btn-outline-ice" style={{ padding: "0.875rem 2.5rem", borderRadius: "9999px", fontSize: "0.9375rem", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+                  View Full Gallery <ChevronRight size={14} />
+                </Link>
+              </div>
+            </FadeIn>
+          </div>
+        </section>
 
-        {/* ══ TESTIMONIALS ══════════════════════════════════════════ */}
-        <Section bg="#0B1628" style={{ borderTop: borderTop, paddingTop: "6rem", paddingBottom: "6rem" }}>
-          <SectionHeader eyebrow="Testimonials" title="What Our Clients Say" />
-          <FadeIn delay={100} style={{ width: "100%", maxWidth: "36rem", margin: "0 auto" }}>
-            <div style={{ background: "#09111F", border: "1px solid rgba(11,191,255,0.18)", borderRadius: "1rem", padding: "4rem", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", position: "relative", overflow: "hidden" }}>
-              <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse at center,rgba(11,191,255,0.04) 0%,transparent 65%)" }} />
-              <div style={{ display: "flex", gap: "0.375rem", marginBottom: "1.75rem" }}>
-                {[...Array(5)].map((_, j) => <Star key={j} size={22} color="#0BBFFF" fill="#0BBFFF" />)}
-              </div>
-              <p style={{ fontFamily: "var(--font-display,serif)", color: "#EAF8FF", fontSize: "1.375rem", fontWeight: 600, marginBottom: "1rem" }}>Be One of Our First Reviews</p>
-              <p style={{ color: "#8CA9BD", fontSize: "0.9375rem", lineHeight: 1.75, maxWidth: "22rem", marginBottom: "2.25rem" }}>
-                Book your detail today and experience the IceLux difference. We&apos;d love to earn your five stars.
-              </p>
-              <Link href="/contact" className="btn-ice" style={{ padding: "0.875rem 2.5rem", borderRadius: "9999px", fontSize: "0.9375rem", fontWeight: 600 }}>
-                Book Your Detail
-              </Link>
-            </div>
-          </FadeIn>
-        </Section>
+
 
         {/* ══ SERVICE AREA ══════════════════════════════════════════ */}
         <Section bg="#050912" style={{ borderTop: borderTop, paddingTop: "6rem", paddingBottom: "6rem" }}>
@@ -513,6 +500,14 @@ export default function Home() {
                 name: "Facebook",
                 handle: "IceLux Detailing",
                 sub: "Like our page for updates",
+              },
+              {
+                href: "https://www.tiktok.com/@iceluxdetailing",
+                bg: "#000000",
+                icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.28 8.28 0 004.84 1.55V6.79a4.85 4.85 0 01-1.07-.1z"/></svg>,
+                name: "TikTok",
+                handle: "@iceluxdetailing",
+                sub: "Watch our latest details",
               },
             ].map((s, i) => (
                 <FadeIn key={s.name} delay={i * 80} style={{ display: "flex" }}>

@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronRight, Share2, X } from "lucide-react";
+import { ChevronRight, X } from "lucide-react";
 import { siteConfig } from "@/app/lib/data";
 
 /* ─── Style constants ─────────────────────────────────── */
@@ -62,28 +62,43 @@ const galleryItems = [
   { src: "/cad after front.jpg",        cat: "Exterior",       label: "Cadillac XT6 — Front View",              size: "medium" },
   { src: "/after silver van full.jpg",  cat: "Exterior",       label: "Sprinter Van — Front View",              size: "medium" },
   { src: "/after silver van 2 full.jpg",cat: "Exterior",       label: "Sprinter Van — Rear 3/4 View",           size: "medium" },
-  { src: "/wagoneer-full.png",          cat: "Exterior",       label: "Wagoneer — Full Exterior",               size: "large"  },
+  { src: "/IMG_1726.jpeg",              cat: "Exterior",       label: "Wagoneer — Side Profile",                size: "large"  },
+  { src: "/IMG_1727.jpeg",              cat: "Exterior",       label: "Wagoneer — Rear 3/4 View",               size: "medium" },
+  { src: "/IMG_1729.jpeg",              cat: "Exterior",       label: "Wagoneer — Front 3/4 View",              size: "medium" },
+  { src: "/IMG_1730.jpeg",              cat: "Exterior",       label: "Wagoneer — Rear Quarter",                size: "large"  },
 
   /* ── INTERIOR ───────────────────────────────────────── */
   { src: "/after cad int 1.jpg",        cat: "Interior",       label: "Cadillac XT6 — Driver Cabin",            size: "medium" },
   { src: "/after cad int 2.jpg",        cat: "Interior",       label: "Cadillac XT6 — Front Interior",          size: "medium" },
   { src: "/after cad int 3.jpg",        cat: "Interior",       label: "Cadillac XT6 — Interior Steering",       size: "medium" },
-  { src: "/after cad int 11.jpg",       cat: "Interior",       label: "Cadillac XT6 — Center Console Detail",   size: "large"  },
-  { src: "/after cad int 12.jpg",       cat: "Interior",       label: "Cadillac XT6 — Rear Floor",              size: "medium" },
-  { src: "/after cad int 13.jpg",       cat: "Interior",       label: "Cadillac XT6 — Cargo Area",              size: "medium" },
-  { src: "/after cad int 14.jpg",       cat: "Interior",       label: "Cadillac XT6 — Night Interior Glow",     size: "large"  },
-  { src: "/after cad int 15.jpg",       cat: "Interior",       label: "Cadillac XT6 — Rear Seats",              size: "medium" },
-  { src: "/van int 2.jpg",              cat: "Interior",       label: "Sprinter Van — Clean Interior",          size: "medium" },
-  { src: "/after 2.jpg",               cat: "Interior",       label: "Sprinter Van — Driver Cabin After",      size: "medium" },
+  { src: "/after cad int 11.jpg",       cat: "Interior",       label: "Cadillac LYRIQ 600 E4 — Center Console Detail", size: "large" },
+  { src: "/after cad int 12.jpg",       cat: "Interior",       label: "Cadillac LYRIQ 600 E4 — Rear Floor",     size: "medium" },
+  { src: "/after cad int 13.jpg",       cat: "Interior",       label: "Cadillac LYRIQ 600 E4 — Cargo Area",     size: "medium" },
+  { src: "/after cad int 14.jpg",       cat: "Interior",       label: "Cadillac LYRIQ 600 E4 — Night Interior Glow", size: "large" },
+  { src: "/after cad int 15.jpg",       cat: "Interior",       label: "Cadillac LYRIQ 600 E4 — Dashboard",      size: "medium" },
+  { src: "/after 2.jpg",               cat: "Interior",       label: "Sprinter Van — Driver Cabin After",       size: "medium" },
   { src: "/porsche-interior.png",       cat: "Interior",       label: "Porsche Macan — Interior Restoration",   size: "large"  },
+  { src: "/IMG_1711.jpeg",              cat: "Interior",       label: "Wagoneer — Driver Cabin",                size: "large"  },
+  { src: "/IMG_1712.jpeg",              cat: "Interior",       label: "Wagoneer — Rear Seats",                  size: "medium" },
+  { src: "/IMG_1713.jpeg",              cat: "Interior",       label: "Wagoneer — Cargo Area",                  size: "medium" },
+  { src: "/IMG_1715.jpeg",              cat: "Interior",       label: "Wagoneer — Passenger Side",              size: "medium" },
+  { src: "/IMG_1716.jpeg",              cat: "Interior",       label: "Wagoneer — Rear Interior",               size: "large"  },
+  { src: "/IMG_1717.jpeg",              cat: "Interior",       label: "Wagoneer — Steering & Dash",             size: "medium" },
+  { src: "/IMG_1720.jpeg",              cat: "Interior",       label: "Wagoneer — Second Row Seats",            size: "medium" },
+  { src: "/IMG_1721.jpeg",              cat: "Interior",       label: "Wagoneer — Cargo Floor",                 size: "large"  },
+  { src: "/IMG_1722.jpeg",              cat: "Interior",       label: "Wagoneer — Center Console",              size: "medium" },
 
   /* ── WHEELS & TIRES ─────────────────────────────────── */
-  { src: "/after cad tire 1.jpg",       cat: "Wheels & Tires", label: "Cadillac XT6 — Wheel & Tire Dressing",   size: "medium" },
-  { src: "/detail-truck.jpeg",          cat: "Wheels & Tires", label: "F-150 — Wheel Deep Clean",               size: "medium" },
-  { src: "/wagoneer-exterior.jpeg",     cat: "Wheels & Tires", label: "Wagoneer — Wheel & Side Panel",          size: "large"  },
+  { src: "/after cad tire 1.jpg",       cat: "Wheels & Tires", label: "Cadillac XT6 — Wheel & Tire Dressing",  size: "medium" },
+  { src: "/detail-truck.jpeg",          cat: "Wheels & Tires", label: "F-150 — Wheel Deep Clean",              size: "medium" },
+  { src: "/wagoneer-exterior.jpeg",     cat: "Wheels & Tires", label: "Wagoneer — Wheel & Side Panel",         size: "large"  },
+  { src: "/IMG_1725.jpeg",              cat: "Wheels & Tires", label: "Wagoneer — Wheel Close-Up",             size: "medium" },
+  { src: "/IMG_1731.jpeg",              cat: "Wheels & Tires", label: "Wagoneer — Rear Wheel",                 size: "medium" },
+  { src: "/IMG_1732.jpeg",              cat: "Wheels & Tires", label: "Wagoneer — Front Wheel",                size: "large"  },
 
   /* ── TRANSFORMATIONS ────────────────────────────────── */
-  { src: "/after silver van 3.jpg",     cat: "Transformations", label: "Sprinter Van — Full Transformation",    size: "large"  },
+  { src: "/after silver van 3.jpg",     cat: "Transformations", label: "Sprinter Van — Full Transformation",   size: "large"  },
+  { src: "/IMG_1734.jpeg",              cat: "Transformations", label: "Wagoneer — Full Detail Complete",       size: "large"  },
 ];
 
 /* ─── Before / After pairs ────────────────────────────── */
@@ -101,8 +116,8 @@ const beforeAfterPairs = [
     after:  { src: "/after cad int 12.jpg",  caption: "Spotless rear floor, mats restored" },
   },
   {
-    label: "Cadillac XT6 — 3rd Row & Cargo",
-    vehicle: "Cadillac XT6",
+    label: "Cadillac LYRIQ 600 E4 — 3rd Row & Cargo",
+    vehicle: "Cadillac LYRIQ 600 E4",
     before: { src: "/before cad int 3.jpg",  caption: "Dirty seats and soiled floor" },
     after:  { src: "/after cad int 13.jpg",  caption: "Deep cleaned cargo & 3rd row" },
   },
@@ -110,7 +125,13 @@ const beforeAfterPairs = [
     label: "Sprinter Van — Full Interior Detail",
     vehicle: "Mercedes Sprinter Van",
     before: { src: "/before van 1.jpg",      caption: "Debris-covered floor & seats" },
-    after:  { src: "/van int 2.jpg",         caption: "Complete restoration — like new" },
+    after:  { src: "/after 2.jpg",           caption: "Complete restoration — like new" },
+  },
+  {
+    label: "Wagoneer — Interior Detail",
+    vehicle: "Jeep Wagoneer",
+    before: { src: "/IMG_1711.jpeg",         caption: "Pre-detail inspection" },
+    after:  { src: "/IMG_1717.jpeg",         caption: "Full interior detail complete" },
   },
 ];
 
@@ -282,10 +303,23 @@ export default function GalleryPage() {
                     See our latest details, transformations, and process videos on Instagram and TikTok. New content posted regularly.
                   </p>
                   <div style={{ display: "flex", flexDirection: "column", gap: "0.875rem", alignItems: "center" }}>
-                    <a href={siteConfig.instagramUrl} target=" blank" rel="noopener noreferrer"
-                       className="btn-ice"
-                       style={{ padding: "0.75rem 2rem", borderRadius: "9999px", fontSize: "0.9375rem", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
-                      <Share2 size={16} /> {siteConfig.instagram}
+                    <a href={siteConfig.instagramUrl} target="_blank" rel="noopener noreferrer"
+                       className="btn-outline-ice"
+                       style={{ padding: "0.75rem 1.75rem", borderRadius: "9999px", fontSize: "0.9375rem", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.625rem", width: "100%", justifyContent: "center" }}>
+                      <img src="/instagram.svg" alt="Instagram" width={18} height={18} style={{ filter: "invert(60%) sepia(80%) saturate(400%) hue-rotate(170deg)" }} />
+                      Instagram — {siteConfig.instagram}
+                    </a>
+                    <a href={siteConfig.facebookUrl} target="_blank" rel="noopener noreferrer"
+                       className="btn-outline-ice"
+                       style={{ padding: "0.75rem 1.75rem", borderRadius: "9999px", fontSize: "0.9375rem", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.625rem", width: "100%", justifyContent: "center" }}>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="#0BBFFF"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                      Facebook — IceLux Detailing
+                    </a>
+                    <a href="https://www.tiktok.com/@iceluxdetailing" target="_blank" rel="noopener noreferrer"
+                       className="btn-outline-ice"
+                       style={{ padding: "0.75rem 1.75rem", borderRadius: "9999px", fontSize: "0.9375rem", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.625rem", width: "100%", justifyContent: "center" }}>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="#0BBFFF"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.28 8.28 0 004.84 1.55V6.79a4.85 4.85 0 01-1.07-.1z"/></svg>
+                      TikTok — @iceluxdetailing
                     </a>
                   </div>
                 </div>

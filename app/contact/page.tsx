@@ -119,7 +119,7 @@ const whatToExpect = [
 ══════════════════════════════════════════════════════ */
 export default function ContactPage() {
   const [form, setForm] = useState({
-    name: "", phone: "", email: "", vehicle: "", service: "", message: "",
+    name: "", phone: "", email: "", vehicle: "", service: "", enhancements: [] as string[], message: "",
   });
   const [submitted, setSubmitted] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
@@ -135,10 +135,14 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const payload = {
+      ...form,
+      enhancements: form.enhancements.length > 0 ? form.enhancements.join(", ") : "None",
+    };
     const response = await fetch("https://formspree.io/f/mykvbeya", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      body: JSON.stringify(payload),
     });
     if (response.ok) setSubmitted(true);
   };
@@ -354,15 +358,52 @@ export default function ContactPage() {
                               <option value="">Select a package...</option>
                               <option value="icelux-signature">IceLux Signature — Full Interior & Exterior</option>
                               <option value="blue-diamond">Blue Diamond Signature — Ultimate Detail</option>
-                              <option value="luxrefresh">LuxRefresh — Maintenance Detail</option>
+                              <option value="lux-refresh">The Lux Refresh — Maintenance Detail</option>
                               <option value="diamond-lounge">The Diamond Lounge — Interior Detail</option>
                               <option value="diamond-luxe">Diamond Luxe Finish — Exterior Detail</option>
-                              <option value="enhancement">Enhancement / Add-On Only</option>
                               <option value="not-sure">Not sure — need a recommendation</option>
                             </select>
                           </div>
 
-                          {/* Preferred time */}
+                          {/* Enhancements / Add-Ons */}
+                          <div>
+                            <label style={{ display: "block", color: MUTED, fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.625rem" }}>
+                              Add-Ons / Enhancements <span style={{ color: MUTED, fontWeight: 400, textTransform: "none", letterSpacing: 0, fontSize: "0.7rem" }}>(select all that apply)</span>
+                            </label>
+                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.625rem" }} className="form-row">
+                              {[
+                                { id: "leather-treatment",      label: "Leather Treatment",          price: "$40" },
+                                { id: "rubber-mat-renewal",     label: "Rubber Mat Renewal",         price: "$35" },
+                                { id: "black-trim-restoration", label: "Black Trim Restoration",     price: "$40" },
+                                { id: "engine-bay",             label: "Engine Bay Clean & Dressing",price: "$40" },
+                                { id: "interior-glow-up",       label: "Interior Glow-Up",           price: "$20" },
+                                { id: "stain-odor-removal",     label: "Stain & Odor Removal",       price: "From $30" },
+                              ].map((enh) => {
+                                const checked = form.enhancements.includes(enh.id);
+                                return (
+                                    <label key={enh.id} style={{ display: "flex", alignItems: "center", gap: "0.75rem", background: checked ? "rgba(11,191,255,0.08)" : BG2, border: checked ? "1px solid rgba(43,203,255,0.45)" : BORDER, borderRadius: "0.75rem", padding: "0.75rem 1rem", cursor: "pointer", transition: "all 0.2s" }}>
+                                      <input
+                                          type="checkbox"
+                                          checked={checked}
+                                          onChange={() => {
+                                            setForm((prev) => ({
+                                              ...prev,
+                                              enhancements: checked
+                                                  ? prev.enhancements.filter((e) => e !== enh.id)
+                                                  : [...prev.enhancements, enh.id],
+                                            }));
+                                          }}
+                                          style={{ accentColor: ICE, width: "1rem", height: "1rem", flexShrink: 0 }}
+                                      />
+                                      <div>
+                                        <p style={{ color: checked ? TEXT : MUTED, fontSize: "0.8125rem", fontWeight: checked ? 600 : 400, lineHeight: 1.3 }}>{enh.label}</p>
+                                        <p style={{ color: ICE, fontSize: "0.6875rem", fontWeight: 600, marginTop: "0.1rem" }}>{enh.price}</p>
+                                      </div>
+                                    </label>
+                                );
+                              })}
+                            </div>
+                          </div>
                           <div>
                             <label style={{ display: "block", color: MUTED, fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.625rem" }}>
                               Preferred Appointment Time
