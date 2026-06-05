@@ -159,7 +159,7 @@ const paintProtection = [
   },
   {
     Icon: Sparkles, name: "IceLux Crystal Coat", durability: "Up to 12 Months",
-    description: "Our highest level of paint protection — full-body clay decontamination + advanced ceramic wax for deep shine and long-lasting hydrophobic protection.",
+    description: "Our highest level of paint protection, full-body clay decontamination + advanced ceramic wax for deep shine and long-lasting hydrophobic protection.",
     isSale: false, flashSale: null, regularPrice: null,
     pricing: [{ label: "Cars, SUVs & Trucks", price: "$75" }, { label: "3rd Row SUVs", price: "$85" }, { label: "Sprinter Vans", price: "$100" }],
   },

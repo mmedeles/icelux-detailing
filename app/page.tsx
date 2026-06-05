@@ -230,7 +230,7 @@ export default function Home() {
         <Section bg="#050912" style={{ borderBottom: borderTop }}>
           <div style={{ width: "100%", maxWidth: "48rem", display: "grid", gridTemplateColumns: "repeat(3,1fr)", padding: "5rem 0", gap: "0" }} className="stats-grid">
             {[
-              { target: 5,   suffix: "★", label: "Star Rating — Every Time" },
+              { target: 5,   suffix: "★", label: "Star Rating - Every Time" },
               { target: 50,  suffix: "+", label: "Vehicles Detailed" },
               { target: 100, suffix: "%", label: "Satisfaction Guaranteed" },
             ].map((s, i) => (
@@ -254,13 +254,13 @@ export default function Home() {
                     Mobile Detailing Built Around You
                   </h2>
                   <p style={{ color: "#8CA9BD", fontSize: "1rem", lineHeight: 1.8, marginBottom: "1.5rem" }}>
-                    At IceLux Detailing, your vehicle is more than transportation — it&apos;s an investment
+                    At IceLux Detailing, your vehicle is more than transportation, it&apos;s an investment
                     worth protecting. We come directly to your home or office, bringing professional-grade
                     care with zero hassle. No drop-offs, no waiting rooms, no wasted time.
                   </p>
                   <p style={{ color: "#8CA9BD", fontSize: "1rem", lineHeight: 1.8, marginBottom: "2.5rem" }}>
                     Every service uses industry-leading products and meticulous technique, delivering
-                    showroom-quality results at your door. Transparent pricing — no hidden fees, ever.
+                    showroom-quality results at your door. Transparent pricing. No hidden fees, ever.
                   </p>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", justifyContent: "center" }}>
                     <Link href="/contact" className="btn-ice" style={{ padding: "0.875rem 1.75rem", borderRadius: "9999px", fontSize: "0.875rem", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
@@ -297,9 +297,9 @@ export default function Home() {
                 </p>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: "1.25rem", textAlign: "left" }}>
                   {[
-                    { icon: <CheckCircle size={18} color="#0BBFFF" />, title: "Professional-Grade Products", desc: "Only the best detailing compounds, coatings, and tools — no shortcuts." },
+                    { icon: <CheckCircle size={18} color="#0BBFFF" />, title: "Professional-Grade Products", desc: "Only the best detailing compounds, coatings, and tools, no shortcuts." },
                     { icon: <CheckCircle size={18} color="#0BBFFF" />, title: "Meticulous Technique", desc: "Every panel, surface, and crevice treated with care and precision." },
-                    { icon: <CheckCircle size={18} color="#0BBFFF" />, title: "Transparent Pricing", desc: "What you see is what you pay — no hidden fees, ever." },
+                    { icon: <CheckCircle size={18} color="#0BBFFF" />, title: "Transparent Pricing", desc: "What you see is what you pay, no hidden fees... ever." },
                     { icon: <CheckCircle size={18} color="#0BBFFF" />, title: "Kept Informed", desc: "Updates from booking through completion so you're never left guessing." },
                   ].map((pt) => (
                       <div key={pt.title} style={{ background: "rgba(9,17,31,0.80)", border: "1px solid rgba(43,203,255,0.15)", borderRadius: "0.875rem", padding: "1.375rem 1.5rem", display: "flex", flexDirection: "column", gap: "0.625rem" }}>
