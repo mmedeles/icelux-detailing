@@ -136,7 +136,7 @@ const allPackages = [
   {
     id: "diamond-luxe", badge: "Exterior Detail", featured: false,
     badgeStyle: { background: "rgba(11,191,255,0.05)", color: MUTED, border: "1px solid rgba(43,203,255,0.15)" },
-    name: "Diamond Luxe Finish", label: "Exterior Detail",
+    name: "Diamond Lux Finish", label: "Exterior Detail",
     description: "Bring back your vehicle's shine with a professional exterior detail focused on cleaning, enhancing, and protecting all exterior surfaces.",
     services: ["Exterior hand wash", "Wheel & tire cleaning", "Tire dressing", "Bug removal", "Exterior glass cleaning", "Trim wipe-down"],
     prices: [85, 110, 135, 155, 180], warning: null,
@@ -182,6 +182,13 @@ const signatureEnhancements = [
 export default function PackagesPage() {
   const [loaded, setLoaded] = useState(false);
   useEffect(() => { const t = setTimeout(() => setLoaded(true), 80); return () => clearTimeout(t); }, []);
+
+  useEffect(() => {
+    if (window.location.hash === '#paint-protection') {
+      const el = document.getElementById('paint-protection');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
 
   const h = (delay: number): React.CSSProperties => ({
     opacity: loaded ? 1 : 0,
@@ -286,7 +293,6 @@ export default function PackagesPage() {
                           <IconComp size={20} color={ICE} />
                         </div>
                         <h3 style={{ fontFamily: FONT_DISPLAY, color: TEXT, fontSize: "1.25rem", fontWeight: 700, marginBottom: "0.375rem" }}>{item.name}</h3>
-                        <p style={{ color: ICE, fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "0.875rem" }}>Lasts {item.durability}</p>
                         <p style={{ color: MUTED, fontSize: "0.875rem", lineHeight: 1.75, flex: 1, marginBottom: "1.25rem" }}>{item.description}</p>
                         <div style={{ borderTop: SECTION_BORDER, paddingTop: "1.25rem" }}>
                           {item.isSale ? (
@@ -331,11 +337,10 @@ export default function PackagesPage() {
                       <div style={{ background: BG3, border: BORDER, borderRadius: "1rem", padding: "1.75rem", display: "flex", flexDirection: "column", width: "100%" }} className="card-hover">
                         <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem", marginBottom: "1rem" }}>
                           <div style={{ width: "2.75rem", height: "2.75rem", borderRadius: "0.625rem", background: "rgba(11,191,255,0.07)", border: "1px solid rgba(11,191,255,0.18)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                            <IconComp />
+                            <IconComp size={18} color={ICE} />
                           </div>
                           <div style={{ flex: 1 }}>
                             <h3 style={{ color: TEXT, fontWeight: 700, fontSize: "0.9375rem", marginBottom: "0.25rem" }}>{enh.name}</h3>
-                            <p style={{ color: ICE, fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" }}>Lasts {enh.durability}</p>
                           </div>
                           <span style={{ color: TEXT, fontWeight: 700, fontSize: "1rem", flexShrink: 0 }}>{enh.price}</span>
                         </div>

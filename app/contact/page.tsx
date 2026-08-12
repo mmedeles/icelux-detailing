@@ -360,7 +360,7 @@ export default function ContactPage() {
                               <option value="blue-diamond">Blue Diamond Signature — Ultimate Detail</option>
                               <option value="lux-refresh">The Lux Refresh — Maintenance Detail</option>
                               <option value="diamond-lounge">The Diamond Lounge — Interior Detail</option>
-                              <option value="diamond-luxe">Diamond Luxe Finish — Exterior Detail</option>
+                              <option value="diamond-luxe">Diamond Lux Finish — Exterior Detail</option>
                               <option value="not-sure">Not sure — need a recommendation</option>
                             </select>
                           </div>

@@ -330,7 +330,7 @@ export default function Home() {
                     <h3 style={{ color: "#EAF8FF", fontWeight: 700, fontSize: "1rem", marginBottom: "0.875rem", lineHeight: 1.4 }}>{svc.title}</h3>
                     <p style={{ color: "#8CA9BD", fontSize: "0.875rem", lineHeight: 1.75, flex: 1 }}>{svc.description}</p>
                     <Link
-                        href={svc.id === "paint-sealants" ? "/packages#paint-protection" : "/packages"}
+                        href={svc.id === "ceramic" ? "/packages#paint-protection" : "/packages"}
                         style={{ marginTop: "1.5rem", display: "inline-flex", alignItems: "center", gap: "0.375rem", color: "#0BBFFF", fontSize: "0.875rem", fontWeight: 500 }}>
                       Learn More <ChevronRight size={14} />
                     </Link>

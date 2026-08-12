@@ -37,8 +37,7 @@ export const services = [
   {
     id: "maintenance",
     title: "Maintenance Plans",
-    description:
-        "Regular scheduled detailing to keep your vehicle in showroom condition between full detail sessions.",
+    description: "Maintenance",
     icon: "calendar",
   },
 ];
@@ -74,7 +73,7 @@ export const featuredPackages = [
   },
   {
     id: "luxe-refresh",
-    name: "Luxe Refresh",
+    name: "Lux Refresh",
     badge: "Quick Detail",
     description: "Fast, focused, flawless. Keep your vehicle between full details with a premium touch-up session.",
     highlights: [
@@ -111,7 +110,7 @@ export const packages = [
   },
   {
     id: "diamond-luxe",
-    name: "Diamond Luxe Finish",
+    name: "Diamond Lux Finish",
     tier: "premium",
     tagline: "For Vehicles That Demand More",
     description:
@@ -135,7 +134,7 @@ export const packages = [
     description:
         "Reserved for those who demand the absolute best. Full paint correction, ceramic coating prep, and complete interior restoration.",
     services: [
-      "Everything in Diamond Luxe Finish",
+      "Everything in Diamond Lux Finish",
       "Multi-stage paint correction",
       "Ceramic coating application",
       "Full engine bay clean & dress",
@@ -166,7 +165,7 @@ export const packages = [
   },
   {
     id: "luxe-refresh",
-    name: "Luxe Refresh",
+    name: "Lux Refresh",
     tier: "maintenance",
     tagline: "Stay Fresh Between Full Details",
     description:

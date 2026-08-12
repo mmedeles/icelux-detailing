@@ -64,7 +64,8 @@ const galleryItems = [
   { src: "/after silver van 2 full.jpg",cat: "Exterior",       label: "Sprinter Van - Rear 3/4 View",           size: "medium" },
   { src: "/IMG_1726.jpeg",              cat: "Exterior",       label: "Wagoneer - Side Profile",                size: "large"  },
   { src: "/IMG_1727.jpeg",              cat: "Exterior",       label: "Wagoneer - Rear 3/4 View",               size: "medium" },
-  { src: "/IMG_1729.jpeg",              cat: "Interior",       label: "Wagoneer - Front 3/4 View",              size: "medium" },
+  { src: "/IMG_1729.jpeg",              cat: "Exterior",       label: "Wagoneer - Front 3/4 View",              size: "medium" },
+  { src: "/IMG_1730.jpeg",              cat: "Exterior",       label: "Wagoneer - Rear Quarter",               size: "large"  },
 
   /* ── INTERIOR ───────────────────────────────────────── */
   { src: "/after cad int 1.jpg",        cat: "Interior",       label: "Cadillac XT6 - Driver Cabin",            size: "medium" },
@@ -89,7 +90,6 @@ const galleryItems = [
 
   /* ── WHEELS & TIRES ─────────────────────────────────── */
   { src: "/after cad tire 1.jpg",       cat: "Wheels & Tires", label: "Cadillac XT6 - Wheel & Tire Dressing",  size: "medium" },
-  { src: "/IMG_1730.jpeg",              cat: "Wheels & Tires", label: "Wagoneer - Rear Quarter",               size: "large"  },
   { src: "/detail-truck.jpeg",          cat: "Wheels & Tires", label: "F-150 - Wheel Deep Clean",              size: "medium" },
   { src: "/wagoneer-exterior.jpeg",     cat: "Wheels & Tires", label: "Wagoneer - Wheel & Side Panel",         size: "large"  },
   { src: "/IMG_1725.jpeg",              cat: "Wheels & Tires", label: "Wagoneer - Wheel Close-Up",             size: "medium" },
