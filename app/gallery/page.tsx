@@ -49,56 +49,108 @@ function FadeIn({ children, delay = 0, style: extra = {} }: {
 }
 
 /* ─── All categories ──────────────────────────────────── */
-const CATEGORIES = ["All", "Before & After", "Interior", "Exterior", "Wheels & Tires", "Engine Bay", "Paint Protection", "Transformations"];
+const CATEGORIES = ["All", "Full Detail", "Interior", "Exterior", "Paint Protection", "Sprinter Van"];
 
-/* ─── Gallery items with real photos ─────────────────── */
-const galleryItems = [
-  /* ── EXTERIOR ───────────────────────────────────────── */
-  { src: "/after cad full 1.jpg",       cat: "Exterior",       label: "Cadillac XT6 - Full Exterior Detail",    size: "large"  },
-  { src: "/after cad full 2.jpg",       cat: "Exterior",       label: "Cadillac XT6 - Side Profile",            size: "medium" },
-  { src: "/after cad full 3.jpg",       cat: "Exterior",       label: "Cadillac XT6 - Rear 3/4 View",           size: "medium" },
-  { src: "/after cad full 4.jpg",       cat: "Exterior",       label: "Cadillac XT6 - Front 3/4 View",          size: "large"  },
-  { src: "/after 3.jpg",                cat: "Exterior",       label: "Cadillac XT6 - Neighborhood Shot",       size: "medium" },
-  { src: "/cad after front.jpg",        cat: "Exterior",       label: "Cadillac XT6 - Front View",              size: "medium" },
-  { src: "/after silver van full.jpg",  cat: "Exterior",       label: "Sprinter Van - Front View",              size: "medium" },
-  { src: "/after silver van 2 full.jpg",cat: "Exterior",       label: "Sprinter Van - Rear 3/4 View",           size: "medium" },
-  { src: "/IMG_1726.jpeg",              cat: "Exterior",       label: "Wagoneer - Side Profile",                size: "large"  },
-  { src: "/IMG_1727.jpeg",              cat: "Exterior",       label: "Wagoneer - Rear 3/4 View",               size: "medium" },
-  { src: "/IMG_1729.jpeg",              cat: "Exterior",       label: "Wagoneer - Front 3/4 View",              size: "medium" },
-  { src: "/IMG_1730.jpeg",              cat: "Exterior",       label: "Wagoneer - Rear Quarter",               size: "large"  },
-
-  /* ── INTERIOR ───────────────────────────────────────── */
-  { src: "/after cad int 1.jpg",        cat: "Interior",       label: "Cadillac XT6 - Driver Cabin",            size: "medium" },
-  { src: "/after cad int 2.jpg",        cat: "Interior",       label: "Cadillac XT6 - Front Interior",          size: "medium" },
-  { src: "/after cad int 3.jpg",        cat: "Interior",       label: "Cadillac XT6 - Interior Steering",       size: "medium" },
-  { src: "/after cad int 11.jpg",       cat: "Interior",       label: "Cadillac LYRIQ 600 E4 - Center Console Detail", size: "large" },
-  { src: "/after cad int 12.jpg",       cat: "Interior",       label: "Cadillac LYRIQ 600 E4 - Rear Floor",     size: "medium" },
-  { src: "/after cad int 13.jpg",       cat: "Interior",       label: "Cadillac LYRIQ 600 E4 - Cargo Area",     size: "medium" },
-  { src: "/after cad int 14.jpg",       cat: "Interior",       label: "Cadillac LYRIQ 600 E4 - Night Interior Glow", size: "large" },
-  { src: "/after cad int 15.jpg",       cat: "Interior",       label: "Cadillac LYRIQ 600 E4 - Dashboard",      size: "medium" },
-  { src: "/after 2.jpg",                cat: "Interior",       label: "Sprinter Van - Driver Cabin After",       size: "medium" },
-  { src: "/porsche-interior.png",       cat: "Interior",       label: "Porsche Macan - Interior Restoration",   size: "large"  },
-  { src: "/IMG_1711.jpeg",              cat: "Interior",       label: "Wagoneer - Driver Cabin",                size: "large"  },
-  { src: "/IMG_1712.jpeg",              cat: "Interior",       label: "Wagoneer - Rear Seats",                  size: "medium" },
-  { src: "/IMG_1713.jpeg",              cat: "Interior",       label: "Wagoneer - Cargo Area",                  size: "medium" },
-  { src: "/IMG_1715.jpeg",              cat: "Interior",       label: "Wagoneer - Passenger Side",              size: "medium" },
-  { src: "/IMG_1716.jpeg",              cat: "Interior",       label: "Wagoneer - Rear Interior",               size: "large"  },
-  { src: "/IMG_1717.jpeg",              cat: "Interior",       label: "Wagoneer - Steering & Dash",             size: "medium" },
-  { src: "/IMG_1720.jpeg",              cat: "Interior",       label: "Wagoneer - Second Row Seats",            size: "medium" },
-  { src: "/IMG_1721.jpeg",              cat: "Interior",       label: "Wagoneer - Cargo Floor",                 size: "large"  },
-  { src: "/IMG_1722.jpeg",              cat: "Interior",       label: "Wagoneer - Center Console",              size: "medium" },
-
-  /* ── WHEELS & TIRES ─────────────────────────────────── */
-  { src: "/after cad tire 1.jpg",       cat: "Wheels & Tires", label: "Cadillac XT6 - Wheel & Tire Dressing",  size: "medium" },
-  { src: "/detail-truck.jpeg",          cat: "Wheels & Tires", label: "F-150 - Wheel Deep Clean",              size: "medium" },
-  { src: "/wagoneer-exterior.jpeg",     cat: "Wheels & Tires", label: "Wagoneer - Wheel & Side Panel",         size: "large"  },
-  { src: "/IMG_1725.jpeg",              cat: "Wheels & Tires", label: "Wagoneer - Wheel Close-Up",             size: "medium" },
-  { src: "/IMG_1731.jpeg",              cat: "Wheels & Tires", label: "Wagoneer - Rear Wheel",                 size: "medium" },
-  { src: "/IMG_1732.jpeg",              cat: "Wheels & Tires", label: "Wagoneer - Front Wheel",                size: "large"  },
-
-  /* ── TRANSFORMATIONS ────────────────────────────────── */
-  { src: "/after silver van 3.jpg",     cat: "Transformations", label: "Sprinter Van - Full Transformation",   size: "large"  },
-  { src: "/IMG_1734.jpeg",              cat: "Transformations", label: "Wagoneer - Full Detail Complete",       size: "large"  },
+/* ─── Vehicle jobs with real photos ───────────────────── */
+const vehicleJobs = [
+  {
+    id: "wagoneer-full",
+    vehicle: "Jeep Wagoneer",
+    service: "IceLux Signature — Full Detail",
+    category: "Full Detail",
+    thumbnail: "/IMG_1729.jpeg",
+    badge: "New",
+    photos: [
+      "/IMG_1729.jpeg",
+      "/IMG_1726.jpeg",
+      "/IMG_1727.jpeg",
+      "/IMG_1730.jpeg",
+      "/IMG_1711.jpeg",
+      "/IMG_1712.jpeg",
+      "/IMG_1713.jpeg",
+      "/IMG_1715.jpeg",
+      "/IMG_1716.jpeg",
+      "/IMG_1717.jpeg",
+      "/IMG_1720.jpeg",
+      "/IMG_1721.jpeg",
+      "/IMG_1722.jpeg",
+      "/IMG_1725.jpeg",
+      "/IMG_1731.jpeg",
+      "/IMG_1732.jpeg",
+      "/IMG_1734.jpeg",
+    ],
+  },
+  {
+    id: "cadillac-xt6-full",
+    vehicle: "Cadillac XT6",
+    service: "IceLux Signature — Full Detail",
+    category: "Full Detail",
+    thumbnail: "/after cad full 1.jpg",
+    badge: null,
+    photos: [
+      "/after cad full 1.jpg",
+      "/after cad full 2.jpg",
+      "/after cad full 3.jpg",
+      "/after cad full 4.jpg",
+      "/after 3.jpg",
+      "/cad after front.jpg",
+      "/after cad int 1.jpg",
+      "/after cad int 2.jpg",
+      "/after cad int 3.jpg",
+      "/after cad tire 1.jpg",
+    ],
+  },
+  {
+    id: "cadillac-lyriq",
+    vehicle: "Cadillac LYRIQ 600 E4",
+    service: "Interior Restoration",
+    category: "Interior",
+    thumbnail: "/after cad int 11.jpg",
+    badge: null,
+    photos: [
+      "/after cad int 11.jpg",
+      "/after cad int 12.jpg",
+      "/after cad int 13.jpg",
+      "/after cad int 14.jpg",
+      "/after cad int 15.jpg",
+    ],
+  },
+  {
+    id: "sprinter-van",
+    vehicle: "Mercedes Sprinter Van",
+    service: "Full Interior Detail",
+    category: "Sprinter Van",
+    thumbnail: "/after silver van full.jpg",
+    badge: null,
+    photos: [
+      "/after silver van full.jpg",
+      "/after silver van 2 full.jpg",
+      "/after silver van 3.jpg",
+      "/after 2.jpg",
+    ],
+  },
+  {
+    id: "porsche-macan",
+    vehicle: "Porsche Macan",
+    service: "Interior Restoration",
+    category: "Interior",
+    thumbnail: "/porsche-interior.png",
+    badge: null,
+    photos: [
+      "/porsche-interior.png",
+    ],
+  },
+  {
+    id: "f150-wheels",
+    vehicle: "Ford F-150",
+    service: "Wheel & Tire Detail",
+    category: "Exterior",
+    thumbnail: "/detail-truck.jpeg",
+    badge: null,
+    photos: [
+      "/detail-truck.jpeg",
+    ],
+  },
 ];
 
 /* ─── Before / After pairs ────────────────────────────── */
@@ -140,11 +192,37 @@ const beforeAfterPairs = [
 ══════════════════════════════════════════════════════ */
 export default function GalleryPage() {
   const [activeFilter, setActiveFilter] = useState("All");
-  const [lightbox, setLightbox] = useState<{ src: string; label: string } | null>(null);
+  const [lightbox, setLightbox] = useState<{
+    photos: string[];
+    index: number;
+    vehicle: string;
+    service: string;
+  } | null>(null);
+
+  const openLightbox = (job: typeof vehicleJobs[0], index = 0) => {
+    setLightbox({ photos: job.photos, index, vehicle: job.vehicle, service: job.service });
+  };
+  const closeLightbox = () => setLightbox(null);
+  const lightboxNext = () => setLightbox((lb) => lb
+      ? { ...lb, index: (lb.index + 1) % lb.photos.length } : null);
+  const lightboxPrev = () => setLightbox((lb) => lb
+      ? { ...lb, index: (lb.index - 1 + lb.photos.length) % lb.photos.length }
+      : null);
+
+  useEffect(() => {
+    if (!lightbox) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") lightboxNext();
+      if (e.key === "ArrowLeft")  lightboxPrev();
+      if (e.key === "Escape")     closeLightbox();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [lightbox]);
 
   const filtered = activeFilter === "All"
-      ? galleryItems
-      : galleryItems.filter((item) => item.cat === activeFilter);
+      ? vehicleJobs
+      : vehicleJobs.filter((job) => job.category === activeFilter);
 
   return (
       <>
@@ -179,50 +257,145 @@ export default function GalleryPage() {
               ))}
             </div>
             <p style={{ color: MUTED, fontSize: "0.75rem", marginTop: "1rem", opacity: 0.55 }}>
-              {filtered.length} photo{filtered.length !== 1 ? "s" : ""}
-              {activeFilter !== "All" ? ` in ${activeFilter}` : " total"}
+              {filtered.length} vehicle{filtered.length !== 1 ? "s" : ""}
+              {activeFilter !== "All" ? ` in ${activeFilter}` : " in gallery"}
             </p>
           </div>
         </section>
 
-        {/* ── MASONRY GALLERY GRID ───────────────────────── */}
+        {/* ── VEHICLE CARD GRID ───────────────────────────── */}
         <section style={{ background: BG, paddingBottom: "6rem" }}>
           <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", padding: "0 2rem" }}>
             <div style={{ width: "100%", maxWidth: "72rem" }}>
-              <div style={{ columns: "1", columnGap: "1rem" }} className="gallery-columns">
-                {filtered.map((item, i) => (
-                    <FadeIn key={`${item.src}-${i}`} delay={i * 40} style={{ display: "block", breakInside: "avoid", marginBottom: "1rem" }}>
+              <div
+                  className="vehicle-grid"
+                  style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: "1.75rem" }}
+              >
+                {filtered.map((job, i) => (
+                    <FadeIn key={job.id} delay={i * 80}>
                       <div
-                          onClick={() => setLightbox({ src: item.src, label: item.label })}
+                          onClick={() => openLightbox(job)}
+                          className="vehicle-card"
                           style={{
                             position: "relative",
-                            aspectRatio: item.size === "large" ? "4/3" : item.size === "medium" ? "1/1" : "3/4",
-                            borderRadius: "0.75rem",
+                            background: BG3,
+                            border: "1px solid rgba(43,203,255,0.15)",
+                            borderRadius: "1rem",
                             overflow: "hidden",
                             cursor: "pointer",
-                            border: "1px solid rgba(43,203,255,0.12)",
+                            transition: "transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
                           }}
-                          className="gallery-card"
                       >
-                        <Image src={item.src} alt={item.label} fill className="object-cover"
-                               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+                        {/* Thumbnail */}
+                        <div style={{ position: "relative", aspectRatio: "16/10", overflow: "hidden" }}>
+                          <Image
+                              src={job.thumbnail}
+                              alt={job.vehicle}
+                              fill
+                              className="object-cover vehicle-thumb"
+                              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                              style={{ transition: "transform 0.5s ease" }}
+                          />
+                          {/* Dark gradient overlay at bottom of image */}
+                          <div style={{
+                            position: "absolute", inset: 0,
+                            background: "linear-gradient(to bottom, transparent 40%, rgba(5,9,18,0.85) 100%)",
+                          }} />
 
-                        {/* Hover overlay */}
-                        <div className="gallery-overlay" style={{ position: "absolute", inset: 0, background: "rgba(5,9,18,0.65)", opacity: 0, transition: "opacity 0.3s", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "1rem" }}>
-                          <p style={{ color: TEXT, fontSize: "0.9375rem", fontWeight: 600, textAlign: "center" }}>{item.label}</p>
-                          <span style={{ marginTop: "0.625rem", color: ICE, fontSize: "0.75rem", border: "1px solid rgba(11,191,255,0.4)", padding: "0.25rem 0.75rem", borderRadius: "9999px" }}>View</span>
+                          {/* Badge if present */}
+                          {job.badge && (
+                              <div style={{ position: "absolute", top: "0.75rem", left: "0.75rem" }}>
+                                <span style={{
+                                  background: "linear-gradient(135deg, #0BBFFF, #8EDFFF)",
+                                  color: "#050912", fontSize: "0.625rem", fontWeight: 700,
+                                  letterSpacing: "0.15em", textTransform: "uppercase",
+                                  padding: "0.25rem 0.625rem", borderRadius: "9999px",
+                                }}>{job.badge}</span>
+                              </div>
+                          )}
+
+                          {/* Photo count badge */}
+                          <div style={{ position: "absolute", top: "0.75rem", right: "0.75rem" }}>
+                            <span style={{
+                              background: "rgba(5,9,18,0.80)", border: "1px solid rgba(43,203,255,0.25)",
+                              color: ICE, fontSize: "0.6875rem", fontWeight: 600,
+                              padding: "0.25rem 0.625rem", borderRadius: "9999px",
+                              backdropFilter: "blur(4px)",
+                              display: "inline-flex", alignItems: "center", gap: "0.375rem",
+                            }}>
+                              <svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                   stroke="currentColor" strokeWidth="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <polyline points="21 15 16 10 5 21"/>
+                              </svg>
+                              {job.photos.length}
+                            </span>
+                          </div>
+
+                          {/* Corner accents */}
+                          <div style={{ position: "absolute", bottom: "0.625rem", left: "0.625rem", width: "0.875rem", height: "0.875rem", borderBottom: "1.5px solid rgba(43,203,255,0.45)", borderLeft: "1.5px solid rgba(43,203,255,0.45)" }} />
+                          <div style={{ position: "absolute", bottom: "0.625rem", right: "0.625rem", width: "0.875rem", height: "0.875rem", borderBottom: "1.5px solid rgba(43,203,255,0.45)", borderRight: "1.5px solid rgba(43,203,255,0.45)" }} />
                         </div>
 
-                        {/* Category badge */}
-                        <div style={{ position: "absolute", bottom: "0.75rem", left: "0.75rem" }}>
-                      <span style={{ display: "inline-block", padding: "0.2rem 0.625rem", borderRadius: "9999px", background: "rgba(5,9,18,0.85)", border: "1px solid rgba(43,203,255,0.2)", color: "#8EDFFF", fontSize: "0.625rem", fontWeight: 500, letterSpacing: "0.07em", textTransform: "uppercase", backdropFilter: "blur(4px)" }}>
-                        {item.cat}
-                      </span>
-                        </div>
+                        {/* Card body */}
+                        <div style={{ padding: "1.25rem 1.5rem" }}>
+                          <h3 style={{
+                            color: TEXT, fontFamily: FONT_DISPLAY, fontSize: "1.25rem",
+                            fontWeight: 700, marginBottom: "0.375rem", lineHeight: 1.2,
+                          }}>{job.vehicle}</h3>
+                          <p style={{ color: ICE, fontSize: "0.8125rem", fontWeight: 500, marginBottom: "1rem" }}>{job.service}</p>
+                          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                            <span style={{
+                              color: MUTED, fontSize: "0.75rem",
+                              display: "inline-flex", alignItems: "center", gap: "0.375rem",
+                            }}>
+                              {job.photos.length} photo{job.photos.length !== 1 ? "s" : ""}
+                            </span>
+                            <span style={{
+                              color: ICE, fontSize: "0.8125rem", fontWeight: 600,
+                              display: "inline-flex", alignItems: "center", gap: "0.25rem",
+                            }}>
+                              View Gallery
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                   stroke="currentColor" strokeWidth="2.5">
+                                <polyline points="9 18 15 12 9 6"/>
+                              </svg>
+                            </span>
+                          </div>
 
-                        {/* Corner accents */}
-                        <div style={{ position: "absolute", top: "0.625rem", left: "0.625rem", width: "0.875rem", height: "0.875rem", borderTop: "1.5px solid rgba(43,203,255,0.45)", borderLeft: "1.5px solid rgba(43,203,255,0.45)" }} />
-                        <div style={{ position: "absolute", top: "0.625rem", right: "0.625rem", width: "0.875rem", height: "0.875rem", borderTop: "1.5px solid rgba(43,203,255,0.45)", borderRight: "1.5px solid rgba(43,203,255,0.45)" }} />
+                          {/* Mini photo strip — show first 4 thumbnails */}
+                          {job.photos.length > 1 && (
+                              <div style={{ display: "flex", gap: "0.375rem", marginTop: "1rem" }}>
+                                {job.photos.slice(0, 4).map((src, idx) => (
+                                    <div
+                                        key={idx}
+                                        onClick={(e) => { e.stopPropagation(); openLightbox(job, idx); }}
+                                        style={{
+                                          position: "relative", flex: 1, aspectRatio: "1/1",
+                                          borderRadius: "0.375rem", overflow: "hidden",
+                                          border: "1px solid rgba(43,203,255,0.15)",
+                                          cursor: "pointer",
+                                        }}
+                                    >
+                                      <Image src={src} alt="" fill className="object-cover" sizes="80px" />
+                                      {idx === 3 && job.photos.length > 4 && (
+                                          <div style={{
+                                            position: "absolute", inset: 0,
+                                            background: "rgba(5,9,18,0.70)",
+                                            display: "flex", alignItems: "center",
+                                            justifyContent: "center",
+                                          }}>
+                                            <span style={{ color: TEXT, fontSize: "0.75rem", fontWeight: 700 }}>
+                                              +{job.photos.length - 4}
+                                            </span>
+                                          </div>
+                                      )}
+                                    </div>
+                                ))}
+                              </div>
+                          )}
+                        </div>
                       </div>
                     </FadeIn>
                 ))}
@@ -338,28 +511,166 @@ export default function GalleryPage() {
         {/* ── LIGHTBOX ───────────────────────────────────── */}
         {lightbox && (
             <div
-                onClick={() => setLightbox(null)}
-                style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(0,0,0,0.92)", display: "flex", alignItems: "center", justifyContent: "center", padding: "2rem", backdropFilter: "blur(8px)" }}>
-              <button onClick={() => setLightbox(null)}
-                      style={{ position: "absolute", top: "1.5rem", right: "1.5rem", background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)", color: "white", borderRadius: "9999px", width: "2.5rem", height: "2.5rem", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
-                <X size={18} />
-              </button>
-              <div onClick={(e) => e.stopPropagation()} style={{ position: "relative", width: "100%", maxWidth: "52rem", maxHeight: "85vh", borderRadius: "1rem", overflow: "hidden", border: "1px solid rgba(43,203,255,0.25)" }}>
-                <Image src={lightbox.src} alt={lightbox.label} width={1200} height={800}
-                       style={{ width: "100%", height: "auto", maxHeight: "80vh", objectFit: "contain", display: "block" }} />
-                <div style={{ padding: "1rem 1.5rem", background: BG3, borderTop: "1px solid rgba(43,203,255,0.12)" }}>
-                  <p style={{ color: MUTED, fontSize: "0.9375rem" }}>{lightbox.label}</p>
+                onClick={closeLightbox}
+                style={{
+                  position: "fixed", inset: 0, zIndex: 100,
+                  background: "rgba(0,0,0,0.95)",
+                  display: "flex", flexDirection: "column",
+                  alignItems: "center", justifyContent: "center",
+                  backdropFilter: "blur(10px)",
+                }}
+            >
+              {/* Top bar */}
+              <div
+                  onClick={(e) => e.stopPropagation()}
+                  style={{
+                    position: "absolute", top: 0, left: 0, right: 0,
+                    padding: "1.25rem 1.5rem",
+                    display: "flex", alignItems: "center",
+                    justifyContent: "space-between",
+                    background: "linear-gradient(to bottom, rgba(0,0,0,0.8), transparent)",
+                  }}
+              >
+                <div>
+                  <p style={{ color: TEXT, fontWeight: 700, fontSize: "1rem", fontFamily: FONT_DISPLAY }}>{lightbox.vehicle}</p>
+                  <p style={{ color: ICE, fontSize: "0.8125rem" }}>{lightbox.service}</p>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                  <span style={{ color: MUTED, fontSize: "0.8125rem" }}>
+                    {lightbox.index + 1} / {lightbox.photos.length}
+                  </span>
+                  <button
+                      onClick={closeLightbox}
+                      style={{
+                        background: "rgba(255,255,255,0.1)",
+                        border: "1px solid rgba(255,255,255,0.2)",
+                        color: "white", borderRadius: "9999px",
+                        width: "2.25rem", height: "2.25rem",
+                        display: "flex", alignItems: "center",
+                        justifyContent: "center", cursor: "pointer",
+                      }}
+                  >
+                    <X size={16} />
+                  </button>
                 </div>
               </div>
+
+              {/* Main image */}
+              <div
+                  onClick={(e) => e.stopPropagation()}
+                  style={{
+                    position: "relative", width: "100%", maxWidth: "56rem",
+                    maxHeight: "75vh", display: "flex", alignItems: "center",
+                    justifyContent: "center", padding: "0 4rem",
+                  }}
+              >
+                <Image
+                    src={lightbox.photos[lightbox.index]}
+                    alt={`${lightbox.vehicle} - photo ${lightbox.index + 1}`}
+                    width={1400} height={900}
+                    style={{
+                      width: "100%", height: "auto",
+                      maxHeight: "70vh", objectFit: "contain",
+                      borderRadius: "0.75rem",
+                      border: "1px solid rgba(43,203,255,0.20)",
+                    }}
+                />
+
+                {/* Prev button */}
+                {lightbox.photos.length > 1 && (
+                    <button
+                        onClick={(e) => { e.stopPropagation(); lightboxPrev(); }}
+                        style={{
+                          position: "absolute", left: "0.5rem",
+                          background: "rgba(11,191,255,0.12)",
+                          border: "1px solid rgba(43,203,255,0.35)",
+                          color: ICE, borderRadius: "9999px",
+                          width: "2.75rem", height: "2.75rem",
+                          display: "flex", alignItems: "center",
+                          justifyContent: "center", cursor: "pointer",
+                          transition: "background 0.2s",
+                        }}
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                           stroke="currentColor" strokeWidth="2.5">
+                        <polyline points="15 18 9 12 15 6"/>
+                      </svg>
+                    </button>
+                )}
+
+                {/* Next button */}
+                {lightbox.photos.length > 1 && (
+                    <button
+                        onClick={(e) => { e.stopPropagation(); lightboxNext(); }}
+                        style={{
+                          position: "absolute", right: "0.5rem",
+                          background: "rgba(11,191,255,0.12)",
+                          border: "1px solid rgba(43,203,255,0.35)",
+                          color: ICE, borderRadius: "9999px",
+                          width: "2.75rem", height: "2.75rem",
+                          display: "flex", alignItems: "center",
+                          justifyContent: "center", cursor: "pointer",
+                          transition: "background 0.2s",
+                        }}
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                           stroke="currentColor" strokeWidth="2.5">
+                        <polyline points="9 18 15 12 9 6"/>
+                      </svg>
+                    </button>
+                )}
+              </div>
+
+              {/* Thumbnail strip */}
+              {lightbox.photos.length > 1 && (
+                  <div
+                      onClick={(e) => e.stopPropagation()}
+                      style={{
+                        position: "absolute", bottom: 0, left: 0, right: 0,
+                        padding: "1rem 1.5rem",
+                        background: "linear-gradient(to top, rgba(0,0,0,0.85), transparent)",
+                        display: "flex", gap: "0.5rem",
+                        justifyContent: "center", flexWrap: "nowrap",
+                        overflowX: "auto",
+                      }}
+                  >
+                    {lightbox.photos.map((src, idx) => (
+                        <div
+                            key={idx}
+                            onClick={() => setLightbox((lb) => lb ? { ...lb, index: idx } : null)}
+                            style={{
+                              position: "relative", flexShrink: 0,
+                              width: "3.5rem", height: "3.5rem",
+                              borderRadius: "0.375rem", overflow: "hidden",
+                              cursor: "pointer",
+                              border: idx === lightbox.index
+                                  ? "2px solid #0BBFFF"
+                                  : "2px solid rgba(255,255,255,0.15)",
+                              opacity: idx === lightbox.index ? 1 : 0.55,
+                              transition: "opacity 0.2s, border-color 0.2s",
+                            }}
+                        >
+                          <Image src={src} alt="" fill className="object-cover" sizes="56px" />
+                        </div>
+                    ))}
+                  </div>
+              )}
             </div>
         )}
 
         <style>{`
-        @media (min-width: 640px)  { .gallery-columns { columns: 2; } }
-        @media (min-width: 1024px) { .gallery-columns { columns: 3; } }
-        .gallery-card:hover .gallery-overlay { opacity: 1 !important; }
-        .gallery-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .gallery-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(11,191,255,0.10); }
+        .vehicle-grid { width: 100%; }
+        .vehicle-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 20px 50px rgba(11,191,255,0.12);
+          border-color: rgba(43,203,255,0.40) !important;
+        }
+        .vehicle-card:hover .vehicle-thumb {
+          transform: scale(1.04);
+        }
+        @media (max-width: 639px) {
+          .vehicle-grid { grid-template-columns: 1fr !important; }
+        }
       `}</style>
       </>
   );
