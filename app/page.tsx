@@ -142,7 +142,7 @@ export default function Home() {
         {/* ══ HERO ══════════════════════════════════════════════════ */}
         <section style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}>
           <div style={{ position: "absolute", inset: 0 }}>
-            <Image src="/hero.jpg" alt="IceLux Detailing" fill priority className="object-cover object-center"
+            <Image src="/porsche-911-hero.jpg" alt="Porsche 911 detailed by IceLux Detailing" fill priority className="object-cover object-[center_42%]"
                    style={{ transform: loaded ? "scale(1)" : "scale(1.05)", transition: "transform 8s ease" }} />
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(105deg,rgba(0,0,0,0.93) 0%,rgba(0,0,0,0.70) 55%,rgba(0,0,0,0.25) 100%)" }} />
             <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "8rem", background: "linear-gradient(to top,rgba(5,9,18,1),transparent)" }} />
@@ -194,8 +194,8 @@ export default function Home() {
 
                 {/* Right — photo card (hidden on mobile via CSS class) */}
                 <div className="hero-photo-card" style={{ opacity: loaded ? 1 : 0, transform: loaded ? "translateX(0)" : "translateX(30px)", transition: "all 0.9s ease 300ms" }}>
-                  <div style={{ position: "relative", width: "100%", maxWidth: "26rem", borderRadius: "1rem", overflow: "hidden", border: "1px solid rgba(11,191,255,0.28)", boxShadow: "0 0 80px rgba(11,191,255,0.10)", aspectRatio: "4/3" }}>
-                    <Image src="/detail-truck.jpeg" alt="IceLux Detail Work" fill className="object-cover" />
+                  <div style={{ position: "relative", width: "100%", maxWidth: "26rem", borderRadius: "1rem", overflow: "hidden", border: "1px solid rgba(11,191,255,0.28)", boxShadow: "0 0 80px rgba(11,191,255,0.10)", aspectRatio: "3/4" }}>
+                    <Image src="/wagoneer-interior-hero.png" alt="Jeep Wagoneer interior detailed by IceLux Detailing" fill className="object-cover" />
                     <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.18)" }} />
                     <div style={{ position: "absolute", bottom: "1rem", left: "1rem", padding: "0.625rem 1rem", borderRadius: "0.75rem", background: "rgba(0,0,0,0.80)", border: "1px solid rgba(11,191,255,0.35)", backdropFilter: "blur(8px)" }}>
                       <p style={{ color: "#0BBFFF", fontSize: "0.5625rem", fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: "0.125rem" }}>Mobile Service</p>
@@ -231,7 +231,7 @@ export default function Home() {
           <div style={{ width: "100%", maxWidth: "48rem", display: "grid", gridTemplateColumns: "repeat(3,1fr)", padding: "5rem 0", gap: "0" }} className="stats-grid">
             {[
               { target: 5,   suffix: "★", label: "Star Rating - Every Time" },
-              { target: 50,  suffix: "+", label: "Vehicles Detailed" },
+              { target: 87,  suffix: "+", label: "Vehicles Detailed" },
               { target: 100, suffix: "%", label: "Satisfaction Guaranteed" },
             ].map((s, i) => (
                 <div key={i} style={{ borderLeft: i > 0 ? borderTop : "none" }}>
@@ -280,7 +280,7 @@ export default function Home() {
         {/* ══ ABOUT ROW 2 — Premium Quality ═════════════════════════ */}
         <section style={{ position: "relative", overflow: "hidden", paddingTop: "6rem", paddingBottom: "6rem" }}>
           <div style={{ position: "absolute", inset: 0 }}>
-            <Image src="/wagoneer-interior.png" alt="" fill className="object-cover object-center" />
+            <Image src="/wagoneer-interior-hero.png" alt="" fill className="object-cover object-center" />
             <div style={{ position: "absolute", inset: 0, background: "rgba(5,9,18,0.88)" }} />
           </div>
           <div style={{ position: "relative", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", padding: "0 1.25rem" }}>

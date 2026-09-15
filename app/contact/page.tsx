@@ -133,11 +133,18 @@ export default function ContactPage() {
     transition: `all 0.7s ease ${delay}ms`,
   });
 
+  // Formspree Pro required for _autoresponse auto-reply emails.
+  // Upgrade at formspree.io and ensure the form endpoint mykvbeya
+  // is registered to iceluxdetailing@gmail.com.
+  // Formspree will email IceLux on every submission automatically.
+  // The _autoresponse field triggers a confirmation email to the client.
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const payload = {
       ...form,
       enhancements: form.enhancements.length > 0 ? form.enhancements.join(", ") : "None",
+      _replyto: form.email,
+      _autoresponse: `Hi ${form.name}, thank you for reaching out to IceLux Detailing! We've received your request and will follow up with you within 24 hours to confirm your appointment details and pricing. For faster service, call or text us directly at 725-221-9148. We look forward to taking care of your vehicle! — The IceLux Detailing Team`,
     };
     const response = await fetch("https://formspree.io/f/mykvbeya", {
       method: "POST",

@@ -130,14 +130,14 @@ const vehicleJobs = [
     ],
   },
   {
-    id: "porsche-macan",
-    vehicle: "Porsche Macan",
-    service: "Interior Restoration",
-    category: "Interior",
-    thumbnail: "/porsche-interior.png",
+    id: "porsche-911",
+    vehicle: "Porsche 911 Carrera",
+    service: "Exterior Detail",
+    category: "Exterior",
+    thumbnail: "/porsche-911-hero.jpg",
     badge: null,
     photos: [
-      "/porsche-interior.png",
+      "/porsche-911-hero.jpg",
     ],
   },
   {
